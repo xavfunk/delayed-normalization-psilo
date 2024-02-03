@@ -21,9 +21,12 @@ class TestTrial(Trial):
 
         # get the stimulus array with self.session.var_isi/dur_dict and safe it into self.frames
         if self.parameters['trial_type'] == 'dur':
-            self.frames = self.session.var_dur_dict[self.parameters['stim_dur']]
+            # self.frames = self.session.var_dur_dict[self.parameters['stim_dur']]
+            self.frames = self.session.var_dur_dict_flip[self.parameters['stim_dur']]
+
         else:
-            self.frames = self.session.var_isi_dict[self.parameters['stim_dur']]
+            # self.frames = self.session.var_isi_dict[self.parameters['stim_dur']]
+            self.frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
 
         #self.fix_color = "red"
         self.change_back_counter = 0 # counting frames to change back fixation color
@@ -37,6 +40,95 @@ class TestTrial(Trial):
         if events: 
             self.overt_counter_prep.setText('saw t')
             self.overt_counter_prep.draw()   
+
+    def draw_flip(self, current_frame):
+        """ Draws stimuli and flips the window 
+            to be used when flipping on every frame is discouraged
+        """
+        #print(self.session.nr_frames, current_frame)
+        
+
+
+        if self.phase == 0: # prep time
+            #self.overt_counter_prep.setText(self.session.nr_frames) 
+            #self.overt_counter_prep.draw() 
+
+            #self.wait_print_t()
+
+            # draw texture
+            #self.img.draw()
+            # draw fixation TODO confirm we want this
+            self.session.default_fix.draw()
+            self.session.win.flip()
+            self.img.draw()
+            
+            # events = event.getKeys(keyList=['t'])
+            # if events:  
+            #     self.exit_phase = True
+
+        elif self.phase == 1: # we are in stimulus presentation
+            #print(self.frames)
+            ## if the self.frame array at this frame index is one, flip it
+            
+            # if self.frames[self.session.nr_frames%self.session.total_duration] == 1:
+            #print(self.session.nr_frames)
+            # try:
+                # if self.frames[self.session.nr_frames] == 1: 
+            if self.frames[current_frame] == 1:
+                #print(current_frame)
+                # flip
+                print("flippin at {}".format(self.session.nr_frames))
+                print("trial type is: {}".format(np.where(self.frames == 1)[0]))
+
+                # self.overt_counter_trial.setText(self.session.nr_frames) 
+                # self.overt_counter_trial.draw() 
+                if self.flip_counter == 0:
+                    self.img.draw()
+                    self.session.default_fix.draw()
+                elif self.flip_counter == 1:
+                    self.session.default_fix.draw()
+                elif self.flip_counter == 2:
+                    self.img.draw()
+                    self.session.default_fix.draw()
+                else:
+                    self.session.default_fix.draw()
+
+                self.session.win.flip()
+                self.flip_counter += 1
+
+                # print("flip counter at: {}".format(self.flip_counter))
+                # # what to show next
+                # if self.flip_counter % 2 == 0:
+                #     print("drawing next: fix")
+                #     self.session.default_fix.draw()
+                # else:
+                #     print("drawing next: img and fix")
+
+                #     self.img.draw()
+                #     self.session.default_fix.draw()
+
+                # self.flip_counter += 1
+
+            
+        
+            # except:
+            #     pass
+            # else:
+            #     # draw blank TODO confirm if this is needded
+            #     self.blank.draw()            
+            #     # draw fixation 
+            #     self.session.default_fix.draw()
+                
+        else: # we are in iti
+            # draw fixation
+            self.session.default_fix.draw()
+            self.session.win.flip()
+
+            # # debug
+            # self.overt_counter_iti.setText(self.session.nr_frames) 
+            # self.overt_counter_iti.draw()
+            # self.wait_print_t()
+
 
     def draw(self):
         """ Draws stimuli """
@@ -102,7 +194,71 @@ class TestTrial(Trial):
         #         self.session.default_fix.setColor('black')    
 
         # overt_counter = TextStim(self.session.win, text='{}'.format(self.session.nr_frames)) # for debugging
-        # overt_counter.draw()        
+        # overt_counter.draw()
+
+    def run(self):
+        """ Runs through phases. Should not be subclassed unless
+        really necessary. """
+
+        if self.eyetracker_on:  # Sets status message
+            cmd = f"record_status_message 'trial {self.trial_nr}'"
+            self.session.tracker.sendCommand(cmd)
+
+        # Because the first flip happens when the experiment starts,
+        # we need to compensate for this during the first trial/phase
+        if self.session.first_trial:
+            # must be first trial/phase
+            if self.timing == 'seconds':  # subtract duration of one frame
+                self.phase_durations[0] -= 1./self.session.actual_framerate * 1.1  # +10% to be sure
+            else:  # if timing == 'frames', subtract one frame 
+                self.phase_durations[0] -= 1
+            
+            self.session.first_trial = False
+
+        for phase_dur in self.phase_durations:  # loop over phase durations
+            self.session.nr_frames = 0
+            # pass self.phase *now* instead of while logging the phase info.
+            #self.session.win.callOnFlip(self.log_phase_info, phase=self.phase)
+
+            # Start loading in next trial during this phase (if not None)
+            if self.load_next_during_phase == self.phase:
+                self.load_next_trial(phase_dur)
+
+            if self.timing == 'seconds':
+                # Loop until timer is at 0!
+                self.session.timer.add(phase_dur)
+                while self.session.timer.getTime() < 0 and not self.exit_phase and not self.exit_trial:
+                    self.draw()
+                    if self.draw_each_frame:
+                        self.session.win.flip()
+                        self.session.nr_frames += 1
+                    self.get_events()
+            else:
+                # Loop for a predetermined number of frames
+                # Note: only works when you're sure you're not 
+                # dropping frames
+                self.flip_counter = 0
+
+                for frame in range(phase_dur):
+
+                    if self.exit_phase or self.exit_trial:
+                        break
+                    # here, either draw_flip() or (draw() and session.win.flip()) should be used
+                    self.draw_flip(current_frame = frame)
+                    # self.draw()
+                    # self.session.win.flip()
+                    
+                    self.get_events()
+                    self.session.nr_frames += 1
+
+            if self.exit_phase:  # broke out of phase loop
+                self.session.timer.reset()  # reset timer!
+                self.exit_phase = False  # reset exit_phase
+            if self.exit_trial:
+                self.session.timer.reset()
+                break
+
+            self.phase += 1  # advance phase        
 
 
 class EyetrackerSession(PylinkEyetrackerSession):
@@ -125,7 +281,7 @@ class EyetrackerSession(PylinkEyetrackerSession):
 
         # make durations list of tuples for prep, iti, trial
         durations = list(zip(prep_durations, trial_durations, iti_durations))
-        
+        print("prep durations: {}".format(prep_durations))
         ## making stimulus arrays
         stim_durations = [0, 2, 4, 8, 16, 32, 64] # frames in 120 FPS, either duration or isi times
         fixed_duration = 16 # fixed duration for isi trials
@@ -143,6 +299,40 @@ class EyetrackerSession(PylinkEyetrackerSession):
         # these dicts are integer indexable with the current number of trial frames 
         self.var_isi_dict = {dur:frames for dur, frames in zip(stim_durations, var_isi)}
         self.var_dur_dict = {dur:frames for dur, frames in zip(stim_durations, var_duration)}
+        
+        var_duration_flip = np.zeros((len(stim_durations), self.total_duration))
+        for i in range(len(stim_durations)):
+            #print(i)
+            var_duration_flip[i, 0] = 1
+            var_duration_flip[i, stim_durations[i]] = 1
+            
+            if i == 0:
+                var_duration_flip[i, 0] = 0
+        
+        var_isi_flip = np.zeros((len(stim_durations), self.total_duration))
+
+        for i in range(len(stim_durations)):
+            #print(i)
+            
+            if i == 0:
+                var_isi_flip[i, 0] = 1
+                var_isi_flip[i, 2 * fixed_duration] = 1
+                
+            else:
+                try:
+                    # fixed 16 frames
+                    var_isi_flip[i, 0] = 1
+                    var_isi_flip[i, 0 + fixed_duration] = 1
+                    var_isi_flip[i, 0 + fixed_duration + stim_durations[i]] = 1
+                    var_isi_flip[i, 0 + fixed_duration + stim_durations[i] + fixed_duration] = 1
+                except IndexError:
+                    continue
+        
+        # these dicts are integer indexable with the current number of trial frames 
+        self.var_isi_dict_flip = {dur:frames for dur, frames in zip(stim_durations, var_isi_flip)}
+        self.var_dur_dict_flip = {dur:frames for dur, frames in zip(stim_durations, var_duration_flip)}
+        
+        print("prep durations: {}".format(self.var_isi_dict_flip))
 
         ## making parameters
         # there are two parameters:
