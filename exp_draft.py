@@ -24,7 +24,7 @@ class TestTrial(Trial):
             # self.frames = self.session.var_dur_dict[self.parameters['stim_dur']]
             self.frames = self.session.var_dur_dict_flip[self.parameters['stim_dur']]
             
-            # DEBUG
+            # debugging
             # manual_array = np.zeros(96)
             # manual_array[0] = 1 # on
             # manual_array[95] = -1 # off after 800 ms
@@ -43,6 +43,7 @@ class TestTrial(Trial):
             # self.frames = self.session.var_isi_dict[self.parameters['stim_dur']]
             self.frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
 
+            # debugging
             # manual_array = np.zeros(96)
             # manual_array[0] = 1 # on
             # manual_array[95] = -1 # off after almost 500 ms
@@ -55,16 +56,17 @@ class TestTrial(Trial):
             # manual_array[95] = -1
 
             # self.frames = manual_array
-
+        
+        # debugging counters etc
         #self.fix_color = "red"
-        self.change_back_counter = 0 # counting frames to change back fixation color
-        self.overt_counter_trial = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'green') # for debugging
-        self.overt_counter_iti = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'red') # for debugging
-        self.overt_counter_prep = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'blue') # for debugging
-        self.overt_message_flip_counter_0 = TextStim(self.session.win, text='flip counter at 0, draw img and fix', color = 'blue') # for debugging
-        self.overt_message_flip_counter_1 = TextStim(self.session.win, text='flip counter at 1, draw fix', color = 'green') # for debugging
-        self.overt_message_flip_counter_2 = TextStim(self.session.win, text='flip counter at 2, draw img and fix', color = 'blue') # for debugging
-        self.overt_message_flip_counter_3 = TextStim(self.session.win, text='flip counter at 3, draw fix', color = 'red') # for debugging
+        # self.change_back_counter = 0 # counting frames to change back fixation color
+        # self.overt_counter_trial = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'green') # for debugging
+        # self.overt_counter_iti = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'red') # for debugging
+        # self.overt_counter_prep = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'blue') # for debugging
+        # self.overt_message_flip_counter_0 = TextStim(self.session.win, text='flip counter at 0, draw img and fix', color = 'blue') # for debugging
+        # self.overt_message_flip_counter_1 = TextStim(self.session.win, text='flip counter at 1, draw fix', color = 'green') # for debugging
+        # self.overt_message_flip_counter_2 = TextStim(self.session.win, text='flip counter at 2, draw img and fix', color = 'blue') # for debugging
+        # self.overt_message_flip_counter_3 = TextStim(self.session.win, text='flip counter at 3, draw fix', color = 'red') # for debugging
 
 
     def wait_print_t(self):
@@ -79,13 +81,10 @@ class TestTrial(Trial):
             to be used when flipping on every frame is discouraged
         """
         #print(self.session.nr_frames, current_frame)
-        
-
 
         if self.phase == 0: # prep time
             #self.overt_counter_prep.setText(self.session.nr_frames) 
             #self.overt_counter_prep.draw() 
-
             #self.wait_print_t()
 
             # draw texture
@@ -110,6 +109,7 @@ class TestTrial(Trial):
                 # if self.frames[self.session.nr_frames] == 1: 
             # print(self.frames)
             if self.frames[current_frame] == 1:
+                ## debugging printouts
                 # print(current_frame)
                 # print("trial type is: {}".format(np.where(self.frames == 1)[0]))
                 # print("flip counter is: {}".format(self.flip_counter))
@@ -118,93 +118,38 @@ class TestTrial(Trial):
                 self.img.draw()
                 self.session.default_fix.draw()
 
-                print("flip counter is: {}".format(self.flip_counter))
+                ## debugging printouts
                 print("flippin at {}".format(self.session.nr_frames))
                 self.session.win.flip(clearBuffer = False)
             
             elif self.frames[current_frame] == -1:
                 
                 self.session.default_fix.draw()
-                self.flip_counter += 1
 
-                print("flip counter is: {}".format(self.flip_counter))
                 print("flippin back at {}".format(self.session.nr_frames))
                 self.session.win.flip()
 
-                # self.overt_counter_trial.setText(self.session.nr_frames) 
-                # self.overt_counter_trial.draw() 
-
-                ## flip counter logic
-                # if self.flip_counter == 0:
-                #     # print("draw img and fix")
-                #     self.overt_message_flip_counter_0.draw()
-                #     self.img.draw()
-                #     self.session.default_fix.draw()
-    
-                # elif self.flip_counter == 1:
-                #     self.overt_message_flip_counter_1.draw()
-
-                #     print("draw fix")
-                #     self.session.default_fix.draw()
-
-                # elif self.flip_counter == 2:
-                #     self.overt_message_flip_counter_2.draw()
-
-                #     # print("draw img and fix")
-                #     self.img.draw()
-                #     self.session.default_fix.draw()
-    
-                # else:
-                #     self.overt_message_flip_counter_3.draw()
-
-                #     # print("draw fix")
-                #     self.session.default_fix.draw()
-
-                # # flip
-                # print("flippin at {}".format(self.session.nr_frames))
-                # self.session.win.flip()
-
-                # self.flip_counter += 1
-
-                # print("flip counter at: {}".format(self.flip_counter))
-                # # what to show next
-                # if self.flip_counter % 2 == 0:
-                #     print("drawing next: fix")
-                #     self.session.default_fix.draw()
-                # else:
-                #     print("drawing next: img and fix")
-
-                #     self.img.draw()
-                #     self.session.default_fix.draw()
-
-                # self.flip_counter += 1
             else:
-                # print("doing nothing at {}".format(self.session.nr_frames))
                 self.session.win.flip(clearBuffer = False)
             
         
-            # except:
-            #     pass
-            # else:
-            #     # draw blank TODO confirm if this is needded
-            #     self.blank.draw()            
-            #     # draw fixation 
-            #     self.session.default_fix.draw()
-                
         else: # we are in iti
             # draw fixation
             self.session.default_fix.draw()
             self.session.win.flip()
-            #print("doing nothing in iti at {}".format(self.session.nr_frames))
-            # # debug
+
+            ## debugging printouts
             # self.overt_counter_iti.setText(self.session.nr_frames) 
             # self.overt_counter_iti.draw()
             # self.wait_print_t()
 
 
     def draw(self):
-        """ Draws stimuli """
+        """ Draws stimuli 
+        This is to be used when flipping on every frame
+        """
         if self.phase == 0: # prep time
+            ## debugging
             # self.overt_counter_prep.setText(self.session.nr_frames) 
             # self.overt_counter_prep.draw() 
 
@@ -224,9 +169,9 @@ class TestTrial(Trial):
                 self.session.default_fix.draw()
 
                 # debug
-                self.overt_counter_trial.setText(self.session.nr_frames) 
-                self.overt_counter_trial.draw() 
-                self.wait_print_t()
+                # self.overt_counter_trial.setText(self.session.nr_frames) 
+                # self.overt_counter_trial.draw() 
+                # self.wait_print_t()
 
             else:
                 # draw blank TODO confirm if this is needded
@@ -235,9 +180,9 @@ class TestTrial(Trial):
                 self.session.default_fix.draw()
                 
                 # debug
-                self.overt_counter_trial.setText(self.session.nr_frames) 
-                self.overt_counter_trial.draw() 
-                self.wait_print_t()
+                # self.overt_counter_trial.setText(self.session.nr_frames) 
+                # self.overt_counter_trial.draw() 
+                # self.wait_print_t()
 
 
 
