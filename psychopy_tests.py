@@ -11,11 +11,11 @@ manual_array[-1] = -1 # off after 800 ms
 message1 = visual.TextStim(win, text='flip 1')
 message2 = visual.TextStim(win, text='flip 2')
 message = visual.TextStim(win, text='hello')
-
+rect = visual.Rect(win, .1, .1, pos = (1,1), fillColor ="black")
 
 print(manual_array)
 img.draw()
-
+rect.draw()
 core.wait(2.0)
 
 message1.draw()

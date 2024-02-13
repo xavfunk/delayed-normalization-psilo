@@ -2,7 +2,7 @@ import os.path as op
 from exptools2.core import Session
 from exptools2.core import PylinkEyetrackerSession
 from exptools2.core import Trial
-from psychopy.visual import TextStim, ImageStim
+from psychopy.visual import Rect, TextStim, ImageStim
 from exptools2 import utils
 import numpy as np
 import glob
@@ -68,6 +68,10 @@ class TestTrial(Trial):
         # self.overt_message_flip_counter_2 = TextStim(self.session.win, text='flip counter at 2, draw img and fix', color = 'blue') # for debugging
         # self.overt_message_flip_counter_3 = TextStim(self.session.win, text='flip counter at 3, draw fix', color = 'red') # for debugging
 
+        # Square for Photodiode
+        self.white_square = Rect(self.session.win, 1, 1, pos = (-10,-8))
+        self.black_square = Rect(self.session.win, 1, 1, pos = (-10,-8), fillColor = 'black')
+
 
     def wait_print_t(self):
         # wait for t
@@ -91,6 +95,7 @@ class TestTrial(Trial):
             #self.img.draw()
             # draw fixation TODO confirm we want this
             self.session.default_fix.draw()
+            self.white_square.draw()
             self.session.win.flip()
             # self.img.draw()
             #print("doing nothing in prep at {}".format(self.session.nr_frames))
@@ -115,6 +120,7 @@ class TestTrial(Trial):
                 # print("flip counter is: {}".format(self.flip_counter))
                 # print("self.frames is: {}".format(self.session.win.frames))
                 
+                self.black_square.draw()
                 self.img.draw()
                 self.session.default_fix.draw()
 
@@ -123,17 +129,23 @@ class TestTrial(Trial):
                 self.session.win.flip(clearBuffer = False)
             
             elif self.frames[current_frame] == -1:
-                
+                                
+                self.white_square.draw()
                 self.session.default_fix.draw()
 
                 print("flippin back at {}".format(self.session.nr_frames))
                 self.session.win.flip()
+                self.white_square.draw()
+                self.session.default_fix.draw()
 
             else:
+                #self.white_square.draw()
+                # self.session.default_fix.draw()
                 self.session.win.flip(clearBuffer = False)
             
         
         else: # we are in iti
+            self.white_square.draw()
             # draw fixation
             self.session.default_fix.draw()
             self.session.win.flip()
@@ -153,7 +165,12 @@ class TestTrial(Trial):
             # self.overt_counter_prep.setText(self.session.nr_frames) 
             # self.overt_counter_prep.draw() 
 
-            self.wait_print_t()
+            # self.wait_print_t()
+
+            self.white_square.draw()
+            self.session.default_fix.draw()
+
+
 
         elif self.phase == 1: # we are in stimulus presentation
             
@@ -167,6 +184,8 @@ class TestTrial(Trial):
                 self.img.draw()
                 # draw fixation TODO confirm we want this
                 self.session.default_fix.draw()
+                self.black_square.draw()
+
 
                 # debug
                 # self.overt_counter_trial.setText(self.session.nr_frames) 
@@ -175,7 +194,10 @@ class TestTrial(Trial):
 
             else:
                 # draw blank TODO confirm if this is needded
-                self.blank.draw()            
+                self.blank.draw()     
+    
+                self.white_square.draw()
+
                 # draw fixation 
                 self.session.default_fix.draw()
                 
@@ -187,13 +209,15 @@ class TestTrial(Trial):
 
 
         else: # we are in iti
+            
+            self.white_square.draw()
             # draw fixation
             self.session.default_fix.draw()
 
             # debug
-            self.overt_counter_iti.setText(self.session.nr_frames) 
-            self.overt_counter_iti.draw()
-            self.wait_print_t()
+            # self.overt_counter_iti.setText(self.session.nr_frames) 
+            # self.overt_counter_iti.draw()
+            # self.wait_print_t()
             
 
         # fixation dot color change; makes frames drop
@@ -365,8 +389,8 @@ class EyetrackerSession(PylinkEyetrackerSession):
         self.var_dur_dict = {dur:frames for dur, frames in zip(stim_durations, var_duration)}
 
         # these are to check the timings        
-        self.check_isi_dict = {dur:np.zeros(96) for dur in zip(stim_durations)}
-        self.check_dur_dict = {dur:np.zeros(96) for dur in zip(stim_durations)}
+        self.check_isi_dict = {dur:np.zeros(96) for dur in stim_durations}
+        self.check_dur_dict = {dur:np.zeros(96) for dur in stim_durations}
 
 
         var_duration_flip = np.zeros((len(stim_durations), self.total_duration))
