@@ -17,7 +17,7 @@ class TestTrial(Trial):
         self.img = ImageStim(self.session.win, self.parameters['oneOverF_texture_path'],
                              mask = 'raisedCos', maskParams = {'fringeWidth':0.2}) # proportion that will be blurred
         self.blank = TextStim(self.session.win, text='') 
-        self.check_frames = np.zeros(96)
+
 
         # get the stimulus array with self.session.var_isi/dur_dict and save it into self.frames
         if self.parameters['trial_type'] == 'dur':
@@ -82,11 +82,16 @@ class TestTrial(Trial):
 
     def draw_flip(self, current_frame):
         """ Draws stimuli and flips the window 
-            to be used when flipping on every frame is discouraged
         """
         #print(self.session.nr_frames, current_frame)
 
-        if self.phase == 0: # prep time
+        # fixation dot color change
+        if int((self.session.clock.getTime()*120)) in self.parameters['dot_color_timings']:
+            # change color
+            self.session.fix_dot_color_idx += 1
+            self.session.default_fix.setColor(self.session.fix_dot_colors[self.session.fix_dot_color_idx % len(self.session.fix_dot_colors)])
+
+        if self.phase == 0: # prep timeself.session.total_nr_frames 
             #self.overt_counter_prep.setText(self.session.nr_frames) 
             #self.overt_counter_prep.draw() 
             #self.wait_print_t()
@@ -125,7 +130,7 @@ class TestTrial(Trial):
                 self.session.default_fix.draw()
 
                 ## debugging printouts
-                print("flippin at {}".format(self.session.nr_frames))
+                #print("flippin at {}".format(self.session.nr_frames))
                 self.session.win.flip(clearBuffer = False)
             
             elif self.frames[current_frame] == -1:
@@ -133,7 +138,7 @@ class TestTrial(Trial):
                 self.white_square.draw()
                 self.session.default_fix.draw()
 
-                print("flippin back at {}".format(self.session.nr_frames))
+                #print("flippin back at {}".format(self.session.nr_frames))
                 self.session.win.flip()
                 self.white_square.draw()
                 self.session.default_fix.draw()
@@ -156,10 +161,18 @@ class TestTrial(Trial):
             # self.wait_print_t()
 
 
+
+
     def draw(self):
         """ Draws stimuli 
         This is to be used when flipping on every frame
         """
+        # fixation dot color change
+        if int((self.session.clock.getTime()*120)) in self.parameters['dot_color_timings']:
+            # change color
+            self.session.fix_dot_color_idx += 1
+            self.session.default_fix.setColor(self.session.fix_dot_colors[self.session.fix_dot_color_idx % len(self.session.fix_dot_colors)])
+
         if self.phase == 0: # prep time
             ## debugging
             # self.overt_counter_prep.setText(self.session.nr_frames) 
@@ -169,8 +182,6 @@ class TestTrial(Trial):
 
             self.white_square.draw()
             self.session.default_fix.draw()
-
-
 
         elif self.phase == 1: # we are in stimulus presentation
             
@@ -218,29 +229,15 @@ class TestTrial(Trial):
             # self.overt_counter_iti.setText(self.session.nr_frames) 
             # self.overt_counter_iti.draw()
             # self.wait_print_t()
-            
-
-        # fixation dot color change; makes frames drop
-        # if self.session.nr_frames in self.parameters['dot_color_timings']:
-        #     # change color
-        #     self.session.default_fix.setColor('red')
-        #     self.change_back_counter = 96 # keep red for 96 frames, ie 800 ms
-        
-        # # count down frames left before changing color back
-        # if self.change_back_counter != 0:
-        #     self.change_back_counter -= 1
-
-        # # change color back if not yet black
-        # else:
-        #     if self.session.default_fix.color != 'black':
-                
-        #         self.session.default_fix.setColor('black')    
 
         # overt_counter = TextStim(self.session.win, text='{}'.format(self.session.nr_frames)) # for debugging
         # overt_counter.draw()
 
     def draw_return(self):
-        """ Draws stimuli and return flipping flag"""
+        """ 
+        DPERECATED
+        Draws stimuli and return flipping flag
+        """
         if self.phase == 0: # prep time
             # self.overt_counter_prep.setText(self.session.nr_frames) 
             # self.overt_counter_prep.draw() 
@@ -296,6 +293,7 @@ class TestTrial(Trial):
             self.session.first_trial = False
 
         for phase_dur in self.phase_durations:  # loop over phase durations
+            self.session.total_nr_frames += self.session.nr_frames
             self.session.nr_frames = 0
             # pass self.phase *now* instead of while logging the phase info.
             #self.session.win.callOnFlip(self.log_phase_info, phase=self.phase)
@@ -317,7 +315,7 @@ class TestTrial(Trial):
                 # Loop for a predetermined number of frames
                 # Note: only works when you're sure you're not 
                 # dropping frames
-                self.flip_counter = 0
+                # self.flip_counter = 0
 
                 for frame in range(phase_dur):
 
@@ -328,6 +326,8 @@ class TestTrial(Trial):
                     # self.draw()
                     # self.session.win.flip()
                     
+                    # print("it is clock time {}".format(self.session.clock.getTime()))
+                    # print("it is clock frame time {}".format(int(self.session.clock.getTime()*120)))
                     
                     # flip_flag = self.draw_return()
                     # #print(flip_flag)
@@ -335,6 +335,17 @@ class TestTrial(Trial):
                     #     if self.phase ==1:
                     #         print("flipping at {}".format(frame))
                     #     self.session.win.flip()
+                    #print("it is timer time {}".format(self.session.timer.getTime()))
+                    if self.phase == 1:
+                        # TODO instead of printing, put these values into an array
+                        # that tells us exactly on which frames this happened
+                        print(frame, session.win.nDroppedFrames, self.frames[frame])
+                        # TODO how to exaclty handle the checked frames
+                        # save them to df, while keeping trial parameters
+                        self.check_frames[frame][0] = frame
+                        self.check_frames[frame][1] = session.win.nDroppedFrames
+                        self.check_frames[frame][2] = self.frames[frame]
+
                     
                     self.get_events()
                     self.session.nr_frames += 1
@@ -354,6 +365,10 @@ class EyetrackerSession(PylinkEyetrackerSession):
     def __init__(self, output_str, output_dir=None, settings_file=None, n_trials=10, eyetracker_on=True):
         """ Initializes TestSession object. """
         self.n_trials = n_trials
+        self.total_nr_frames = 0
+        self.fix_dot_color_idx = 0
+        self.fix_dot_colors = ['green', 'red']
+
         super().__init__(output_str, output_dir=output_dir, settings_file=settings_file, eyetracker_on=eyetracker_on)
 
     def create_trials(self, timing='frames'):
@@ -472,9 +487,12 @@ class EyetrackerSession(PylinkEyetrackerSession):
             self.start_recording_eyetracker()
 
         self.start_experiment()
+
         for trial in self.trials:
             # TODO wait for scanner t
-            trial.run()            
+            trial.run()        
+            # print(session.win._frameTimes)
+
 
         self.close()
 
