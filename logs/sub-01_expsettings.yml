@@ -30,7 +30,7 @@ mouse:
 mri:
     TA: 1.33
     TR: 1.33
-    simulate: false
+    simulate: true
     skip: 0
     sound: false
     sync: t
@@ -44,7 +44,7 @@ window:
     - 0
     - 0
     - 0
-    fullscr: true
+    fullscr: false
     pos:
     - 0
     - 0

@@ -17,7 +17,7 @@ class TestTrial(Trial):
         self.img = ImageStim(self.session.win, self.parameters['oneOverF_texture_path'],
                              mask = 'raisedCos', maskParams = {'fringeWidth':0.2}) # proportion that will be blurred
         self.blank = TextStim(self.session.win, text='') 
-
+        self.check_frames = np.zeros((96, 3))
 
         # get the stimulus array with self.session.var_isi/dur_dict and save it into self.frames
         if self.parameters['trial_type'] == 'dur':
@@ -72,8 +72,13 @@ class TestTrial(Trial):
         self.white_square = Rect(self.session.win, 1, 1, pos = (-10,-8))
         self.black_square = Rect(self.session.win, 1, 1, pos = (-10,-8), fillColor = 'black')
 
+        # square for being in phase 0
+        self.green_square = Rect(self.session.win, 1, 1, pos = (-10,-8), fillColor = 'green')
+
 
     def wait_print_t(self):
+        """DEPRECATED"""
+
         # wait for t
         events = event.getKeys(keyList=['t'])
         if events: 
@@ -100,7 +105,9 @@ class TestTrial(Trial):
             #self.img.draw()
             # draw fixation TODO confirm we want this
             self.session.default_fix.draw()
-            self.white_square.draw()
+            self.white_square.draw() # for timing checks  
+            # self.green_square.draw() # for debugging in phase 0
+
             self.session.win.flip()
             # self.img.draw()
             #print("doing nothing in prep at {}".format(self.session.nr_frames))
@@ -108,6 +115,10 @@ class TestTrial(Trial):
             # events = event.getKeys(keyList=['t'])
             # if events:  
             #     self.exit_phase = True
+            # event.clearEvents()
+
+            if 't' in event.getKeys(keyList = ['t']):
+                self.exit_phase = True
 
         elif self.phase == 1: # we are in stimulus presentation
             #print(self.frames)
@@ -180,8 +191,15 @@ class TestTrial(Trial):
 
             # self.wait_print_t()
 
-            self.white_square.draw()
+            self.white_square.draw() # for photodiode
+            # self.green_square.draw() # for debugging in phase 0
+
             self.session.default_fix.draw()
+            
+            
+            if 't' in event.getKeys(keyList = 't'):
+                self.exit_phase = True
+
 
         elif self.phase == 1: # we are in stimulus presentation
             
@@ -318,6 +336,9 @@ class TestTrial(Trial):
                 # self.flip_counter = 0
 
                 for frame in range(phase_dur):
+                    
+                    if frame == 0:
+                        event.clearEvents()
 
                     if self.exit_phase or self.exit_trial:
                         break
@@ -347,7 +368,7 @@ class TestTrial(Trial):
                         self.check_frames[frame][2] = self.frames[frame]
 
                     
-                    self.get_events()
+                    #self.get_events()
                     self.session.nr_frames += 1
 
             if self.exit_phase:  # broke out of phase loop
@@ -378,7 +399,7 @@ class EyetrackerSession(PylinkEyetrackerSession):
         frames_TR = int(round(self.settings['mri']['TR']*120))
         full_iti_duration = 3 * frames_TR
 
-        prep_durations = self.n_trials * [frames_TR//2] # 1/2 of a TR, setting up and waiting for t # also 1.33/2 will be 79.8 frames, rounding to 80
+        prep_durations = self.n_trials * [100000] # just a very large duration, as we wait for t # [frames_TR//2] # 1/2 of a TR, setting up and waiting for t # also 1.33/2 will be 79.8 frames, rounding to 80
         iti_durations = self.n_trials * [full_iti_duration - trial_duration - frames_TR//2] # placeholder for TODO implement itis note they will be the time from onset of a stimulus, so it will be ITI - 1/2 TR - 96
         trial_durations = self.n_trials * [trial_duration] # this will be constant TODO confirm length
 

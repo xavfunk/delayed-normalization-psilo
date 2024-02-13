@@ -1,5 +1,6 @@
 from psychopy import visual, core
 import numpy as np
+from psychopy import event
 
 win = visual.Window([1200,1200])
 img = visual.ImageStim(win, 'textures/oneOverF_texture_1_1024_2.bmp',
@@ -21,7 +22,10 @@ core.wait(2.0)
 message1.draw()
 win.flip()
 
-core.wait(2.0)
+event.waitKeys(keyList = 't'):
+
+
+#core.wait(2.0)
 
 message2.draw()
 win.flip(clearBuffer = False)
