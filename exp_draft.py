@@ -5,7 +5,10 @@ from exptools2.core import Trial
 from psychopy.visual import Rect, TextStim, ImageStim
 from exptools2 import utils
 import numpy as np
+import pandas as pd
 import glob
+import os
+import matplotlib.pyplot as plt
 from psychopy import event
 
 class TestTrial(Trial):
@@ -142,7 +145,7 @@ class TestTrial(Trial):
 
                 ## debugging printouts
                 #print("flippin at {}".format(self.session.nr_frames))
-                self.session.win.flip(clearBuffer = False)
+                self.session.trialwise_frame_timings[current_frame, self.trial_nr] = self.session.win.flip(clearBuffer = False)
             
             elif self.frames[current_frame] == -1:
                                 
@@ -150,14 +153,14 @@ class TestTrial(Trial):
                 self.session.default_fix.draw()
 
                 #print("flippin back at {}".format(self.session.nr_frames))
-                self.session.win.flip()
+                self.session.trialwise_frame_timings[current_frame, self.trial_nr] = self.session.win.flip()
                 self.white_square.draw()
                 self.session.default_fix.draw()
 
             else:
                 #self.white_square.draw()
                 # self.session.default_fix.draw()
-                self.session.win.flip(clearBuffer = False)
+                self.session.trialwise_frame_timings[current_frame, self.trial_nr] = self.session.win.flip(clearBuffer = False)
             
         
         else: # we are in iti
@@ -251,44 +254,6 @@ class TestTrial(Trial):
         # overt_counter = TextStim(self.session.win, text='{}'.format(self.session.nr_frames)) # for debugging
         # overt_counter.draw()
 
-    def draw_return(self):
-        """ 
-        DPERECATED
-        Draws stimuli and return flipping flag
-        """
-        if self.phase == 0: # prep time
-            # self.overt_counter_prep.setText(self.session.nr_frames) 
-            # self.overt_counter_prep.draw() 
-            self.session.default_fix.draw()
-
-            # self.wait_print_t()
-            return 1
-
-        elif self.phase == 1: # we are in stimulus presentation
-            
-            if self.frames[self.session.nr_frames] == 1:
-
-                # draw texture
-                self.img.draw()
-                # draw fixation TODO confirm we want this
-                self.session.default_fix.draw()
-                
-                return 1 
-
-            elif self.frames[self.session.nr_frames] == -1:
-                self.session.default_fix.draw()
-                return 1
-
-            else:
-                return 0
-
-
-        else: # we are in iti
-            # draw fixation
-            self.session.default_fix.draw()
-            return 1
-            
-
 
 
     def run(self):
@@ -345,8 +310,11 @@ class TestTrial(Trial):
                     # here, either draw_flip() or (draw() and session.win.flip()) should be used
                     self.draw_flip(current_frame = frame)
                     # self.draw()
-                    # self.session.win.flip()
-                    
+                    # keeping track of flip timings
+                    # if self.phase == 1:
+                    #     self.session.trialwise_frame_timings[frame, self.trial_nr] = self.session.win.flip()
+                    # else:
+                    #     self.session.win.flip()                
                     # print("it is clock time {}".format(self.session.clock.getTime()))
                     # print("it is clock frame time {}".format(int(self.session.clock.getTime()*120)))
                     
@@ -357,16 +325,17 @@ class TestTrial(Trial):
                     #         print("flipping at {}".format(frame))
                     #     self.session.win.flip()
                     #print("it is timer time {}".format(self.session.timer.getTime()))
-                    if self.phase == 1:
-                        # TODO instead of printing, put these values into an array
-                        # that tells us exactly on which frames this happened
-                        print(frame, session.win.nDroppedFrames, self.frames[frame])
-                        # TODO how to exaclty handle the checked frames
-                        # save them to df, while keeping trial parameters
-                        self.check_frames[frame][0] = frame
-                        self.check_frames[frame][1] = session.win.nDroppedFrames
-                        self.check_frames[frame][2] = self.frames[frame]
-
+                    
+                    
+                    # if self.phase == 1:
+                    #     # TODO instead of printing, put these values into an array
+                    #     # that tells us exactly on which frames this happened
+                    #     print(frame, session.win.nDroppedFrames, self.frames[frame])
+                    #     # TODO how to exaclty handle the checked frames
+                    #     # save them to df, while keeping trial parameters
+                    #     self.check_frames[frame][0] = frame
+                    #     self.check_frames[frame][1] = session.win.nDroppedFrames
+                    #     self.check_frames[frame][2] = self.frames[frame]
                     
                     #self.get_events()
                     self.session.nr_frames += 1
@@ -390,6 +359,8 @@ class EyetrackerSession(PylinkEyetrackerSession):
         self.fix_dot_color_idx = 0
         self.fix_dot_colors = ['green', 'red']
 
+        self.trialwise_frame_timings = np.zeros((96, n_trials))
+
         super().__init__(output_str, output_dir=output_dir, settings_file=settings_file, eyetracker_on=eyetracker_on)
 
     def create_trials(self, timing='frames'):
@@ -399,7 +370,7 @@ class EyetrackerSession(PylinkEyetrackerSession):
         frames_TR = int(round(self.settings['mri']['TR']*120))
         full_iti_duration = 3 * frames_TR
 
-        prep_durations = self.n_trials * [100000] # just a very large duration, as we wait for t # [frames_TR//2] # 1/2 of a TR, setting up and waiting for t # also 1.33/2 will be 79.8 frames, rounding to 80
+        prep_durations = self.n_trials * [120] #[100000] # just a very large duration, as we wait for t # [frames_TR//2] # 1/2 of a TR, setting up and waiting for t # also 1.33/2 will be 79.8 frames, rounding to 80
         iti_durations = self.n_trials * [full_iti_duration - trial_duration - frames_TR//2] # placeholder for TODO implement itis note they will be the time from onset of a stimulus, so it will be ITI - 1/2 TR - 96
         trial_durations = self.n_trials * [trial_duration] # this will be constant TODO confirm length
 
@@ -517,11 +488,77 @@ class EyetrackerSession(PylinkEyetrackerSession):
 
         self.close()
 
+    def close(self):
+        """'Closes' experiment. Should always be called, even when
+        experiment is quit manually (saves onsets to file)."""
+
+        if self.closed:  # already closed!
+            return None
+
+        self.win.callOnFlip(self._set_exp_stop)
+        self.win.flip()
+        self.win.recordFrameIntervals = False
+
+        print(f"\nDuration experiment: {self.exp_stop:.3f}\n")
+
+        if not op.isdir(self.output_dir):
+            os.makedirs(self.output_dir)
+
+        # self.global_log = pd.DataFrame(self.global_log).set_index("trial_nr")
+        # self.global_log["onset_abs"] = self.global_log["onset"] + self.exp_start
+
+        # # Only non-responses have a duration
+        # nonresp_idx = ~self.global_log.event_type.isin(["response", "trigger", "pulse"])
+        # last_phase_onset = self.global_log.loc[nonresp_idx, "onset"].iloc[-1]
+        # dur_last_phase = self.exp_stop - last_phase_onset
+        # durations = np.append(
+        #     self.global_log.loc[nonresp_idx, "onset"].diff().values[1:], dur_last_phase
+        # )
+        # self.global_log.loc[nonresp_idx, "duration"] = durations
+
+        # # Same for nr frames
+        # nr_frames = np.append(
+        #     self.global_log.loc[nonresp_idx, "nr_frames"].values[1:], self.nr_frames
+        # )
+        # self.global_log.loc[nonresp_idx, "nr_frames"] = nr_frames.astype(int)
+
+        # # Round for readability and save to disk
+        # self.global_log = self.global_log.round(
+        #     {"onset": 5, "onset_abs": 5, "duration": 5}
+        # )
+        # f_out = op.join(self.output_dir, self.output_str + "_events.tsv")
+        # self.global_log.to_csv(f_out, sep="\t", index=True)
+
+        # Create figure with frametimes (to check for dropped frames)
+        fig, ax = plt.subplots(figsize=(15, 5))
+        ax.plot(self.win.frameIntervals)
+        ax.axhline(1.0 / self.actual_framerate, c="r")
+        ax.axhline(
+            1.0 / self.actual_framerate + 1.0 / self.actual_framerate, c="r", ls="--"
+        )
+        ax.set(
+            xlim=(0, len(self.win.frameIntervals) + 1),
+            xlabel="Frame nr",
+            ylabel="Interval (sec.)",
+            ylim=(-0.01, 0.125),
+        )
+        fig.savefig(op.join(self.output_dir, self.output_str + "_frames.pdf"))
+
+        # save frame timings
+        frametimings_df = pd.DataFrame(self.trialwise_frame_timings, columns = ["trial {}".format(str(i).zfill(2)) for i in range(self.n_trials)] )
+        frametimings_df.to_csv(op.join(self.output_dir, self.output_str + "_frametimings.csv"), index = False)
+
+        if self.mri_simulator is not None:
+            self.mri_simulator.stop()
+
+        self.win.close()
+        self.closed = True
+
 
 if __name__ == '__main__':
 
     settings = op.join(op.dirname(__file__), 'settings.yml')
-    session = EyetrackerSession('sub-01', n_trials=100, settings_file=settings,
+    session = EyetrackerSession('sub-02', n_trials=100, settings_file=settings,
                                  eyetracker_on = False) # False if testing without eyetracker!
     # session.create_trials(durations=(.25, .25), timing='seconds')
     session.create_trials()
