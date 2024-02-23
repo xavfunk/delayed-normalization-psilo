@@ -11,7 +11,7 @@ from psychopy import event
 
 class DelayedNormTrial(Trial):
     """ Simple trial with text (trial x) and fixation. """
-    def __init__(self, session, trial_nr, phase_durations, txt=None, **kwargs):
+    def __init__(self, session, trial_nr, phase_durations, **kwargs):
         super().__init__(session, trial_nr, phase_durations, **kwargs)
         
         # get the 1/f texture
@@ -30,7 +30,7 @@ class DelayedNormTrial(Trial):
             self.stimulus_frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
 
         # squares for Photodiode
-        if self.photodiode_check is True:
+        if self.session.photodiode_check is True:
             self.white_square = Rect(self.session.win, 1, 1, pos = (-10,-8))
             self.black_square = Rect(self.session.win, 1, 1, pos = (-10,-8), fillColor = 'black')
 
