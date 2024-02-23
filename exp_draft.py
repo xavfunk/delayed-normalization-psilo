@@ -1,9 +1,7 @@
 import os.path as op
-from exptools2.core import Session
 from exptools2.core import PylinkEyetrackerSession
 from exptools2.core import Trial
 from psychopy.visual import Rect, TextStim, ImageStim
-from exptools2 import utils
 import numpy as np
 import pandas as pd
 import glob
@@ -11,7 +9,7 @@ import os
 import matplotlib.pyplot as plt
 from psychopy import event
 
-class TestTrial(Trial):
+class DelayedNormTrial(Trial):
     """ Simple trial with text (trial x) and fixation. """
     def __init__(self, session, trial_nr, phase_durations, txt=None, **kwargs):
         super().__init__(session, trial_nr, phase_durations, **kwargs)
@@ -22,76 +20,32 @@ class TestTrial(Trial):
         self.blank = TextStim(self.session.win, text='') 
         self.check_frames = np.zeros((96, 3))
 
-        # get the stimulus array with self.session.var_isi/dur_dict and save it into self.frames
+        # get the stimulus array with self.session.var_isi/dur_dict and save it into self.stimulus_frames
         if self.parameters['trial_type'] == 'dur':
-            # self.frames = self.session.var_dur_dict[self.parameters['stim_dur']]
-            self.frames = self.session.var_dur_dict_flip[self.parameters['stim_dur']]
-            
-            # debugging
-            # manual_array = np.zeros(96)
-            # manual_array[0] = 1 # on
-            # manual_array[95] = -1 # off after 800 ms
-            # # flicker a bit
-            # manual_array[65] = 1
-            # manual_array[71] = -1
-            # manual_array[77] = 1
-            # manual_array[83] = -1
-            # manual_array[89] = 1
-            # manual_array[95] = -1
-
-            # self.frames = manual_array
-
+            # self.stimulus_frames = self.session.var_dur_dict[self.parameters['stim_dur']]
+            self.stimulus_frames = self.session.var_dur_dict_flip[self.parameters['stim_dur']]
 
         else:
-            # self.frames = self.session.var_isi_dict[self.parameters['stim_dur']]
-            self.frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
+            # self.stimulus_frames = self.session.var_isi_dict[self.parameters['stim_dur']]
+            self.stimulus_frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
 
-            # debugging
-            # manual_array = np.zeros(96)
-            # manual_array[0] = 1 # on
-            # manual_array[95] = -1 # off after almost 500 ms
-            # # flicker a bit
-            # manual_array[65] = 1
-            # manual_array[71] = -1
-            # manual_array[77] = 1
-            # manual_array[83] = -1
-            # manual_array[89] = 1
-            # manual_array[95] = -1
+        # squares for Photodiode
+        if self.photodiode_check is True:
+            self.white_square = Rect(self.session.win, 1, 1, pos = (-10,-8))
+            self.black_square = Rect(self.session.win, 1, 1, pos = (-10,-8), fillColor = 'black')
 
-            # self.frames = manual_array
-        
-        # debugging counters etc
-        #self.fix_color = "red"
-        # self.change_back_counter = 0 # counting frames to change back fixation color
-        # self.overt_counter_trial = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'green') # for debugging
-        # self.overt_counter_iti = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'red') # for debugging
-        # self.overt_counter_prep = TextStim(self.session.win, text='{}'.format(self.session.nr_frames), color = 'blue') # for debugging
-        # self.overt_message_flip_counter_0 = TextStim(self.session.win, text='flip counter at 0, draw img and fix', color = 'blue') # for debugging
-        # self.overt_message_flip_counter_1 = TextStim(self.session.win, text='flip counter at 1, draw fix', color = 'green') # for debugging
-        # self.overt_message_flip_counter_2 = TextStim(self.session.win, text='flip counter at 2, draw img and fix', color = 'blue') # for debugging
-        # self.overt_message_flip_counter_3 = TextStim(self.session.win, text='flip counter at 3, draw fix', color = 'red') # for debugging
-
-        # Square for Photodiode
-        self.white_square = Rect(self.session.win, 1, 1, pos = (-10,-8))
-        self.black_square = Rect(self.session.win, 1, 1, pos = (-10,-8), fillColor = 'black')
-
-        # square for being in phase 0
-        self.green_square = Rect(self.session.win, 1, 1, pos = (-10,-8), fillColor = 'green')
-
-
-    def wait_print_t(self):
-        """DEPRECATED"""
-
-        # wait for t
-        events = event.getKeys(keyList=['t'])
-        if events: 
-            self.overt_counter_prep.setText('saw t')
-            self.overt_counter_prep.draw()   
 
     def draw_flip(self, current_frame):
-        """ Draws stimuli and flips the window 
+        """ 
+        Draws stimuli and flips the window 
+        This function implements a potentially more resourceful drawing behaviour, where frames are only 
+        drawn when something on the screen actually changes.
+        Otherwise, we simply flip without clearing the buffer, meaning that a blank screen will be flipped on top
+        of what is already drawn on the screen.
+
+
+        This method is still buggy on fullscreen, for undiscovered reasons
         """
-        #print(self.session.nr_frames, current_frame)
 
         # fixation dot color change
         if int((self.session.clock.getTime()*120)) in self.parameters['dot_color_timings']:
@@ -99,82 +53,64 @@ class TestTrial(Trial):
             self.session.fix_dot_color_idx += 1
             self.session.default_fix.setColor(self.session.fix_dot_colors[self.session.fix_dot_color_idx % len(self.session.fix_dot_colors)])
 
-        if self.phase == 0: # prep timeself.session.total_nr_frames 
-            #self.overt_counter_prep.setText(self.session.nr_frames) 
-            #self.overt_counter_prep.draw() 
-            #self.wait_print_t()
-
-            # draw texture
-            #self.img.draw()
-            # draw fixation TODO confirm we want this
-            self.session.default_fix.draw()
-            self.white_square.draw() # for timing checks  
-            # self.green_square.draw() # for debugging in phase 0
-
-            self.session.win.flip()
-            # self.img.draw()
-            #print("doing nothing in prep at {}".format(self.session.nr_frames))
+        if self.phase == 0: # we are in phase 0, prep time
             
-            # events = event.getKeys(keyList=['t'])
-            # if events:  
-            #     self.exit_phase = True
-            # event.clearEvents()
+            self.session.default_fix.draw()
+            
+            if self.photodiode_check is True:
+                # draw photodiode square
+                self.black_square.draw()
 
+            
+            self.session.win.flip()
+
+            # checking if scanner t arrives
             if 't' in event.getKeys(keyList = ['t']):
                 self.exit_phase = True
 
-        elif self.phase == 1: # we are in stimulus presentation
-            #print(self.frames)
-            ## if the self.frame array at this frame index is one, flip it
+        elif self.phase == 1: # we are in phase 1, stimulus presentation
             
-            # if self.frames[self.session.nr_frames%self.session.total_duration] == 1:
-            #print(self.session.nr_frames)
-            # try:
-                # if self.frames[self.session.nr_frames] == 1: 
-            # print(self.frames)
-            if self.frames[current_frame] == 1:
-                ## debugging printouts
-                # print(current_frame)
-                # print("trial type is: {}".format(np.where(self.frames == 1)[0]))
-                # print("flip counter is: {}".format(self.flip_counter))
-                # print("self.frames is: {}".format(self.session.win.frames))
+            # if the self.stimulus_frames array at this frame index is 1, draw the stimulus and flip it
+            if self.stimulus_frames[current_frame] == 1:
                 
-                self.black_square.draw()
+                if self.photodiode_check is True:
+                    self.white_square.draw()
+    
                 self.img.draw()
                 self.session.default_fix.draw()
 
-                ## debugging printouts
-                #print("flippin at {}".format(self.session.nr_frames))
                 self.session.trialwise_frame_timings[current_frame, self.trial_nr] = self.session.win.flip(clearBuffer = False)
-            
-            elif self.frames[current_frame] == -1:
-                                
-                self.white_square.draw()
+
+            # if the self.stimulus_frames array at this frame index is -1, draw only fix and flip it
+            elif self.stimulus_frames[current_frame] == -1:
+
+                if self.photodiode_check is True:
+                    self.black_square.draw()
+    
                 self.session.default_fix.draw()
 
-                #print("flippin back at {}".format(self.session.nr_frames))
                 self.session.trialwise_frame_timings[current_frame, self.trial_nr] = self.session.win.flip()
-                self.white_square.draw()
+
+                if self.photodiode_check is True:
+                    self.black_square.draw()
+    
                 self.session.default_fix.draw()
 
+            # if the self.stimulus_frames array at this frame index is neither [1, -1], draw nothing and flip with clearBuffer = False
             else:
-                #self.white_square.draw()
+                if self.photodiode_check is True:
+                    self.black_square.draw()
+
                 # self.session.default_fix.draw()
                 self.session.trialwise_frame_timings[current_frame, self.trial_nr] = self.session.win.flip(clearBuffer = False)
             
         
-        else: # we are in iti
-            self.white_square.draw()
+        else: # we are in phase 2, iti
+
+            self.black_square.draw()
             # draw fixation
             self.session.default_fix.draw()
             self.session.win.flip()
-
-            ## debugging printouts
-            # self.overt_counter_iti.setText(self.session.nr_frames) 
-            # self.overt_counter_iti.draw()
-            # self.wait_print_t()
-
-
 
 
     def draw(self):
@@ -187,15 +123,10 @@ class TestTrial(Trial):
             self.session.fix_dot_color_idx += 1
             self.session.default_fix.setColor(self.session.fix_dot_colors[self.session.fix_dot_color_idx % len(self.session.fix_dot_colors)])
 
-        if self.phase == 0: # prep time
-            ## debugging
-            # self.overt_counter_prep.setText(self.session.nr_frames) 
-            # self.overt_counter_prep.draw() 
+        if self.phase == 0: # we are in phase 0, prep time
 
-            # self.wait_print_t()
-
-            self.white_square.draw() # for photodiode
-            # self.green_square.draw() # for debugging in phase 0
+            if self.photodiode_check is True:
+                self.black_square.draw()
 
             self.session.default_fix.draw()
             
@@ -204,56 +135,35 @@ class TestTrial(Trial):
                 self.exit_phase = True
 
 
-        elif self.phase == 1: # we are in stimulus presentation
+        elif self.phase == 1: # we are in phase 1, stimulus presentation
             
             ## if the self.frame array at this frame index is one, show the texture, otherwise blank or fix
-#            if self.frames[self.session.nr_frames%self.session.total_duration] == 1:
-            if self.frames[self.session.nr_frames] == 1:
-
-#            if self.frames[self.session.nr_frames] == 1:  
+            if self.stimulus_frames[self.session.nr_frames] == 1:
+                
+                if self.photodiode_check is True:
+                    self.white_square.draw()    
 
                 # draw texture
                 self.img.draw()
-                # draw fixation TODO confirm we want this
+
+                # draw fixation
                 self.session.default_fix.draw()
-                self.black_square.draw()
-
-
-                # debug
-                # self.overt_counter_trial.setText(self.session.nr_frames) 
-                # self.overt_counter_trial.draw() 
-                # self.wait_print_t()
-
+                
             else:
-                # draw blank TODO confirm if this is needded
-                self.blank.draw()     
-    
-                self.white_square.draw()
+                
+                if self.photodiode_check is True:
+                    self.black_square.draw()
 
                 # draw fixation 
                 self.session.default_fix.draw()
-                
-                # debug
-                # self.overt_counter_trial.setText(self.session.nr_frames) 
-                # self.overt_counter_trial.draw() 
-                # self.wait_print_t()
 
 
-
-        else: # we are in iti
-            
-            self.white_square.draw()
+        else: # we are in phase 2, iti
+            if self.photodiode_check is True:
+                self.black_square.draw()
+    
             # draw fixation
             self.session.default_fix.draw()
-
-            # debug
-            # self.overt_counter_iti.setText(self.session.nr_frames) 
-            # self.overt_counter_iti.draw()
-            # self.wait_print_t()
-
-        # overt_counter = TextStim(self.session.win, text='{}'.format(self.session.nr_frames)) # for debugging
-        # overt_counter.draw()
-
 
 
     def run(self):
@@ -308,34 +218,15 @@ class TestTrial(Trial):
                     if self.exit_phase or self.exit_trial:
                         break
                     # here, either draw_flip() or (draw() and session.win.flip()) should be used
-                    self.draw_flip(current_frame = frame)
-                    # self.draw()
+                    #self.draw_flip(current_frame = frame)
+                    
+                    self.draw()
+                    
                     # keeping track of flip timings
-                    # if self.phase == 1:
-                    #     self.session.trialwise_frame_timings[frame, self.trial_nr] = self.session.win.flip()
-                    # else:
-                    #     self.session.win.flip()                
-                    # print("it is clock time {}".format(self.session.clock.getTime()))
-                    # print("it is clock frame time {}".format(int(self.session.clock.getTime()*120)))
-                    
-                    # flip_flag = self.draw_return()
-                    # #print(flip_flag)
-                    # if flip_flag == 1:
-                    #     if self.phase ==1:
-                    #         print("flipping at {}".format(frame))
-                    #     self.session.win.flip()
-                    #print("it is timer time {}".format(self.session.timer.getTime()))
-                    
-                    
-                    # if self.phase == 1:
-                    #     # TODO instead of printing, put these values into an array
-                    #     # that tells us exactly on which frames this happened
-                    #     print(frame, session.win.nDroppedFrames, self.frames[frame])
-                    #     # TODO how to exaclty handle the checked frames
-                    #     # save them to df, while keeping trial parameters
-                    #     self.check_frames[frame][0] = frame
-                    #     self.check_frames[frame][1] = session.win.nDroppedFrames
-                    #     self.check_frames[frame][2] = self.frames[frame]
+                    if self.phase == 1:
+                        self.session.trialwise_frame_timings[frame, self.trial_nr] = self.session.win.flip()
+                    else:
+                        self.session.win.flip()                
                     
                     #self.get_events()
                     self.session.nr_frames += 1
@@ -350,7 +241,7 @@ class TestTrial(Trial):
             self.phase += 1  # advance phase        
 
 
-class EyetrackerSession(PylinkEyetrackerSession):
+class DelayedNormSession(PylinkEyetrackerSession):
     """ Simple session with x trials. """
     def __init__(self, output_str, output_dir=None, settings_file=None, n_trials=10, eyetracker_on=True):
         """ Initializes TestSession object. """
@@ -451,7 +342,7 @@ class EyetrackerSession(PylinkEyetrackerSession):
 
         for trial_nr in range(self.n_trials):
             self.trials.append(
-                TestTrial(session=self,
+                DelayedNormTrial(session=self,
                           trial_nr=trial_nr,
                           phase_durations=durations[trial_nr],
                           txt='Trial %i' % trial_nr,
@@ -481,10 +372,7 @@ class EyetrackerSession(PylinkEyetrackerSession):
         self.start_experiment()
 
         for trial in self.trials:
-            # TODO wait for scanner t
             trial.run()        
-            # print(session.win._frameTimes)
-
 
         self.close()
 
@@ -558,14 +446,12 @@ class EyetrackerSession(PylinkEyetrackerSession):
 if __name__ == '__main__':
 
     settings = op.join(op.dirname(__file__), 'settings.yml')
-    session = EyetrackerSession('sub-02', n_trials=100, settings_file=settings,
+    session = DelayedNormSession('sub-02', n_trials=100, settings_file=settings,
                                  eyetracker_on = False) # False if testing without eyetracker!
     # session.create_trials(durations=(.25, .25), timing='seconds')
     session.create_trials()
     print(session.var_dur_dict_flip)
     print(session.var_isi_dict_flip)
-
-
 
     #session.create_trials(durations=(3, 3), timing='frames')
     session.run()
