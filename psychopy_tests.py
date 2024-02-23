@@ -22,7 +22,7 @@ core.wait(2.0)
 message1.draw()
 win.flip()
 
-event.waitKeys(keyList = 't'):
+event.waitKeys(keyList = 't')
 
 
 #core.wait(2.0)

@@ -11,7 +11,7 @@ from psychopy import event
 
 class DelayedNormTrial(Trial):
     """ Simple trial with text (trial x) and fixation. """
-    def __init__(self, session, trial_nr, phase_durations, **kwargs):
+    def __init__(self, session, trial_nr, phase_durations, txt = None, **kwargs):
         super().__init__(session, trial_nr, phase_durations, **kwargs)
         
         # get the 1/f texture
@@ -22,12 +22,12 @@ class DelayedNormTrial(Trial):
 
         # get the stimulus array with self.session.var_isi/dur_dict and save it into self.stimulus_frames
         if self.parameters['trial_type'] == 'dur':
-            # self.stimulus_frames = self.session.var_dur_dict[self.parameters['stim_dur']]
-            self.stimulus_frames = self.session.var_dur_dict_flip[self.parameters['stim_dur']]
+            self.stimulus_frames = self.session.var_dur_dict[self.parameters['stim_dur']]
+            # self.stimulus_frames = self.session.var_dur_dict_flip[self.parameters['stim_dur']]
 
         else:
-            # self.stimulus_frames = self.session.var_isi_dict[self.parameters['stim_dur']]
-            self.stimulus_frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
+            self.stimulus_frames = self.session.var_isi_dict[self.parameters['stim_dur']]
+            # self.stimulus_frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
 
         # squares for Photodiode
         if self.session.photodiode_check is True:
@@ -57,7 +57,7 @@ class DelayedNormTrial(Trial):
             
             self.session.default_fix.draw()
             
-            if self.photodiode_check is True:
+            if self.session.photodiode_check is True:
                 # draw photodiode square
                 self.black_square.draw()
 
@@ -73,7 +73,7 @@ class DelayedNormTrial(Trial):
             # if the self.stimulus_frames array at this frame index is 1, draw the stimulus and flip it
             if self.stimulus_frames[current_frame] == 1:
                 
-                if self.photodiode_check is True:
+                if self.session.photodiode_check is True:
                     self.white_square.draw()
     
                 self.img.draw()
@@ -84,21 +84,21 @@ class DelayedNormTrial(Trial):
             # if the self.stimulus_frames array at this frame index is -1, draw only fix and flip it
             elif self.stimulus_frames[current_frame] == -1:
 
-                if self.photodiode_check is True:
+                if self.session.photodiode_check is True:
                     self.black_square.draw()
     
                 self.session.default_fix.draw()
 
                 self.session.trialwise_frame_timings[current_frame, self.trial_nr] = self.session.win.flip()
 
-                if self.photodiode_check is True:
+                if self.session.photodiode_check is True:
                     self.black_square.draw()
     
                 self.session.default_fix.draw()
 
             # if the self.stimulus_frames array at this frame index is neither [1, -1], draw nothing and flip with clearBuffer = False
             else:
-                if self.photodiode_check is True:
+                if self.session.photodiode_check is True:
                     self.black_square.draw()
 
                 # self.session.default_fix.draw()
@@ -125,7 +125,7 @@ class DelayedNormTrial(Trial):
 
         if self.phase == 0: # we are in phase 0, prep time
 
-            if self.photodiode_check is True:
+            if self.session.photodiode_check is True:
                 self.black_square.draw()
 
             self.session.default_fix.draw()
@@ -140,7 +140,7 @@ class DelayedNormTrial(Trial):
             ## if the self.frame array at this frame index is one, show the texture, otherwise blank or fix
             if self.stimulus_frames[self.session.nr_frames] == 1:
                 
-                if self.photodiode_check is True:
+                if self.session.photodiode_check is True:
                     self.white_square.draw()    
 
                 # draw texture
@@ -151,7 +151,7 @@ class DelayedNormTrial(Trial):
                 
             else:
                 
-                if self.photodiode_check is True:
+                if self.session.photodiode_check is True:
                     self.black_square.draw()
 
                 # draw fixation 
@@ -159,7 +159,7 @@ class DelayedNormTrial(Trial):
 
 
         else: # we are in phase 2, iti
-            if self.photodiode_check is True:
+            if self.session.photodiode_check is True:
                 self.black_square.draw()
     
             # draw fixation
@@ -243,66 +243,67 @@ class DelayedNormTrial(Trial):
 
 class DelayedNormSession(PylinkEyetrackerSession):
     """ Simple session with x trials. """
-    def __init__(self, output_str, output_dir=None, settings_file=None, n_trials=10, eyetracker_on=True):
+    def __init__(self, output_str, output_dir=None, settings_file=None, n_trials=10, eyetracker_on=True, photodiode_check = False):
         """ Initializes TestSession object. """
         self.n_trials = n_trials
         self.total_nr_frames = 0
         self.fix_dot_color_idx = 0
         self.fix_dot_colors = ['green', 'red']
-
+        self.photodiode_check = True if photodiode_check else False
         self.trialwise_frame_timings = np.zeros((96, n_trials))
 
         super().__init__(output_str, output_dir=output_dir, settings_file=settings_file, eyetracker_on=eyetracker_on)
 
     def create_trials(self, timing='frames'):
         self.trials = []
+
         # 3 phases: prep, ITI and trial
-        trial_duration = 96
-        frames_TR = int(round(self.settings['mri']['TR']*120))
-        full_iti_duration = 3 * frames_TR
+        stim_duration_p1 = self.settings['stimuli']['stim_duration']
+        TR_in_frames = int(round(self.settings['mri']['TR']*120))
+        full_iti_duration = 3 * TR_in_frames # TODO itis
 
-        prep_durations = self.n_trials * [120] #[100000] # just a very large duration, as we wait for t # [frames_TR//2] # 1/2 of a TR, setting up and waiting for t # also 1.33/2 will be 79.8 frames, rounding to 80
-        iti_durations = self.n_trials * [full_iti_duration - trial_duration - frames_TR//2] # placeholder for TODO implement itis note they will be the time from onset of a stimulus, so it will be ITI - 1/2 TR - 96
-        trial_durations = self.n_trials * [trial_duration] # this will be constant TODO confirm length
+        if self.settings['stimuli']['scanner_sync']:
+            prep_durations_p0 = self.n_trials * [100000] # just a very large duration, as we wait for t # [TR_in_frames//2] # 1/2 of a TR, setting up and waiting for t # also 1.33/2 will be 79.8 frames, rounding to 80
+        else:
+            prep_durations_p0 = [TR_in_frames//2] # 1/2 of a TR, setting up and waiting for t # also 1.33/2 will be 79.8 frames, rounding to 80
 
-        # make durations list of tuples for prep, iti, trial
-        durations = list(zip(prep_durations, trial_durations, iti_durations))
-        print("prep durations: {}".format(prep_durations))
+        stim_durations_p1 = self.n_trials * [stim_duration_p1] # this will be constant
+        iti_durations_p2 = self.n_trials * [full_iti_duration - stim_duration_p1 - TR_in_frames//2] # placeholder for TODO implement itis note they will be the time from onset of a stimulus, so it will be ITI - 1/2 TR - 96
+
+        # make phase durations list of tuples for prep, iti, trial
+        phase_durations = list(zip(prep_durations_p0, stim_durations_p1, iti_durations_p2))
+
         ## making stimulus arrays
-        stim_durations = [0, 2, 4, 8, 16, 32, 64] # frames in 120 FPS, either duration or isi times
+        ## TODO make stimulus array creation a method which takes a parameter determining which frame flip paradigm is used form settings
+        stim_conds = [0, 2, 4, 8, 16, 32, 64] # frames in 120 FPS, either duration or isi times
         fixed_duration = 16 # fixed duration for isi trials
         self.total_duration = 96 # (<800 ms in total) in exp design; 800 ms = .8*120 = 96 frames
-        var_duration = np.vstack([np.hstack((np.ones(duration), # showing stimulus
-                                             np.zeros(self.total_duration - duration))) # no stimulus for the remaining frames
-                                             for duration in stim_durations])
+        var_duration = np.vstack([np.hstack((np.ones(stim_cond), # showing stimulus
+                                             np.zeros(self.total_duration - stim_cond))) # no stimulus for the remaining frames
+                                             for stim_cond in stim_conds])
         
-        var_isi = np.vstack([np.hstack((np.ones(fixed_duration), # show stimulus
-                                        np.zeros(duration), # isi
+        var_isi = np.vstack([np.hstack((np.ones(fixed_duration), # shodurationw stimulus
+                                        np.zeros(stim_cond), # isi
                                         np.ones(fixed_duration), # show stimulus again
-                                        np.zeros(self.total_duration - duration - 2*fixed_duration))) # no stimulus for remaining frames 
-                                        for duration in stim_durations])
+                                        np.zeros(self.total_duration - stim_cond - 2*fixed_duration))) # no stimulus for remaining frames 
+                                        for stim_cond in stim_conds])
         
         # these dicts are integer indexable with the current number of trial frames 
-        self.var_isi_dict = {dur:frames for dur, frames in zip(stim_durations, var_isi)}
-        self.var_dur_dict = {dur:frames for dur, frames in zip(stim_durations, var_duration)}
+        self.var_isi_dict = {dur:frames for dur, frames in zip(stim_conds, var_isi)}
+        self.var_dur_dict = {dur:frames for dur, frames in zip(stim_conds, var_duration)}
 
-        # these are to check the timings        
-        self.check_isi_dict = {dur:np.zeros(96) for dur in stim_durations}
-        self.check_dur_dict = {dur:np.zeros(96) for dur in stim_durations}
-
-
-        var_duration_flip = np.zeros((len(stim_durations), self.total_duration))
-        for i in range(len(stim_durations)):
+        var_duration_flip = np.zeros((len(stim_conds), self.total_duration))
+        for i in range(len(stim_conds)):
             #print(i)
             var_duration_flip[i, 0] = 1 # on
-            var_duration_flip[i, stim_durations[i]] = -1 # off
+            var_duration_flip[i, stim_conds[i]] = -1 # off
             
             if i == 0:
                 var_duration_flip[i, 0] = 0
         
-        var_isi_flip = np.zeros((len(stim_durations), self.total_duration))
+        var_isi_flip = np.zeros((len(stim_conds), self.total_duration))
 
-        for i in range(len(stim_durations)):
+        for i in range(len(stim_conds)):
             #print(i)
             
             if i == 0:
@@ -314,14 +315,14 @@ class DelayedNormSession(PylinkEyetrackerSession):
                     # fixed 16 frames
                     var_isi_flip[i, 0] = 1 # on
                     var_isi_flip[i, 0 + fixed_duration] = -1 # off
-                    var_isi_flip[i, 0 + fixed_duration + stim_durations[i]] = 1 # on
-                    var_isi_flip[i, 0 + fixed_duration + stim_durations[i] + fixed_duration] = -1 # off
+                    var_isi_flip[i, 0 + fixed_duration + stim_conds[i]] = 1 # on
+                    var_isi_flip[i, 0 + fixed_duration + stim_conds[i] + fixed_duration] = -1 # off
                 except IndexError:
                     continue
         
         # these dicts are integer indexable with the current number of trial frames 
-        self.var_isi_dict_flip = {dur:frames for dur, frames in zip(stim_durations, var_isi_flip)}
-        self.var_dur_dict_flip = {dur:frames for dur, frames in zip(stim_durations, var_duration_flip)}
+        self.var_isi_dict_flip = {dur:frames for dur, frames in zip(stim_conds, var_isi_flip)}
+        self.var_dur_dict_flip = {dur:frames for dur, frames in zip(stim_conds, var_duration_flip)}
         
         print("var isi durations: {}".format(self.var_isi_dict_flip))
 
@@ -335,7 +336,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
 
         self.texture_paths = glob.glob('./textures/*') # get paths to textures
         params = [dict(trial_type='dur' if trial_nr % 2 == 0 else 'isi', # back-to-back isi-dur
-                       stim_dur = stim_durations[trial_nr%len(stim_durations)], # increasing durations
+                       stim_dur = stim_conds[trial_nr%len(stim_conds)], # increasing durations
                        oneOverF_texture_path = self.texture_paths[trial_nr%10], # one after the other stimulus
                        dot_color_timings = self._make_dot_color_timings()) 
                   for trial_nr in range(self.n_trials)] # this makes back-to-back isi-dur with increasing durations
@@ -344,13 +345,13 @@ class DelayedNormSession(PylinkEyetrackerSession):
             self.trials.append(
                 DelayedNormTrial(session=self,
                           trial_nr=trial_nr,
-                          phase_durations=durations[trial_nr],
+                          phase_durations=phase_durations[trial_nr],
                           txt='Trial %i' % trial_nr,
                           parameters=params[trial_nr],
                           verbose=True,
                           timing=timing)
             )
-            print("made trial {} with params: {} phase duration {} and timing: {}".format(trial_nr, params[trial_nr], durations[trial_nr], timing))
+            print("made trial {} with params: {} phase duration {} and timing: {}".format(trial_nr, params[trial_nr], phase_durations[trial_nr], timing))
 
     def _make_dot_color_timings(self):
         # Inspired by Marco's fixation task
@@ -365,9 +366,13 @@ class DelayedNormSession(PylinkEyetrackerSession):
 
     def run(self):
         """ Runs experiment. """
+        
+
         if self.eyetracker_on:
             self.calibrate_eyetracker()
             self.start_recording_eyetracker()
+        
+        self.display_text('Waiting for scanner \n(remove this text)', keys=self.settings['mri'].get('sync', 't'))
 
         self.start_experiment()
 
@@ -447,11 +452,13 @@ if __name__ == '__main__':
 
     settings = op.join(op.dirname(__file__), 'settings.yml')
     session = DelayedNormSession('sub-02', n_trials=100, settings_file=settings,
-                                 eyetracker_on = False) # False if testing without eyetracker!
+                                 eyetracker_on = False, photodiode_check = True) # False if testing without eyetracker!
     # session.create_trials(durations=(.25, .25), timing='seconds')
+    # print(session.settings)
     session.create_trials()
-    print(session.var_dur_dict_flip)
-    print(session.var_isi_dict_flip)
+    # print(session.var_dur_dict_flip)
+    # print(session.var_isi_dict_flip)
+    # print(session.photodiode_check)
 
     #session.create_trials(durations=(3, 3), timing='frames')
     session.run()
