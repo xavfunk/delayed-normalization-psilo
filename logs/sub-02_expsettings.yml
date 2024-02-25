@@ -39,6 +39,30 @@ preferences:
     general:
         audioLib: sounddevice
         units: deg
+stimuli:
+    fixed_duration: 16
+    iti_const: 120
+    iti_durations: 0
+    scanner_sync: true
+    stim_conds:
+    - 0
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    stim_duration: 96
+    stim_types:
+    - dur
+    - isi
+task:
+    color switch interval: 3.5
+    fix_dot_colors:
+    - green
+    - red
+    fix_dot_size: 0.15
+    response interval: 0.8
 window:
     color:
     - 0
