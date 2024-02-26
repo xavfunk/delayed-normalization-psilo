@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import random
 from scipy.special import gamma
 import statsmodels.api as sm
+import heapq
 
 
 # trials is a mapping between trial types and the corresponding amplitude scaling factor 
@@ -185,19 +186,28 @@ def make_design_matrix(events_dict, max_t = 300, conds = ["dur_0", "dur_17", "du
 def add_noise(Y, SNR = 1):
     return Y + 1/SNR * np.random.normal(0, 1, size = Y.shape)
 
-
+def n_largest_indices(lst, n):
+    indexed_lst = [(-value, index) for index, value in enumerate(lst)]
+    heapq.heapify(indexed_lst)
+    largest_indices = []
+    for _ in range(n):
+        largest_indices.append(heapq.heappop(indexed_lst)[1])
+    return largest_indices
 
 if __name__ == '__main__':
-    ## TODO refactor to seperate plotting from calculations, possibly into either function or a class
-    # TODO generate random histograms
+    # TODO refactor into functions
+    # simulation variables
+    hist = make_hist(n_trials = 39)
+    SNR = 4
+    n_seqs = 100
+
     # for now fixed
     upsample_factor = 1 
     n_trials = 39
-    hist = make_hist(n_trials = 39)
     convolution_length = 30
+    n_plots = 5
 
     # fill an array of size n with randomized seqs
-    n_seqs = 100
     rand_seqs = np.zeros((n_seqs, n_trials))
     scaled_events = np.zeros((n_seqs, np.dot(*hist) * upsample_factor))
     all_events_dict = {}
@@ -211,31 +221,8 @@ if __name__ == '__main__':
         scaled_events[i], all_events_dict[i] = scale_amplitudes(upsampled, trials = trials)
         convolved_timeseries[i] = convolve_HRF(scaled_events[i], upsample_factor, length=convolution_length)
     
-    i = 0
-    n_plots = 5
-    fig, axs = plt.subplots(n_plots, 4, figsize = (10, 20))
-    
-    for i in range(n_plots):
-        if i == 0:
-            axs[i, 0].set_title("Ground truth: randomized events of\n different amplitudes convolved with HRF") 
-
-        plot_trial_sequence(scaled_events[i], all_events_dict[i], axs[i, 0])
-        axs[i, 0].set_xlim(-5, np.dot(*hist) + convolution_length)
-        axs[i, 0].plot(convolved_timeseries[i])
-    # fig.suptitle("Ground truth: randomized events of\n different amplitudes convolved with HRF")
-
     # add random noises for each
-    SNR = 4
     noisy_timeseries = add_noise(convolved_timeseries, SNR = SNR)
-
-    for i in range(n_plots):
-        if i == 0:
-            axs[0, 1].set_title(f"adding noise, SNR = {SNR}") 
-
-        plot_trial_sequence(scaled_events[i], all_events_dict[i], axs[i, 1])
-        axs[i, 1].set_xlim(-5, np.dot(*hist) + convolution_length)
-        axs[i, 1].plot(noisy_timeseries[i])
-
     # model them
         
     # design matrix
@@ -244,9 +231,7 @@ if __name__ == '__main__':
     
     for i in range(len(rand_seqs)):
         design_matrices[i] = make_design_matrix(all_events_dict[i], (np.dot(*hist) + convolution_length)-1)[0]
-    for i in range(n_plots):
-        axs[i, 2].imshow(design_matrices[i][:, :-1], aspect = .05)
-    
+
     # statistics
     glm_results = {}
     predicted_timeseries = np.zeros_like(noisy_timeseries)
@@ -255,12 +240,43 @@ if __name__ == '__main__':
         glm_results[i] = glm.fit()
         predicted_timeseries[i] = glm.predict(glm_results[i].params)
 
+    sort = True
+    if sort is True:
+        all_r2 = [glm_results[i].pseudo_rsquared() for i in range(len(glm_results))]
+        idxs = n_largest_indices(all_r2, 5)
+    else:
+        idxs = range(n_plots)
+    
+    fig, axs = plt.subplots(n_plots, 4, figsize = (20, 10)) 
 
-    # plot prediction
-    for i in range(n_plots):
-        axs[i, 3].plot(noisy_timeseries[i])
-        axs[i, 3].plot(predicted_timeseries[i])
-        axs[i, 3].text(130,1.2, f'$R^2$ : {glm_results[i].pseudo_rsquared():.2f}', bbox=dict(facecolor='white', alpha=0.5))
+    for i, j in zip(idxs, range(n_plots)):
+        # GT
+        plot_trial_sequence(scaled_events[i], all_events_dict[i], axs[j, 0])
+        axs[j, 0].set_xlim(-5, np.dot(*hist) + convolution_length)
+        axs[j, 0].plot(convolved_timeseries[i])
+
+        # noisy
+        plot_trial_sequence(scaled_events[i], all_events_dict[i], axs[j, 1])
+        axs[j, 1].set_xlim(-5, np.dot(*hist) + convolution_length)
+        axs[j, 1].plot(noisy_timeseries[i])
+    
+        # design
+        axs[j, 2].imshow(design_matrices[i][:, :-1], aspect = .05)
+    
+        # prediction
+        axs[j, 3].plot(noisy_timeseries[i], label = 'observed')
+        axs[j, 3].plot(convolved_timeseries[i], label = 'ground truth')
+        axs[j, 3].plot(predicted_timeseries[i], label = 'predicted')
+        
+        # pseudo rsquared
+        axs[j, 3].text(len(predicted_timeseries[1])*.8,1.2, f'$R^2$ : {glm_results[i].pseudo_rsquared():.2f}', bbox=dict(facecolor='white', alpha=0.5))
+  
+  
+    axs[0, 0].set_title("Ground truth: randomized events of\n different amplitudes convolved with HRF") 
+    axs[0, 1].set_title(f"adding noise, SNR = {SNR}") 
+    axs[0, 2].set_title(f"design matrices") 
+    axs[0, 3].set_title(f"predicted timeseries") 
+    axs[-1, 3].legend(ncols = 3)
 
     fig.tight_layout()
     plt.show()
