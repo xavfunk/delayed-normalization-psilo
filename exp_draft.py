@@ -452,7 +452,7 @@ if __name__ == '__main__':
 
     settings = op.join(op.dirname(__file__), 'settings.yml')
     session = DelayedNormSession('sub-02', n_trials=100, settings_file=settings,
-                                 eyetracker_on = False, photodiode_check = True) # False if testing without eyetracker!
+                                 eyetracker_on = False, photodiode_check = False) # False if testing without eyetracker!
     # session.create_trials(durations=(.25, .25), timing='seconds')
     # print(session.settings)
     session.create_trials()
