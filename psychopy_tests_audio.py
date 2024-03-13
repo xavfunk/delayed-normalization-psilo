@@ -36,11 +36,13 @@ print('Starting recording')
 flicker_frequency = 12
 current_frame = 0
 target_time = 1.0
-start_time = timer.getTime()
+# start_time = timer.getTime()
 # Input latency 4.988662 ms
 input_latency = 0.004988662
 
 mic.start()  # start recording
+start_time = timer.getTime()
+
 while (timer.getTime() - start_time) < target_time:
     #  if current_frame == 0:
     #     mic.start()
