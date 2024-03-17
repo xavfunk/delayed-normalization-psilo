@@ -2,6 +2,9 @@ import os.path as op
 from exptools2.core import PylinkEyetrackerSession
 from exptools2.core import Trial
 from psychopy.visual import Rect, TextStim, ImageStim
+from psychopy.sound import Microphone
+from scipy.signal import find_peaks
+
 import numpy as np
 import pandas as pd
 import glob
@@ -31,8 +34,12 @@ class DelayedNormTrial(Trial):
 
         # squares for Photodiode
         if self.session.photodiode_check is True:
-            self.white_square = Rect(self.session.win, 1, 1, pos = (-10,-8))
-            self.black_square = Rect(self.session.win, 1, 1, pos = (-10,-8), fillColor = 'black')
+            self.white_square = Rect(self.session.win, 4, 4, pos = (10,-8))
+            self.black_square = Rect(self.session.win, 4, 4, pos = (10,-8), fillColor = 'black')
+            if self.parameters['trial_type'] == 'dur':
+                self.square_flip_frames = self.session.var_dur_dict_flip[self.parameters['stim_dur']]
+            else:
+                self.square_flip_frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
 
 
     def draw_flip(self, current_frame):
@@ -61,11 +68,15 @@ class DelayedNormTrial(Trial):
                 # draw photodiode square
                 self.black_square.draw()
 
+
             
             self.session.win.flip()
 
             # checking if scanner t arrives
             if 't' in event.getKeys(keyList = ['t']):
+                if self.session.photodiode_check is True:
+                    # start recording
+                    self.session.mic.start()
                 self.exit_phase = True
 
         elif self.phase == 1: # we are in phase 1, stimulus presentation
@@ -106,6 +117,8 @@ class DelayedNormTrial(Trial):
             
         
         else: # we are in phase 2, iti
+            self.session.mic.stop()  # stop recording
+            self.session.recordings[self.parameters['trial_type']][self.parameters['stim_dur']].append(self.session.mic.getRecording()) # get recording and save into dict 
 
             self.black_square.draw()
             # draw fixation
@@ -126,12 +139,16 @@ class DelayedNormTrial(Trial):
         if self.phase == 0: # we are in phase 0, prep time
 
             if self.session.photodiode_check is True:
+                # self.session.mic.start()
                 self.black_square.draw()
 
             self.session.default_fix.draw()
             
             
             if 't' in event.getKeys(keyList = 't'):
+                if self.session.photodiode_check is True:
+                    # start recording
+                    self.session.mic.start()
                 self.exit_phase = True
 
 
@@ -140,8 +157,8 @@ class DelayedNormTrial(Trial):
             ## if the self.frame array at this frame index is one, show the texture, otherwise blank or fix
             if self.stimulus_frames[self.session.nr_frames] == 1:
                 
-                if self.session.photodiode_check is True:
-                    self.white_square.draw()    
+                # if self.session.photodiode_check is True:
+                #     self.white_square.draw()    
 
                 # draw texture
                 self.img.draw()
@@ -151,16 +168,41 @@ class DelayedNormTrial(Trial):
                 
             else:
                 
-                if self.session.photodiode_check is True:
-                    self.black_square.draw()
+                # if self.session.photodiode_check is True:
+                #     self.black_square.draw()
 
                 # draw fixation 
                 self.session.default_fix.draw()
 
+            if self.session.photodiode_check is True:
+                if self.square_flip_frames[self.session.nr_frames]:
+                    self.white_square.draw()
+                else:
+                    self.black_square.draw()
 
         else: # we are in phase 2, iti
             if self.session.photodiode_check is True:
+
+                # TODO this will oversample! -> correct!
                 self.black_square.draw()
+                self.session.mic.stop()
+                audioClip = self.session.mic.getRecording()
+                # plotting for debugging
+                # t = np.linspace(0, audioClip.duration, int(np.round(audioClip.sampleRateHz * audioClip.duration)))
+                # fig, ax = plt.subplots()
+                # ax.plot(t, audioClip.samples[:,1])
+                # plt.savefig('audio_recordings/audio_plot_exp.png')
+
+
+                peaks, _ = find_peaks(audioClip.samples[:,1], height = .3, distance = audioClip.sampleRateHz*1/120) 
+                self.session.conditions.append(self.parameters['stim_dur'])
+                self.session.trial_type.append(self.parameters['trial_type'])
+                self.session.recording_durations.append(audioClip.duration)
+                self.session.delta_peaks.append((peaks[1] - peaks[0])/audioClip.sampleRateHz)
+                self.session.n_peaks_found.append(len(peaks))
+
+                # self.session.recordings[self.parameters['trial_type']][self.parameters['stim_dur']].append(self.session.mic.getRecording()) # get recording and save into dict 
+
     
             # draw fixation
             self.session.default_fix.draw()
@@ -251,6 +293,17 @@ class DelayedNormSession(PylinkEyetrackerSession):
         self.fix_dot_colors = ['green', 'red']
         self.photodiode_check = True if photodiode_check else False
         self.trialwise_frame_timings = np.zeros((96, n_trials))
+        
+        if photodiode_check == True:
+            self.mic = Microphone(streamBufferSecs=6.0)  # open the microphone
+            self.recordings = {"dur" : {timing: [] for timing in [0, 2, 4, 8, 16, 32, 64]}, # hardcoded for now
+                               "var" : {timing: [] for timing in [0, 2, 4, 8, 16, 32, 64]}}
+            
+            self.conditions = [] 
+            self.trial_type = [] 
+            self.recording_durations = [] 
+            self.delta_peaks = [] 
+            self.n_peaks_found = [] 
 
         super().__init__(output_str, output_dir=output_dir, settings_file=settings_file, eyetracker_on=eyetracker_on)
 
@@ -276,13 +329,15 @@ class DelayedNormSession(PylinkEyetrackerSession):
         ## making stimulus arrays
         ## TODO make stimulus array creation a method which takes a parameter determining which frame flip paradigm is used form settings
         stim_conds = [0, 2, 4, 8, 16, 32, 64] # frames in 120 FPS, either duration or isi times
+        stim_conds = [2, 4, 8, 16, 32, 64] # frames in 120 FPS, either duration or isi times
+
         fixed_duration = 16 # fixed duration for isi trials
         self.total_duration = 96 # (<800 ms in total) in exp design; 800 ms = .8*120 = 96 frames
         var_duration = np.vstack([np.hstack((np.ones(stim_cond), # showing stimulus
                                              np.zeros(self.total_duration - stim_cond))) # no stimulus for the remaining frames
                                              for stim_cond in stim_conds])
         
-        var_isi = np.vstack([np.hstack((np.ones(fixed_duration), # shodurationw stimulus
+        var_isi = np.vstack([np.hstack((np.ones(fixed_duration), # sho w stimulus
                                         np.zeros(stim_cond), # isi
                                         np.ones(fixed_duration), # show stimulus again
                                         np.zeros(self.total_duration - stim_cond - 2*fixed_duration))) # no stimulus for remaining frames 
@@ -298,7 +353,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
             var_duration_flip[i, 0] = 1 # on
             var_duration_flip[i, stim_conds[i]] = -1 # off
             
-            if i == 0:
+            if stim_conds[i] == 0:
                 var_duration_flip[i, 0] = 0
         
         var_isi_flip = np.zeros((len(stim_conds), self.total_duration))
@@ -340,6 +395,14 @@ class DelayedNormSession(PylinkEyetrackerSession):
                        oneOverF_texture_path = self.texture_paths[trial_nr%10], # one after the other stimulus
                        dot_color_timings = self._make_dot_color_timings()) 
                   for trial_nr in range(self.n_trials)] # this makes back-to-back isi-dur with increasing durations
+
+        # only dur
+        params = [dict(trial_type='dur',# only dur
+                       stim_dur = stim_conds[trial_nr%len(stim_conds)], # increasing durations
+                       oneOverF_texture_path = self.texture_paths[trial_nr%10], # one after the other stimulus
+                       dot_color_timings = self._make_dot_color_timings()) 
+                  for trial_nr in range(self.n_trials)] # this makes back-to-back isi-dur with increasing durations
+
 
         for trial_nr in range(self.n_trials):
             self.trials.append(
@@ -440,6 +503,18 @@ class DelayedNormSession(PylinkEyetrackerSession):
         # save frame timings
         frametimings_df = pd.DataFrame(self.trialwise_frame_timings, columns = ["trial {}".format(str(i).zfill(2)) for i in range(self.n_trials)] )
         frametimings_df.to_csv(op.join(self.output_dir, self.output_str + "_frametimings.csv"), index = False)
+
+        # plot and save audio
+        # TODO 
+        # fig, axs = 
+        if self.photodiode_check:
+            photo_data = pd.DataFrame({'conditions':self.conditions,
+                        'trial_type': self.trial_type,
+                        'duration': self.recording_durations,
+                        'delta_peaks': self.delta_peaks,
+                        'n_peaks_found': self.n_peaks_found})
+            
+            photo_data.to_csv('timing_photo_exp_results.csv', index = False)
 
         if self.mri_simulator is not None:
             self.mri_simulator.stop()

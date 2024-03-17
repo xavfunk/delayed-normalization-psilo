@@ -7,10 +7,10 @@ window:
   size: [1440, 900]
   pos: [0, 0]
   color: [0, 0, 0]
-  fullscr: False
+  fullscr: True
   #winType: pyglet
   waitBlanking: True
-  screen: 0
+  screen: 1
 
 monitor:
   name: default
@@ -65,7 +65,7 @@ stimuli:
     fixed_duration: 16                 # fixed duration for ISI trials
     stim_duration: 96                  # total duration of the stimulus presentation in frames ()
     iti_durations: 0                   # TODO [0, 1, 2, 3] for indexing the iti df or ['const']
-    iti_const: 120                     # if const (only for testing purposes), this will be the amount of TRs an iti will take 
+    iti_const: 120                     # if const, this will be the amount of TRs an iti will take 
 
 
 # times in seconds
