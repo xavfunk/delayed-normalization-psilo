@@ -1,5 +1,0 @@
-PTB-INFO: Using modified PortAudio V19.7.0-devel, revision unknown
-PTB-INFO: New audio device 0 with handle 0 opened as PortAudio stream:
-PTB-INFO: For 2 channels Capture: Audio subsystem is ALSA, Audio device name is HDA Intel PCH: ALC262 Analog (hw:0,0)
-PTB-INFO: Real samplerate 44100.000000 Hz. Input latency 4.988662 msecs, Output latency 0.000000 msecs.
-
