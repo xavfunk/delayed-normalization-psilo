@@ -351,6 +351,19 @@ class DelayedNormSession(PylinkEyetrackerSession):
             # debugging printout
             print("made trial {} with params: {} phase duration {} and timing: {}".format(trial_nr, params[trial_nr], phase_durations[trial_nr], timing))
         
+        # make a dummy trial at the start
+        dummy = DelayedNormTrial(session=self,
+                          trial_nr=999,
+                          phase_durations=(0, 0, self.settings['stimuli']['dummy_trial_trs']*120 - int(self.TR//2)),
+                          txt='Trial %i: Dummy' % trial_nr,
+                          parameters=dict(trial_type = 'dur',
+                                            stim_dur = 0, 
+                                            oneOverF_texture_path = self.texture_paths[0]),
+                          verbose=False,
+                          timing=timing)
+        
+        self.trials = [dummy] + self.trials
+
         self.dot_color_timings = self._make_dot_color_timings()
 
     def _make_trial_frame_timings(self):

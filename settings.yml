@@ -85,6 +85,7 @@ stimuli:
     stim_duration: 96                  # total duration of the stimulus presentation in frames ()
     iti_durations: 0                   # TODO [0, 1, 2, 3] for indexing the iti df or ['const']
     iti_const: 120                     # if const, this will be the amount of TRs an iti will take 
+    dummy_trial_trs: 10                  # how many TRs the dummy trial will take 
 
 
 # times in seconds

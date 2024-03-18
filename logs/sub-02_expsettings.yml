@@ -40,6 +40,7 @@ preferences:
         audioLib: sounddevice
         units: deg
 stimuli:
+    dummy_trial_trs: 10
     fixed_duration: 16
     iti_const: 120
     iti_durations: 0
