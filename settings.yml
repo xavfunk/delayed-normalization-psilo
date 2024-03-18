@@ -49,8 +49,8 @@ eyetracker:
 
 mri:
   simulate: False
-  TR: 1.33  # seconds between volume acquisitions
-  TA: 1.33  # seconds to acquire one volume
+  TR: 1.32  # seconds between volume acquisitions
+  TA: 1.32  # seconds to acquire one volume
   volumes: 100  # number of 3D volumes to obtain in a given scanning run
   sync: t  # character used as flag for sync timing, default=‘5’
   skip: 0  # how many frames to silently omit initially during T1 stabilization, no sync pulse.
@@ -58,6 +58,7 @@ mri:
 
 # times in frames based on 120 FPS screen
 stimuli:
+    trial_sequence: 'trial_sequences/trial_sequence_simulated_000.csv'
     scanner_sync: True                 # set this to true to make phase p0 (prep) end on input 't', overrides default TR/2
     #screenshot: True                   # TODO implement
     stim_types: ['dur', 'isi']         # stimulus types, ['dur', 'isi']

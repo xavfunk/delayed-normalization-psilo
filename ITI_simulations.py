@@ -4,7 +4,11 @@ import random
 from scipy.special import gamma
 import statsmodels.api as sm
 import heapq
-
+import pandas as pd
+import json
+from datetime import datetime
+import math
+import os
 
 # trials is a mapping between trial types and the corresponding amplitude scaling factor 
 trials = {"dur_0" : 0,
@@ -12,8 +16,8 @@ trials = {"dur_0" : 0,
          "dur_33" : 2,
          "dur_67" : 3,
          "dur_134" : 4,
-#         "dur_267-isi_0" : 5,
-         "dur_267" : 5, # for demonstration purposes 
+        # "dur_267-isi_0" : 5,
+         "dur_267" : 5,
          "dur_533" : 6,
          "isi_17" : 5,
          "isi_33" : 5.1,
@@ -21,6 +25,22 @@ trials = {"dur_0" : 0,
          "isi_134" : 5.5,
          "isi_267" : 5.8,
          "isi_533" : 6}
+
+## predicted from DN model
+trials = {"dur_0" : 0,
+         "dur_17" : 2.08,
+         "dur_33" : 2.57,
+         "dur_67" : 3.14,
+         "dur_134" : 3.74,
+        # "dur_267-isi_0" : 4.47,
+         "dur_267" : 4.47, 
+         "dur_533" : 5.54,
+         "isi_17" : 4.50,
+         "isi_33" : 4.53,
+         "isi_67" : 4.61,
+         "isi_134" : 4.80,
+         "isi_267" : 5.25,
+         "isi_533" : 6.21}
 
 
 def make_hist(n_trials = 39):
@@ -36,6 +56,36 @@ def make_hist(n_trials = 39):
     
     return hist
 
+def get_geometric_distribution(p, length):
+    
+    geometric_dist = np.zeros(length)
+    geometric_dist[0] = p
+    
+    for i in range(1, length):
+        geometric_dist[i] = geometric_dist[i-1] - (geometric_dist[i-1] * p) 
+        
+    return geometric_dist
+
+def get_geometric_hist(p, n_bins, n_trials, bins_start = 4, TR=None):
+    
+    dist = get_geometric_distribution(p, n_bins)
+    hist = np.round(dist * n_trials)
+    
+    n_add = 2
+    while np.sum(hist) < n_trials:
+        # add one to the first bin with only one
+        hist[np.argmax(hist < n_add)] += 1
+        # then increase counter
+        n_add += 1
+    
+    bins = np.arange(bins_start, n_bins + bins_start)
+    
+    # histogram is tuple of (values, bins)
+    if TR is None:
+        return (hist.astype(int), bins)
+    else:
+        return (hist.astype(int), bins*TR)
+
 def randomize_trials(hist_tup):
     """
     takes an ITI distribution tuple of (n_ITIs, bins [seconds])
@@ -49,25 +99,27 @@ def randomize_trials(hist_tup):
         
     return np.array(sequence_list, dtype = int)
 
-def unfold_upsample(sequence_list, upsample_factor = 10):
+def unfold_upsample(sequence_list, upsample_factor = 1):
     """
     takes a sequence list and then unfolds and upsamples it by some factor
     """
     # unfold
     seq_array = np.zeros(np.sum(sequence_list,  dtype = int))
-    
+    seq_array = np.zeros(int(np.sum(sequence_list,  dtype = int)*upsample_factor*TR)) #
+
     # cumsum gives basically the end indeces of the trials, we drop the last and add a 0 in front 
     idxs = np.cumsum(np.hstack((0,sequence_list)))[:-1] # cumsum gives basically the end times of the trials, we drop the last and add a 0 in front 
+    idxs *= upsample_factor*TR#
     seq_array[idxs.astype(int)] = 1
     
-    # upsample
-    seq_array = np.repeat(seq_array, upsample_factor)
-    for i, element in enumerate(seq_array):
-        if element == 1: # detect a one
+    # # upsample
+    # seq_array = np.repeat(seq_array, upsample_factor)
+    # for i, element in enumerate(seq_array):
+    #     if element == 1: # detect a one
 
-            for k in range(1,upsample_factor): # set the following k to 0
-                #print(k)
-                seq_array[i+k] = 0
+    #         for k in range(1,upsample_factor): # set the following k to 0
+    #             #print(k)
+    #             seq_array[i+k] = 0
     
     return seq_array
 
@@ -80,7 +132,7 @@ def scale_amplitudes(seq_array, trials = trials, n_repeats = 3):
     returns appropriately scaled trials and dict specifying when each trial event happened
     """
     event_types = {}
-    design = list(trials.keys()) * n_repeats # 3 repeats
+    design = list(trials.keys()) * n_repeats 
     random.shuffle(design)
     
     j = 0 # index for design
@@ -111,7 +163,7 @@ def plot_trial_sequence(scaled_events, events_dict, ax = None):
         fig, ax = plt.subplots()
     
     for i in events_indices:
-        ax.vlines(i, ymin=0, ymax=scaled_events[i], colors='r', linestyles='solid', label='Vertical Lines (1s)')
+        ax.vlines(i, ymin=0, ymax=scaled_events[i], colors='r', linestyles='solid')
     ax.set_xticks(events_indices)
     ax.set_xticklabels(list(events_dict.values()), rotation = 90, size = 8)
     
@@ -154,7 +206,7 @@ def convolve_HRF(trials_scaled, upsample_factor, length=30, **kwargs):
     return trials_scaled_convolved
 
 
-def make_design_matrix(events_dict, max_t = 300, conds = ["dur_0", "dur_17", "dur_33", "dur_67", "dur_134",
+def make_design_matrix(events_dict, max_t = 300, upsample_factor = 1, conds = ["dur_0", "dur_17", "dur_33", "dur_67", "dur_134",
                                                           "dur_267-isi_0", "dur_533", "isi_17", "isi_33",
                                                           "isi_67", "isi_134", "isi_267", "isi_533"]):
     
@@ -166,8 +218,8 @@ def make_design_matrix(events_dict, max_t = 300, conds = ["dur_0", "dur_17", "du
     
     # for each cond
     for i, cond in enumerate(conds):
-        # find timepoints of stimulation
-        tps = [key for key, val in events_dict.items() if val == cond]
+        # find timepoints of stimulation and downsample
+        tps = [key//upsample_factor for key, val in events_dict.items() if val == cond]
         regr_dict[cond] = tps
         
         # setup regressor
@@ -194,56 +246,155 @@ def n_largest_indices(lst, n):
         largest_indices.append(heapq.heappop(indexed_lst)[1])
     return largest_indices
 
+def trial_df_from_simulation(events_dict, rand_seq, r2, trial_id = None, TR=1.32, n_conds = 13, SNR=4, histogram_p = None,
+                             bins_start = None, n_searched = None, n_best = None, save = False, root = 'trial_sequences'):
+    """
+    computes a trial df alongside metadata from simulation results, from
+    events_dict, rand_seq and corresponding r2
+    """
+    # define ms to frame mapping
+    ms_to_frame_120 = {0:0, 17:2, 33:4, 67:8, 134:16, 267:32, 533:64}
+    
+    event_type = [type_cond.split('_')[0] for type_cond in events_dict.values()]
+    cond_ms = [float(type_cond.split('_')[1]) for type_cond in events_dict.values()]
+    cond_frames = [ms_to_frame_120[int(ms)] for ms in cond_ms]
+    # Zhou took a different texture for each trial
+    texture_id = [i for i in range(len(events_dict))]
+    iti_TR = rand_seq
+    iti_s = [iti_TR_i * TR for iti_TR_i in iti_TR]
+
+    df = pd.DataFrame({
+        'type':event_type, 
+        'iti_s':iti_s,
+        'iti_TR': iti_TR,
+        'cond_frames':cond_frames,
+        'cond_ms':cond_ms,
+        'texture_id':texture_id})
+
+    # metadata
+    n_trials = df.shape[0]
+    length_seconds = None
+    length_TR = None
+
+    # Get the current date
+    current_date = datetime.now().date()
+
+    metadata = {
+        "title": "",
+        "description": "",
+        "created_at": current_date.strftime('%Y-%m-%d'),
+        "TR": TR,
+        "len_seconds":length_seconds,
+        "len_TR":length_TR,
+        "n_trials":n_trials,
+        # simulation parameters
+        "r^2": r2,
+        "n_conditions": n_conds,
+        "full_searchspace":math.factorial(n_conds),
+        "searched_searchspace":n_searched,
+        "histogram_p": hist_p,
+        "histogram_start_bin": 3,
+        "simulation_SNR": SNR,
+        "n_best": n_best
+        }
+    
+    if save:
+        filename = "trial_sequence_simulated_{}".format(str(trial_id).zfill(3))
+
+        # save df
+        df_path = os.path.join(root, filename + ".csv")
+        df.to_csv(df_path, index=False)
+
+        # save metadata
+        json_path = os.path.join(root, filename + ".json")
+        with open(json_path, "w") as json_file:
+            json.dump(metadata, json_file, indent=4)
+
+    return df, metadata
+
 if __name__ == '__main__':
     # TODO refactor into functions
     # simulation variables
-    hist = make_hist(n_trials = 39)
-    SNR = 4
-    n_seqs = 100
+    # hist = make_hist(n_trials = 39)
+    TR = 1.32
+    hist_p = .23
+    bins_start = 3
+    hist = get_geometric_hist(p = hist_p, n_bins = 12, n_trials=39, bins_start=bins_start)
+    # hist = get_geometric_hist(p = .23, n_bins = 12, n_trials=39, bins_start=4, TR=None)
 
-    # for now fixed
-    upsample_factor = 1 
+
+    SNR = 4
+    n_seqs = 1000
+
+    upsample_factor = 100
+    upsample_factor = 100
+
     n_trials = 39
-    convolution_length = 30
+    convolution_length = 30 #* upsample_factor
     n_plots = 5
+    n_best = 10 # select the n best sequences
+    n_conds = 13
+
 
     # fill an array of size n with randomized seqs
     rand_seqs = np.zeros((n_seqs, n_trials))
-    scaled_events = np.zeros((n_seqs, np.dot(*hist) * upsample_factor))
+    print(np.dot(*hist) * upsample_factor)
+    print(upsample_factor)
+    print(np.dot(*hist))
+    print(hist)
+
+    
+    scaled_events = np.zeros((n_seqs, int(np.dot(*hist) * upsample_factor)))
     all_events_dict = {}
-    convolved_timeseries = np.zeros((n_seqs, (np.dot(*hist) + convolution_length-1) * upsample_factor))
+    convolved_timeseries = np.zeros((n_seqs, int((np.dot(*hist) + convolution_length) * upsample_factor - 1)))
 
     # generate random distributions over basic histogram
     # searchspace is 13! = 6227020800 possibilities, optseq simply does a subset of those
     for i in range(len(rand_seqs)):
         rand_seqs[i] = randomize_trials(hist)
-        upsampled = unfold_upsample(rand_seqs[i], upsample_factor)
+        upsampled = unfold_upsample(rand_seqs[i], upsample_factor, TR=1)
+        print(rand_seqs[i].shape)
+        print(upsampled.shape)
+        print(scaled_events.shape)
+        print(convolved_timeseries.shape)
+        # stop
         scaled_events[i], all_events_dict[i] = scale_amplitudes(upsampled, trials = trials)
         convolved_timeseries[i] = convolve_HRF(scaled_events[i], upsample_factor, length=convolution_length)
     
     # add random noises for each
     noisy_timeseries = add_noise(convolved_timeseries, SNR = SNR)
+    # downsample
+    print(noisy_timeseries.shape)
+    noisy_timeseries = noisy_timeseries[:,::upsample_factor]
+    print(noisy_timeseries.shape)
+    
     # model them
         
     # design matrix
-    n_conds = 13
-    design_matrices = np.zeros((n_seqs, (np.dot(*hist) + convolution_length)-1,14))
+    design_matrices = np.zeros((n_seqs, (np.dot(*hist) + convolution_length),14))
     
     for i in range(len(rand_seqs)):
-        design_matrices[i] = make_design_matrix(all_events_dict[i], (np.dot(*hist) + convolution_length)-1)[0]
+        design_matrices[i] = make_design_matrix(all_events_dict[i], (np.dot(*hist) + convolution_length), upsample_factor=upsample_factor)[0]
 
     # statistics
     glm_results = {}
     predicted_timeseries = np.zeros_like(noisy_timeseries)
     for i in range(len(rand_seqs)):
+        # plt.plot(noisy_timeseries[i])
+        # plt.plot(design_matrices[i])
+        # plt.show()
+
+        print(noisy_timeseries.shape)
+        print(design_matrices[i].shape)
         glm = sm.GLM(noisy_timeseries[i], design_matrices[i], family=sm.families.Gaussian())
         glm_results[i] = glm.fit()
         predicted_timeseries[i] = glm.predict(glm_results[i].params)
 
+
     sort = True
     if sort is True:
         all_r2 = [glm_results[i].pseudo_rsquared() for i in range(len(glm_results))]
-        idxs = n_largest_indices(all_r2, 5)
+        idxs = n_largest_indices(all_r2, n_best)
     else:
         idxs = range(n_plots)
     
@@ -270,7 +421,26 @@ if __name__ == '__main__':
         
         # pseudo rsquared
         axs[j, 3].text(len(predicted_timeseries[1])*.8,1.2, f'$R^2$ : {glm_results[i].pseudo_rsquared():.2f}', bbox=dict(facecolor='white', alpha=0.5))
-  
+
+        # betas
+        # betas = {key : value for key, value in zip(trials.keys(), glm_results[i].params)}
+        # plot_trial_sequence(scaled_events[i], all_events_dict[i], trials = betas, ax = axs[j, 3])
+
+        # save event dict
+        print(rand_seqs[i])
+
+        print(all_events_dict[i])
+        print(all_events_dict[i].values())
+        print(list(zip(rand_seqs[i],all_events_dict[i].values())))
+        df = pd.DataFrame({'type':all_events_dict[i].values(), 'iti':rand_seqs[i]})
+        print(df.head())
+
+    for trial_id, i in enumerate(idxs):
+        trial_df_from_simulation(all_events_dict[i], rand_seqs[i], all_r2[i], trial_id = trial_id, TR=TR, n_conds = n_conds, 
+                                 SNR=SNR, histogram_p = hist_p, bins_start = bins_start, n_searched = n_seqs, 
+                                 n_best = n_best, save = True, root = 'trial_sequences')
+
+
   
     axs[0, 0].set_title("Ground truth: randomized events of\n different amplitudes convolved with HRF") 
     axs[0, 1].set_title(f"adding noise, SNR = {SNR}") 

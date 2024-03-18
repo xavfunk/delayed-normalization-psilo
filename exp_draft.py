@@ -310,9 +310,18 @@ class DelayedNormSession(PylinkEyetrackerSession):
     def create_trials(self, timing='frames'):
         self.trials = []
 
+        # get TR in frames
+        self.TR = self.settings['mri']['TR']
+        TR_in_frames = int(round(self.TR*120))
+
+        # load params from sequence df
+        self.trial_sequence_df = pd.read_csv(self.settings['stimuli']['trial_sequence'])
+        iti_TRs = self.trial_sequence_df['iti_TR']
+        iti_frames = [iti_TR * self.settings['mri']['TR'] * 120 for iti_TR in iti_TRs]
+        print("iti in frames: ", iti_frames)
+
         # 3 phases: prep, ITI and trial
         stim_duration_p1 = self.settings['stimuli']['stim_duration']
-        TR_in_frames = int(round(self.settings['mri']['TR']*120))
         full_iti_duration = 3 * TR_in_frames # TODO itis
 
         if self.settings['stimuli']['scanner_sync']:
@@ -327,9 +336,8 @@ class DelayedNormSession(PylinkEyetrackerSession):
         phase_durations = list(zip(prep_durations_p0, stim_durations_p1, iti_durations_p2))
 
         ## making stimulus arrays
-        ## TODO make stimulus array creation a method which takes a parameter determining which frame flip paradigm is used form settings
+        ## TODO make stimulus array creation a method which takes a parameter determining which frame flip paradigm is used from settings
         stim_conds = [0, 2, 4, 8, 16, 32, 64] # frames in 120 FPS, either duration or isi times
-        stim_conds = [2, 4, 8, 16, 32, 64] # frames in 120 FPS, either duration or isi times
 
         fixed_duration = 16 # fixed duration for isi trials
         self.total_duration = 96 # (<800 ms in total) in exp design; 800 ms = .8*120 = 96 frames
@@ -337,7 +345,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
                                              np.zeros(self.total_duration - stim_cond))) # no stimulus for the remaining frames
                                              for stim_cond in stim_conds])
         
-        var_isi = np.vstack([np.hstack((np.ones(fixed_duration), # sho w stimulus
+        var_isi = np.vstack([np.hstack((np.ones(fixed_duration), # show stimulus
                                         np.zeros(stim_cond), # isi
                                         np.ones(fixed_duration), # show stimulus again
                                         np.zeros(self.total_duration - stim_cond - 2*fixed_duration))) # no stimulus for remaining frames 
@@ -379,7 +387,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
         self.var_isi_dict_flip = {dur:frames for dur, frames in zip(stim_conds, var_isi_flip)}
         self.var_dur_dict_flip = {dur:frames for dur, frames in zip(stim_conds, var_duration_flip)}
         
-        print("var isi durations: {}".format(self.var_isi_dict_flip))
+        # print("var isi durations: {}".format(self.var_isi_dict_flip))
 
         ## making parameters
         # there are two parameters:
@@ -396,12 +404,6 @@ class DelayedNormSession(PylinkEyetrackerSession):
                        dot_color_timings = self._make_dot_color_timings()) 
                   for trial_nr in range(self.n_trials)] # this makes back-to-back isi-dur with increasing durations
 
-        # only dur
-        params = [dict(trial_type='dur',# only dur
-                       stim_dur = stim_conds[trial_nr%len(stim_conds)], # increasing durations
-                       oneOverF_texture_path = self.texture_paths[trial_nr%10], # one after the other stimulus
-                       dot_color_timings = self._make_dot_color_timings()) 
-                  for trial_nr in range(self.n_trials)] # this makes back-to-back isi-dur with increasing durations
 
 
         for trial_nr in range(self.n_trials):
@@ -536,5 +538,5 @@ if __name__ == '__main__':
     # print(session.photodiode_check)
 
     #session.create_trials(durations=(3, 3), timing='frames')
-    session.run()
+    # session.run()
     session.quit()
