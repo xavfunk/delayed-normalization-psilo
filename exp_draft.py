@@ -12,6 +12,8 @@ import os
 import matplotlib.pyplot as plt
 from psychopy import event
 from datetime import datetime
+import json
+import sys
 
 class DelayedNormTrial(Trial):
     """ Simple trial with text (trial x) and fixation. """
@@ -255,6 +257,9 @@ class DelayedNormSession(PylinkEyetrackerSession):
         self.trial_sequence_df = pd.read_csv(self.settings['stimuli']['trial_sequence'])
         # get TR in frames
         self.TR = self.settings['mri']['TR']
+
+        self.metadata = {'settings_file' : settings_file,
+                         'eyetracker': eyetracker_on}
 
         if n_trials is None:
             self.n_trials = len(self.trial_sequence_df)
@@ -519,6 +524,13 @@ class DelayedNormSession(PylinkEyetrackerSession):
             
             photo_data.to_csv('photodiode_test_results/timing_photo_exp_results_{}.csv'.format(current_datetime.strftime("%Y-%m-%d-%H-%M")), index = False)
 
+        self.metadata['dot_color_timings'] = self.dot_color_timings
+
+        # save metadata
+        json_path = os.path.join(self.output_dir, self.output_str + "_metadata.json")
+        with open(json_path, "w") as json_file:
+            json.dump(self.metadata, json_file, indent=4)
+
         if self.mri_simulator is not None:
             self.mri_simulator.stop()
 
@@ -527,9 +539,18 @@ class DelayedNormSession(PylinkEyetrackerSession):
 
 
 if __name__ == '__main__':
+    subnr = 2
+    runnr = 1
+    subject = sys.argv[1]
+    sess =  sys.argv[2]
+    task = sys.argv[3] # different conditions
+    run = sys.argv[4] # which run
+
+    print(type(run))
+    print(run)
 
     settings = op.join(op.dirname(__file__), 'settings.yml')
-    session = DelayedNormSession('sub-02', settings_file=settings, n_trials = None,
+    session = DelayedNormSession('sub-{}_run-{}'.format(subnr.zfill(2), runnr.zfill(2)), settings_file=settings, n_trials = None,
                                  eyetracker_on = False, photodiode_check = False)
 
     session.create_trials()
