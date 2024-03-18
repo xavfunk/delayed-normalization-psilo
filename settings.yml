@@ -3,20 +3,37 @@ preferences:
     audioLib: sounddevice
     units: deg
 
+# window:
+#   size: [1440, 900]
+#   pos: [0, 0]
+#   color: [0, 0, 0]
+#   fullscr: True
+#   #winType: pyglet
+#   waitBlanking: True
+#   screen: 1
+
+# monitor:
+#   name: default
+#   width: 50  # in cm
+#   distance: 80  # in cm
+#   gamma: 1
+
 window:
-  size: [1440, 900]
-  pos: [0, 0]
-  color: [0, 0, 0]
-  fullscr: True
-  #winType: pyglet
-  waitBlanking: True
-  screen: 1
+    size: [1920, 1080]
+    pos: [0, 0]
+    color: [0, 0, 0]
+    fullscr: True
+    winType: pyglet
+    waitBlanking: True
+    screen: 1
 
 monitor:
-  name: default
-  width: 50  # in cm
-  distance: 80  # in cm
-  gamma: 1
+    name: default
+    width: 69.8  # in cm
+    distance: 196  # in cm
+    # gamma: 2.1
+    gamma: 1
+
 
 mouse:
   visible: False
@@ -59,6 +76,7 @@ mri:
 # times in frames based on 120 FPS screen
 stimuli:
     trial_sequence: 'trial_sequences/trial_sequence_simulated_000.csv'
+    tex_type: 'rms'                     # either of ['rms', 'minmax'], determines the rescaling used
     scanner_sync: True                 # set this to true to make phase p0 (prep) end on input 't', overrides default TR/2
     #screenshot: True                   # TODO implement
     stim_types: ['dur', 'isi']         # stimulus types, ['dur', 'isi']

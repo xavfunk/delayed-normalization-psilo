@@ -21,15 +21,15 @@ eyetracker:
         x_gaze_constraint: AUTO
         y_gaze_constraint: AUTO
 monitor:
-    distance: 80
+    distance: 196
     gamma: 1
     name: default
-    width: 50
+    width: 69.8
 mouse:
     visible: false
 mri:
-    TA: 1.33
-    TR: 1.33
+    TA: 1.32
+    TR: 1.32
     simulate: false
     skip: 0
     sound: false
@@ -56,6 +56,8 @@ stimuli:
     stim_types:
     - dur
     - isi
+    tex_type: rms
+    trial_sequence: trial_sequences/trial_sequence_simulated_000.csv
 task:
     color switch interval: 3.5
     fix_dot_colors:
@@ -74,6 +76,7 @@ window:
     - 0
     screen: 1
     size:
-    - 1440
-    - 900
+    - 1920
+    - 1080
     waitBlanking: true
+    winType: pyglet
