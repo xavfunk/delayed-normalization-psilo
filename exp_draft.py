@@ -531,6 +531,11 @@ class DelayedNormSession(PylinkEyetrackerSession):
         with open(json_path, "w") as json_file:
             json.dump(self.metadata, json_file, indent=4)
 
+        # save settings
+        json_path = os.path.join(self.output_dir, self.output_str + "_settings.json")
+        with open(json_path, "w") as json_file:
+            json.dump(self.settings, json_file, indent=4)
+
         if self.mri_simulator is not None:
             self.mri_simulator.stop()
 
@@ -539,18 +544,14 @@ class DelayedNormSession(PylinkEyetrackerSession):
 
 
 if __name__ == '__main__':
-    subnr = 2
-    runnr = 1
     subject = sys.argv[1]
     sess =  sys.argv[2]
-    task = sys.argv[3] # different conditions
-    run = sys.argv[4] # which run
-
-    print(type(run))
-    print(run)
-
+    # task = sys.argv[3] # different settings -> now implemented as saving the actual settings
+    run = sys.argv[3] # which run    
+    output_str = 'sub-{}_sess-{}_run-{}'.format(subject.zfill(2), sess.zfill(2), task, run.zfill(2))
+    
     settings = op.join(op.dirname(__file__), 'settings.yml')
-    session = DelayedNormSession('sub-{}_run-{}'.format(subnr.zfill(2), runnr.zfill(2)), settings_file=settings, n_trials = None,
+    session = DelayedNormSession(output_str, settings_file=settings, n_trials = None,
                                  eyetracker_on = False, photodiode_check = False)
 
     session.create_trials()
