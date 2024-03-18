@@ -11,6 +11,7 @@ import glob
 import os
 import matplotlib.pyplot as plt
 from psychopy import event
+from datetime import datetime
 
 class DelayedNormTrial(Trial):
     """ Simple trial with text (trial x) and fixation. """
@@ -33,10 +34,11 @@ class DelayedNormTrial(Trial):
 
         # squares for Photodiode
         if self.session.photodiode_check is True:
-            self.white_square = Rect(self.session.win, 4, 4, pos = (10,-8))
-            self.black_square = Rect(self.session.win, 4, 4, pos = (10,-8), fillColor = 'black')
+            self.white_square = Rect(self.session.win, 2, 2, pos = (5.5,-2.5))
+            self.black_square = Rect(self.session.win, 2, 2, pos = (5.5,-2.5), fillColor = 'black')
             if self.parameters['trial_type'] == 'dur':
                 self.square_flip_frames = self.session.var_dur_dict_flip[self.parameters['stim_dur']]
+                print(self.square_flip_frames)
             else:
                 self.square_flip_frames = self.session.var_isi_dict_flip[self.parameters['stim_dur']]
 
@@ -46,7 +48,9 @@ class DelayedNormTrial(Trial):
         This is to be used when flipping on every frame
         """
         # fixation dot color change
-        if int((self.session.clock.getTime()*120)) in self.parameters['dot_color_timings']:
+        # if int((self.session.clock.getTime()*120)) in self.parameters['dot_color_timings']:
+        if int((self.session.clock.getTime()*120)) in self.session.dot_color_timings:
+        
             # change color
             self.session.fix_dot_color_idx += 1
             self.session.default_fix.setColor(self.session.fix_dot_colors[self.session.fix_dot_color_idx % len(self.session.fix_dot_colors)])
@@ -58,14 +62,14 @@ class DelayedNormTrial(Trial):
 
             self.session.default_fix.draw()
             
-            # trigger 't' breaks out of phase 0
-            if 't' in event.getKeys(keyList = 't'):
+            # trigger 't' breaks out of phase 0, now in get_events
+            # if 't' in event.getKeys(keyList = 't'):
                 
-                if self.session.photodiode_check is True:
-                    # start recording
-                    self.session.mic.start()
+            #     if self.session.photodiode_check is True:
+            #         # start recording
+            #         self.session.mic.start()
                 
-                self.exit_phase = True
+            #     self.exit_phase = True
 
 
         elif self.phase == 1: # we are in phase 1, stimulus presentation
@@ -112,6 +116,60 @@ class DelayedNormTrial(Trial):
     
             # draw fixation
             self.session.default_fix.draw()
+
+    def get_events(self):
+        """ Logs responses/triggers """
+        events = event.getKeys(timeStamped=self.session.clock)
+        if events:
+            if 'q' in [ev[0] for ev in events]:  # specific key in settings?
+                self.session.close()
+                self.session.quit()
+
+            for key, t in events:
+
+                if key == self.session.mri_trigger:
+                    event_type = 'pulse'
+
+                    if self.phase == 0:
+                
+                        if self.session.photodiode_check is True:
+                           # start recording
+                            self.session.mic.start()
+                
+                        self.exit_phase = True
+
+                else:
+                    event_type = 'response'
+
+                idx = self.session.global_log.shape[0]
+                self.session.global_log.loc[idx, 'trial_nr'] = self.trial_nr
+                self.session.global_log.loc[idx, 'onset'] = t
+                self.session.global_log.loc[idx, 'event_type'] = event_type
+                self.session.global_log.loc[idx, 'phase'] = self.phase
+                self.session.global_log.loc[idx, 'response'] = key
+
+                # for param, val in self.parameters.items():
+                    # self.session.global_log.loc[idx, param] = val
+                for param, val in self.parameters.items():  # add parameters to log
+                    if type(val) == np.ndarray or type(val) == list:
+                        for i, x in enumerate(val):
+                            self.session.global_log.loc[idx, param+'_%4i'%i] = x 
+                    else:       
+                        self.session.global_log.loc[idx, param] = val
+
+                if self.eyetracker_on:  # send msg to eyetracker
+                    msg = f'start_type-{event_type}_trial-{self.trial_nr}_phase-{self.phase}_key-{key}_time-{t}'
+                    self.session.tracker.sendMessage(msg)
+
+                #self.trial_log['response_key'][self.phase].append(key)
+                #self.trial_log['response_onset'][self.phase].append(t)
+                #self.trial_log['response_time'][self.phase].append(t - self.start_trial)
+
+                if key != self.session.mri_trigger:
+                    self.last_resp = key
+                    self.last_resp_onset = t
+
+        return events
 
 
     def run(self):
@@ -173,9 +231,8 @@ class DelayedNormTrial(Trial):
                         self.session.trialwise_frame_timings[frame, self.trial_nr] = self.session.win.flip()
                     else:
                         self.session.win.flip()                
-                        # getting events only outside phase 1? TODO test whether this makes a difference for frame timings
-                        self.get_events()
-
+                        # getting events only outside phase 1 makes a difference for frame timings?
+                        self.get_events()   
                     self.session.nr_frames += 1
 
             if self.exit_phase:  # broke out of phase loop
@@ -196,6 +253,9 @@ class DelayedNormSession(PylinkEyetrackerSession):
         
         # load params from sequence df
         self.trial_sequence_df = pd.read_csv(self.settings['stimuli']['trial_sequence'])
+        # get TR in frames
+        self.TR = self.settings['mri']['TR']
+
         if n_trials is None:
             self.n_trials = len(self.trial_sequence_df)
         else:
@@ -207,8 +267,16 @@ class DelayedNormSession(PylinkEyetrackerSession):
         self.fix_dot_colors = ['green', 'red']
         self.photodiode_check = True if photodiode_check else False
         self.trialwise_frame_timings = np.zeros((96, self.n_trials))
+        self.total_exp_duration = np.sum(self.trial_sequence_df.iti_TR) * self.TR
         
         if photodiode_check == True:
+            # only duration
+            self.trial_sequence_df = self.trial_sequence_df[self.trial_sequence_df.type == 'dur']
+            # quick
+            self.trial_sequence_df.iti_TR = [3 for i in range(len(self.trial_sequence_df))]
+            # triple
+            self.trial_sequence_df = pd.concat([self.trial_sequence_df, self.trial_sequence_df, self.trial_sequence_df])
+
             self.mic = Microphone(streamBufferSecs=6.0)  # open the microphone
             self.recordings = {"dur" : {timing: [] for timing in [0, 2, 4, 8, 16, 32, 64]}, # hardcoded for now
                                "var" : {timing: [] for timing in [0, 2, 4, 8, 16, 32, 64]}}
@@ -222,13 +290,10 @@ class DelayedNormSession(PylinkEyetrackerSession):
 
     def create_trials(self, timing='frames'):
         self.trials = []
-
-        # get TR in frames
-        self.TR = self.settings['mri']['TR']
         TR_in_frames = int(round(self.TR*120))
 
         # load params from sequence df
-        self.trial_sequence_df = pd.read_csv(self.settings['stimuli']['trial_sequence'])
+        # self.trial_sequence_df = pd.read_csv(self.settings['stimuli']['trial_sequence'])
         # iti in TRs
         iti_TRs = self.trial_sequence_df['iti_TR']
         # iti in frames
@@ -263,8 +328,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
         # read trial_sequence_df for trial parameters
         params = [dict(trial_type = row.type,
                        stim_dur = row.cond_frames, 
-                       oneOverF_texture_path = self.texture_paths[row.texture_id],
-                       dot_color_timings = self._make_dot_color_timings()) 
+                       oneOverF_texture_path = self.texture_paths[row.texture_id])
                   for i, row in self.trial_sequence_df.iterrows()] 
 
         # params = [dict(trial_type='dur' if trial_nr % 2 == 0 else 'isi', # back-to-back isi-dur
@@ -286,6 +350,8 @@ class DelayedNormSession(PylinkEyetrackerSession):
             )
             # debugging printout
             print("made trial {} with params: {} phase duration {} and timing: {}".format(trial_nr, params[trial_nr], phase_durations[trial_nr], timing))
+        
+        self.dot_color_timings = self._make_dot_color_timings()
 
     def _make_trial_frame_timings(self):
         """
@@ -340,9 +406,12 @@ class DelayedNormSession(PylinkEyetrackerSession):
 
         return
 
-    def _make_dot_color_timings(self):
+    def _make_dot_color_timings(self, total_time=None):
+
+        if total_time is None:
+            total_time = self.total_exp_duration
         # Inspired by Marco's fixation task
-        dot_switch_color_times = np.arange(3, 360, float(3.5))
+        dot_switch_color_times = np.arange(3, total_time, float(3.5))
         # adding randomness
         dot_switch_color_times += (2*np.random.rand(len(dot_switch_color_times))-1) # adding uniform noise [-1, 1] 
         # transforming to frames
@@ -426,6 +495,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
         frametimings_df = pd.DataFrame(self.trialwise_frame_timings, columns = ["trial {}".format(str(i).zfill(2)) for i in range(self.n_trials)] )
         frametimings_df.to_csv(op.join(self.output_dir, self.output_str + "_frametimings.csv"), index = False)
 
+        current_datetime = datetime.now()
         # plot and save audio
         if self.photodiode_check:
             photo_data = pd.DataFrame({'conditions':self.conditions,
@@ -434,7 +504,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
                         'delta_peaks': self.delta_peaks,
                         'n_peaks_found': self.n_peaks_found})
             
-            photo_data.to_csv('timing_photo_exp_results.csv', index = False)
+            photo_data.to_csv('photodiode_test_results/timing_photo_exp_results_{}.csv'.format(current_datetime.strftime("%Y-%m-%d-%H-%M")), index = False)
 
         if self.mri_simulator is not None:
             self.mri_simulator.stop()
@@ -446,7 +516,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
 if __name__ == '__main__':
 
     settings = op.join(op.dirname(__file__), 'settings.yml')
-    session = DelayedNormSession('sub-02', settings_file=settings, n_trials = 3,
+    session = DelayedNormSession('sub-02', settings_file=settings, n_trials = None,
                                  eyetracker_on = False, photodiode_check = False)
 
     session.create_trials()

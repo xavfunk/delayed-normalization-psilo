@@ -22,7 +22,7 @@ eyetracker:
         y_gaze_constraint: AUTO
 monitor:
     distance: 196
-    gamma: 1
+    gamma: 2.1
     name: default
     width: 69.8
 mouse:
