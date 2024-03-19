@@ -1,0 +1,18 @@
+{
+    "title": "",
+    "description": "",
+    "created_at": "2024-03-19",
+    "TR": 1.32,
+    "len_seconds": 298.32,
+    "len_TR": 226.0,
+    "n_trials": 39,
+    "r^2": 0.8512133315950945,
+    "n_conditions": 13,
+    "full_searchspace": 6227020800,
+    "searched_searchspace": 1000,
+    "histogram_p": 0.25,
+    "histogram_start_bin": 3,
+    "simulation_SNR": 4,
+    "n_best": 10,
+    "seed": 105
+}
