@@ -1,0 +1,4 @@
+type,iti_s,iti_TR,cond_frames,cond_ms,texture_id
+dur,5.28,4,0,0,0
+dur,5.28,4,16,134,1
+isi,5.28,4,16,134,2

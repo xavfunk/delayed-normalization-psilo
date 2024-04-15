@@ -4,6 +4,8 @@ from exptools2.core import Trial
 from psychopy.visual import Rect, TextStim, ImageStim
 from psychopy.sound import Microphone
 from scipy.signal import find_peaks
+from psychopy import core
+from psychopy.event import waitKeys, getKeys
 
 import numpy as np
 import pandas as pd
@@ -24,7 +26,6 @@ class DelayedNormTrial(Trial):
         self.img = ImageStim(self.session.win, self.parameters['oneOverF_texture_path'], size = 10,
                              mask = 'raisedCos', maskParams = {'fringeWidth':0.2}) # proportion that will be blurred
         self.check_frames = np.zeros((96, 3))
-
         # get the stimulus array with self.session.var_isi/dur_dict and save it into self.stimulus_frames
         if self.parameters['trial_type'] == 'dur':
             self.stimulus_frames = self.session.var_dur_dict[self.parameters['stim_dur']]
@@ -50,12 +51,20 @@ class DelayedNormTrial(Trial):
         This is to be used when flipping on every frame
         """
         # fixation dot color change
-        # if int((self.session.clock.getTime()*120)) in self.parameters['dot_color_timings']:
-        if int((self.session.clock.getTime()*120)) in self.session.dot_color_timings:
+        # if int((self.session.clock.getTime()*120)) in self.parameters['fix_dot_color_timings']:
+        if self.session.debug:
+            self.session.debug_message.setText("running trial {}, frame {}, time {}".format(self.trial_nr, int(self.session.clock.getTime()*120), round(self.session.clock.getTime(), 2)))
+
+            # self.session.debug_message.setText(int((self.session.clock.getTime()*120)))
+            self.session.debug_message.draw()
         
-            # change color
-            self.session.fix_dot_color_idx += 1
-            self.session.default_fix.setColor(self.session.fix_dot_colors[self.session.fix_dot_color_idx % len(self.session.fix_dot_colors)])
+            # self.switch_fix_color()
+        ## This snipped used to change fix color anytime, TODO potentially remove or replace with self.switch_fix_color()
+        # if int((self.session.clock.getTime()*120)) in self.session.fix_dot_color_timings:
+        
+        #     # change color
+        #     self.session.fix_dot_color_idx += 1
+        #     self.session.default_fix.setColor(self.session.fix_dot_colors[self.session.fix_dot_color_idx % len(self.session.fix_dot_colors)])
 
         if self.phase == 0: # we are in phase 0, prep time
 
@@ -115,7 +124,10 @@ class DelayedNormTrial(Trial):
                 self.session.n_peaks_found.append(len(peaks))
 
                 # self.session.recordings[self.parameters['trial_type']][self.parameters['stim_dur']].append(self.session.mic.getRecording()) # get recording and save into dict 
-    
+
+            # potentially change color
+            self.session.switch_fix_color()
+
             # draw fixation
             self.session.default_fix.draw()
 
@@ -244,12 +256,14 @@ class DelayedNormTrial(Trial):
                 self.session.timer.reset()
                 break
 
-            self.phase += 1  # advance phase        
+            self.phase += 1  # advance phase 
+            if self.phase > 2:
+                self.phase = 0       
 
 
 class DelayedNormSession(PylinkEyetrackerSession):
     """ Simple session with x trials. """
-    def __init__(self, output_str, output_dir=None, settings_file=None, n_trials=None, eyetracker_on=True, photodiode_check = False):
+    def __init__(self, output_str, output_dir=None, settings_file=None, n_trials=None, eyetracker_on=True, photodiode_check = False, debug = False):
         """ Initializes TestSession object. """
         super().__init__(output_str, output_dir=output_dir, settings_file=settings_file, eyetracker_on=eyetracker_on)
         
@@ -262,18 +276,40 @@ class DelayedNormSession(PylinkEyetrackerSession):
                          'eyetracker': eyetracker_on}
 
         if n_trials is None:
+            # just the length of the trial df
             self.n_trials = len(self.trial_sequence_df)
         else:
+            # reduce to n_trials for debugging 
             self.n_trials = n_trials
             self.trial_sequence_df = self.trial_sequence_df[:n_trials]
 
-        self.total_nr_frames = 0
+        # keeping track of frame timings
+        self.trialwise_frame_timings = np.zeros((96, self.n_trials))
+        self.total_nr_frames = 0 # TODO remove/refactor if unneccessary
+
+        # fix dot color and size  
         self.fix_dot_color_idx = 0
         self.fix_dot_colors = ['green', 'red']
-        self.photodiode_check = True if photodiode_check else False
-        self.trialwise_frame_timings = np.zeros((96, self.n_trials))
-        self.total_exp_duration = np.sum(self.trial_sequence_df.iti_TR) * self.TR
+        self.default_fix.setSize(self.settings['task']['fix_dot_size'])
+        self.default_fix.setColor('red') # starting color
+
+        # setting up fixation task duration and timings
+        self.total_fix_duration = (self.settings['stimuli']['dummy_trial_trs'] * self.TR) + (np.sum(self.trial_sequence_df.iti_TR) * self.TR)
+        if self.settings['mri']['topup_scan']: 
+            self.total_fix_duration += self.settings['mri']['topup_duration']
+
+        self.fix_dot_color_timings = self._make_fix_dot_color_timings()
         
+        ## debugging
+        self.debug = True if debug else False
+        # setting a debug message
+        if debug:
+            self.debug_message = TextStim(self.win, text = "debug text", pos = (6.0,4.0), height = .3,
+                                       opacity = .5) 
+
+        ## photodiode checking code
+        self.photodiode_check = True if photodiode_check else False
+
         if photodiode_check == True:
             # only duration
             self.trial_sequence_df = self.trial_sequence_df[self.trial_sequence_df.type == 'dur']
@@ -291,6 +327,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
             self.recording_durations = [] 
             self.delta_peaks = [] 
             self.n_peaks_found = [] 
+
 
 
     def create_trials(self, timing='frames'):
@@ -339,7 +376,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
         # params = [dict(trial_type='dur' if trial_nr % 2 == 0 else 'isi', # back-to-back isi-dur
         #                stim_dur = self.stim_conds[trial_nr%len(self.stim_conds)], # increasing durations
         #                oneOverF_texture_path = self.texture_paths[trial_nr%10], # one after the other stimulus
-        #                dot_color_timings = self._make_dot_color_timings()) 
+        #                fix_dot_color_timings = self._make_fix_dot_color_timings()) 
         #           for trial_nr in range(self.n_trials)] # this makes back-to-back isi-dur with increasing durations
 
         # construct trials
@@ -367,9 +404,18 @@ class DelayedNormSession(PylinkEyetrackerSession):
                           verbose=False,
                           timing=timing)
         
-        self.trials = [dummy] + self.trials
+        dummy_end = DelayedNormTrial(session=self,
+                    trial_nr=998,
+                    phase_durations=(0, 0, self.settings['stimuli']['dummy_trial_trs']*240),
+                    txt='Trial %i: Dummy' % trial_nr,
+                    parameters=dict(trial_type = 'dur',
+                                    stim_dur = 0, 
+                                    oneOverF_texture_path = self.texture_paths[0]),
+                    verbose=False,
+                    timing=timing)
+        
+        self.trials = [dummy] + self.trials #+ [dummy_end]
 
-        self.dot_color_timings = self._make_dot_color_timings()
 
     def _make_trial_frame_timings(self):
         """
@@ -424,32 +470,136 @@ class DelayedNormSession(PylinkEyetrackerSession):
 
         return
 
-    def _make_dot_color_timings(self, total_time=None):
+    def _make_fix_dot_color_timings(self, total_time=None):
 
         if total_time is None:
-            total_time = self.total_exp_duration
+            total_time = self.total_fix_duration
         # Inspired by Marco's fixation task
-        dot_switch_color_times = np.arange(3, total_time, float(3.5))
+        dot_switch_color_times = np.arange(3, total_time, float(1.5 * 3.5))
         # adding randomness
         dot_switch_color_times += (2*np.random.rand(len(dot_switch_color_times))-1) # adding uniform noise [-1, 1] 
-        # transforming to frames
+        # transforming to frames 
         dot_switch_color_times = (dot_switch_color_times*120).astype(int)
 
         return dot_switch_color_times
 
 
+    def start_experiment(self, wait_n_triggers=None, show_fix_during_dummies=True):
+        """Logs the onset of the start of the experiment.
+
+        Parameters
+        ----------
+        wait_n_triggers : int (or None)
+            Number of MRI-triggers ('syncs') to wait before actually
+            starting the experiment. This is useful when you have
+            'dummy' scans that send triggers to the stimulus-PC.
+            Note: clock is still reset right after calling this
+            method.
+        show_fix_during_dummies : bool
+            Whether to show a fixation cross during dummy scans.
+        """
+        self.exp_start = self.clock.getTime()
+        self.clock.reset()  # resets global clock
+        self.timer.reset()  # phase-timer
+
+        if self.mri_simulator is not None:
+            self.mri_simulator.start()
+
+        self.win.recordFrameIntervals = True
+
+        if wait_n_triggers is not None:
+            print(f"Waiting {wait_n_triggers} triggers before starting ...")
+            n_triggers = 0
+            
+            # TODO implement fix color changes while waiting for triggers
+            if show_fix_during_dummies:
+                self.default_fix.draw()
+                self.win.flip()
+
+            while n_triggers < wait_n_triggers:
+                waitKeys(keyList=[self.settings["mri"].get("sync", "t")])
+                n_triggers += 1
+                msg = f"\tOnset trigger {n_triggers}: {self.clock.getTime(): .5f}"
+                msg = msg + "\n" if n_triggers == wait_n_triggers else msg
+                print(msg)
+
+            self.timer.reset()
+    
+    def switch_fix_color(self):
+        """
+        change color of default fix
+        """
+        if int(self.clock.getTime()*120) in self.fix_dot_color_timings:
+        
+            # change color
+            self.fix_dot_color_idx += 1
+            self.default_fix.setColor(self.fix_dot_colors[self.fix_dot_color_idx % len(self.fix_dot_colors)])
+
+
+    def end_experiment(self):
+        """
+        simply takes the fixation task to the end
+        """
+        finish_fix_task = True
+        while finish_fix_task:
+            
+            if int(self.clock.getTime()*120) in self.fix_dot_color_timings:
+            
+                # change color
+                self.fix_dot_color_idx += 1
+                self.default_fix.setColor(self.fix_dot_colors[self.fix_dot_color_idx % len(self.fix_dot_colors)])
+
+            self.default_fix.draw()
+            if self.debug:
+                self.debug_message.setText(f"ending fix, time: {self.clock.getTime(): .2f}, last one: {self.fix_dot_color_timings[-1]/120}")
+                self.debug_message.draw()
+            self.win.flip()
+
+            if int(self.clock.getTime()*120) > self.fix_dot_color_timings[-1]:
+                finish_fix_task = False
+        
+        return
+
     def run(self):
         """ Runs experiment. """
+        
+        # self.display_text('', keys=self.settings['mri'].get('sync', 't'))
+        # waitKeys(keyList = self.settings['mri'].get('sync', 't'))
+        keys = []
+        if self.debug:
+            self.debug_message.setText("preparing to run, awaiting trigger")
+        while self.settings['mri']['sync'] not in keys:
+            keys = getKeys()
+            # print(keys)
+
+            self.switch_fix_color()
+            # if int(self.clock.getTime()*120) in self.fix_dot_color_timings:
+        
+            #     # change color
+            #     self.fix_dot_color_idx += 1
+            #     self.default_fix.setColor(self.fix_dot_colors[self.fix_dot_color_idx % len(self.fix_dot_colors)])
+            
+            if self.debug:
+                self.debug_message.draw()
+            self.default_fix.draw()
+            self.win.flip()
+
         if self.eyetracker_on:
             self.calibrate_eyetracker()
+            self.start_experiment()
             self.start_recording_eyetracker()
-        
-        self.display_text('Waiting for scanner \n(remove this text)', keys=self.settings['mri'].get('sync', 't'))
-
-        self.start_experiment()
+        else:
+            self.start_experiment()
 
         for trial in self.trials:
-            trial.run()        
+            if self.debug:
+                self.debug_message.setText("running trial {}".format(trial.trial_nr))
+            
+            trial.run()
+
+        # finish task here, instead of dummy trial in the end
+        # while keys > self.settings['mri']['dummy_trial_trs']
+        self.end_experiment()
 
         self.close()
 
@@ -524,7 +674,8 @@ class DelayedNormSession(PylinkEyetrackerSession):
             
             photo_data.to_csv('photodiode_test_results/timing_photo_exp_results_{}.csv'.format(current_datetime.strftime("%Y-%m-%d-%H-%M")), index = False)
 
-        self.metadata['dot_color_timings'] = self.dot_color_timings
+        # self.metadata['fix_dot_color_timings'] = list(self.fix_dot_color_timings)
+        self.metadata['fix_dot_color_timings'] = [int(timing) for timing in self.fix_dot_color_timings]
 
         # save metadata
         json_path = os.path.join(self.output_dir, self.output_str + "_metadata.json")
@@ -546,15 +697,17 @@ class DelayedNormSession(PylinkEyetrackerSession):
 if __name__ == '__main__':
     subject = sys.argv[1]
     sess =  sys.argv[2]
-    # task = sys.argv[3] # different settings -> now implemented as saving the actual settings
+    task = 'CTS' # different settings -> now implemented as saving the actual settings
     run = sys.argv[3] # which run    
-    output_str = 'sub-{}_sess-{}_run-{}'.format(subject.zfill(2), sess.zfill(2), task, run.zfill(2))
+    output_str = 'sub-{}_sess-{}_task-{}_run-{}'.format(subject.zfill(2), sess.zfill(2), task, run.zfill(2))
     
     settings = op.join(op.dirname(__file__), 'settings.yml')
-    session = DelayedNormSession(output_str, settings_file=settings, n_trials = None,
-                                 eyetracker_on = False, photodiode_check = False)
-
+    session = DelayedNormSession(output_str, settings_file=settings, n_trials = 3,
+                                 eyetracker_on = False, photodiode_check = False, debug = True)
+    
+    print(list(session.fix_dot_color_timings))
+    
     session.create_trials()
-
     session.run()
+
     session.quit()

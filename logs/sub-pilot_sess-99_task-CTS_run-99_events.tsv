@@ -1,0 +1,23 @@
+trial_nr	onset	event_type	phase	response	nr_frames	trial_type	stim_dur	oneOverF_texture_path	onset_abs	duration
+999	0.004861116409301758	stim	0		0	dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	6.3752241134643555	0.003009796142578125
+999	0.007870912551879883	stim	1		0	dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	6.378233909606934	0.0011401176452636719
+999	0.009011030197143555	stim	2		0	dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	6.379374027252197	13.995784997940063
+999	5.997772932052612	response	2	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	12.368135929107666	
+999	9.5049729347229	response	2	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	15.875335931777954	
+999	13.504931926727295	response	2	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	19.87529492378235	
+0	14.004796028137207	stim	0		8529	dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	20.37515902519226	71.16691088676453
+0	19.18029499053955	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	25.550657987594604	
+0	24.521428108215332	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	30.891791105270386	
+0	26.971508026123047	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	33.3418710231781	
+0	30.179912090301514	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	36.55027508735657	
+0	34.67982196807861	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	41.05018496513367	
+0	40.34647989273071	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	46.71684288978577	
+0	44.78813600540161	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	51.158499002456665	
+0	51.65485501289368	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	58.02521800994873	
+0	54.971487045288086	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	61.34185004234314	
+0	60.60469889640808	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	66.97506189346313	
+0	66.08803606033325	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	72.4583990573883	
+0	72.67142701148987	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	79.04179000854492	
+0	77.62187194824219	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	83.99223494529724	
+0	81.82222604751587	response	0	b		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	88.19258904457092	
+0	85.08927202224731	response	0	lctrl		dur	0.0	./textures/minmax/oneOverF_texture_1_1024_47.bmp	91.45963501930237	

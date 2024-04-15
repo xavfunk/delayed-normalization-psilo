@@ -1,0 +1,12 @@
+{
+    "settings_file": "/home/funk/repos/delayed-normalization-psilo/settings.yml",
+    "eyetracker": false,
+    "fix_dot_color_timings": [
+        418,
+        1104,
+        1565,
+        2346,
+        2951,
+        3479
+    ]
+}
