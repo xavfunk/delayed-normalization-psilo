@@ -19,7 +19,7 @@
             0,
             0
         ],
-        "fullscr": false,
+        "fullscr": true,
         "waitBlanking": true,
         "winType": "pyglet",
         "screen": 1
@@ -28,7 +28,7 @@
         "name": "default",
         "width": 69.8,
         "distance": 196,
-        "gamma": 1
+        "gamma": 2.1
     },
     "mouse": {
         "visible": false
@@ -66,10 +66,10 @@
         "skip": 0,
         "sound": false,
         "topup_scan": true,
-        "topup_duration": 5
+        "topup_duration": 45
     },
     "stimuli": {
-        "trial_sequence": "trial_sequences/test/trial_sequence_s000_short.csv",
+        "trial_sequence": "trial_sequences/d_const_b_14_s_107/trial_sequence_c000_con.csv",
         "tex_type": "minmax",
         "scanner_sync": true,
         "stim_types": [
@@ -89,13 +89,15 @@
         "stim_duration": 96,
         "iti_durations": 0,
         "iti_const": 120,
-        "dummy_trial_trs": 5,
-        "blank_before_trs": 5,
-        "blank_after_trs": 5
+        "triggerless_trs": 5,
+        "blank_before_trs": 13,
+        "blank_after_trs": 18,
+        "x_offset": 0.0,
+        "y_offset": 0.0
     },
     "task": {
         "response interval": 0.8,
-        "color switch interval": 3.5,
+        "color switch interval": 5,
         "fix_dot_size": 0.5,
         "fix_dot_colors": [
             "green",

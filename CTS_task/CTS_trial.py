@@ -13,7 +13,7 @@ class DelayedNormTrial(Trial):
         super().__init__(session, trial_nr, phase_durations, **kwargs)
         
         # get the 1/f texture
-        self.img = ImageStim(self.session.win, self.parameters['oneOverF_texture_path'], size = 10,
+        self.img = ImageStim(self.session.win, self.parameters['oneOverF_texture_path'], size = 10, pos = (self.session.settings['stimuli']['x_offset'], self.session.settings['stimuli']['y_offset']),
                              mask = 'raisedCos', maskParams = {'fringeWidth':0.2}) # proportion that will be blurred
         self.check_frames = np.zeros((96, 3))
         
@@ -41,8 +41,11 @@ class DelayedNormTrial(Trial):
         """ Draws stimuli 
         This is to be used when flipping on every frame
         """
-        # fixation dot color change
-        self.session.switch_fix_color()
+
+        # only outside phase 1:
+        if self.phase != 1:
+            # fixation dot color change
+            self.session.switch_fix_color()
 
         if self.session.debug:
             # update debug_message
@@ -66,7 +69,7 @@ class DelayedNormTrial(Trial):
         elif self.phase == 1: # we are in phase 1, stimulus presentation
             
             ## if the self.stimulus_frames array at this frame index is one, show the texture, otherwise fix
-            if self.stimulus_frames[self.session.nr_frames] == 1:
+            if self.stimulus_frames[self.session.trial_frames] == 1:
                 # draw texture
                 self.img.draw()
 
@@ -78,7 +81,7 @@ class DelayedNormTrial(Trial):
                 self.session.default_fix.draw()
 
             if self.session.photodiode_check is True:
-                if self.square_flip_frames[self.session.nr_frames]:
+                if self.square_flip_frames[self.session.trial_frames]:
                     self.white_square.draw()
                 else:
                     self.black_square.draw()
@@ -145,7 +148,6 @@ class DelayedNormTrial(Trial):
                 self.session.global_log.loc[idx, 'phase'] = self.phase
                 self.session.global_log.loc[idx, 'response'] = key
 
-                # TODO what happens here?
                 # for param, val in self.parameters.items():
                     # self.session.global_log.loc[idx, param] = val
                 for param, val in self.parameters.items():  # add parameters to log
@@ -159,12 +161,10 @@ class DelayedNormTrial(Trial):
                     msg = f'start_type-{event_type}_trial-{self.trial_nr}_phase-{self.phase}_key-{key}_time-{t}'
                     self.session.tracker.sendMessage(msg)
 
-                # TODO what was it about this?
                 #self.trial_log['response_key'][self.phase].append(key)
                 #self.trial_log['response_onset'][self.phase].append(t)
                 #self.trial_log['response_time'][self.phase].append(t - self.start_trial)
 
-                # TODO what was this used for?
                 if key != self.session.mri_trigger:
                     self.last_resp = key
                     self.last_resp_onset = t
@@ -192,8 +192,8 @@ class DelayedNormTrial(Trial):
             self.session.first_trial = False
 
         for phase_dur in self.phase_durations:  # loop over phase durations
-            self.session.total_nr_frames += self.session.nr_frames
-            self.session.nr_frames = 0
+            self.session.trial_frames = 0
+
             # pass self.phase *now* instead of while logging the phase info.
             self.session.win.callOnFlip(self.log_phase_info, phase=self.phase)
 
@@ -209,6 +209,8 @@ class DelayedNormTrial(Trial):
                     if self.draw_each_frame:
                         self.session.win.flip()
                         self.session.nr_frames += 1
+                        self.session.trial_frames += 1
+
                     self.get_events()
             else:
                 # Loop for a predetermined number of frames
@@ -234,6 +236,7 @@ class DelayedNormTrial(Trial):
                         # getting events only outside phase 1 makes a difference for frame timings?
                         self.get_events()   
                     self.session.nr_frames += 1
+                    self.session.trial_frames += 1
 
             if self.exit_phase:  # broke out of phase loop
                 self.session.timer.reset()  # reset timer!

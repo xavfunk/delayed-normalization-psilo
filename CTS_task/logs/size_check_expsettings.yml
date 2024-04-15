@@ -62,7 +62,7 @@ stimuli:
     - dur
     - isi
     tex_type: minmax
-    trial_sequence: trial_sequences/test/trial_sequence_s000_short.csv
+    trial_sequence: trial_sequences/d_var_p_0.23_s_107/trial_sequence_c000_var.csv
 task:
     color switch interval: 3.5
     fix_dot_colors:

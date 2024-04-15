@@ -1,0 +1,3 @@
+trial_nr	onset	event_type	phase	response	nr_frames	trial_type	onset_abs	duration
+0	0.0211331844329834	stim	0		284.0	even	1.4725360870361328	1.7822539806365967
+0	1.7008280754089355	response	0	lctrl		even	3.152230978012085	

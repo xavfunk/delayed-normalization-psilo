@@ -22,7 +22,7 @@ window:
     size: [1920, 1080]
     pos: [0, 0]
     color: [0, 0, 0]
-    fullscr: False
+    fullscr: True
     winType: pyglet
     waitBlanking: True
     screen: 1
@@ -31,8 +31,8 @@ monitor:
     name: default
     width: 69.8  # in cm
     distance: 196  # in cm
-    # gamma: 2.1 # activate this setting for BOLD screen!
-    gamma: 1
+    gamma: 2.1 # activate this setting for BOLD screen!
+    # gamma: 1
 
 
 mouse:
@@ -73,12 +73,14 @@ mri:
   skip: 0  # how many frames to silently omit initially during T1 stabilization, no sync pulse.
   sound: False  # simulate scanner noise
   topup_scan: True
-  topup_duration: 5 #45 # topup scan duration in seconds (no 't's)
+  topup_duration: 45 #45 # topup scan duration in seconds (no 't's)
 
 # times in frames based on 120 FPS screen
 stimuli:
-    # trial_sequence: 'trial_sequences/p_23_s_42/trial_sequence_s008.csv'
-    trial_sequence: 'trial_sequences/test/trial_sequence_s000_short.csv'
+    trial_sequence: 'trial_sequences/d_const_b_14_s_107/trial_sequence_c000_con.csv'
+    # trial_sequence: 'trial_sequences/d_var_p_0.23_s_107/trial_sequence_c000_var.csv'
+    
+    # trial_sequence: 'trial_sequences/test/trial_sequence_s000_short.csv'
 
     tex_type: 'minmax'                     # either of ['rms', 'minmax'], determines the rescaling used
     scanner_sync: True                 # set this to true to make phase p0 (prep) end on input 't', overrides default TR/2
@@ -89,14 +91,16 @@ stimuli:
     stim_duration: 96                  # total duration of the stimulus presentation in frames ()
     iti_durations: 0                   # TODO [0, 1, 2, 3] for indexing the iti df or ['const']
     iti_const: 120                     # if const, this will be the amount of TRs an iti will take 
-    dummy_trial_trs: 5                  # DEPRECATED how many TRs the dummy trial will take 
-    # TODO implement into exp 
-    blank_before_trs: 5                # how many TRs of blank before the task starts properly; 13*TR = 17.16s
-    blank_after_trs: 5                 # how many TRs of blank after the task has finished; 18*TR = 23.76s
+    triggerless_trs: 5                  # (curently not used, but commented out) how many TRs are taken without a trigger, if start_at_syn == 6 then this is 5 
+    blank_before_trs: 13                # how many TRs of blank before the task starts properly; 13*TR = 17.16s
+    blank_after_trs: 18                 # how many TRs of blank after the task has finished; 18*TR = 23.76s
+    # stimulus offsets to correct for bold screen
+    x_offset: 0.0 # pos r, neg l
+    y_offset: 0.0 # pos up, neg down
 
 # times in seconds
 task: 
     response interval: 0.8             # time in s you allow the participant to respond that still counts as correct response
-    color switch interval: 3.5         # interval in s between color dot switches, note: a random decimal between -1 and +1 is added to it in the code 
+    color switch interval: 5 #3.5         # interval in s between color dot switches, note: a random decimal between -1 and +1 is added to it in the code 
     fix_dot_size: .5                 # fixation dot size in degrees. Dot changes color on average every two TRs (or bar steps)
     fix_dot_colors: ['green', 'red']   # fixation dot colors

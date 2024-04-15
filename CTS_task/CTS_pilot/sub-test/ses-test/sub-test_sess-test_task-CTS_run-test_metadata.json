@@ -1,0 +1,27 @@
+{
+    "settings_file": "/home/funk/repos/delayed-normalization-psilo/CTS_task/settings.yml",
+    "eyetracker": true,
+    "fix_dot_color_timings": [
+        412,
+        888,
+        1623,
+        2175,
+        2699,
+        3428,
+        3936,
+        4638,
+        5112,
+        5774,
+        6376,
+        6890,
+        7625,
+        8114,
+        8801,
+        9468,
+        9881,
+        10514,
+        11061,
+        11741,
+        12686
+    ]
+}

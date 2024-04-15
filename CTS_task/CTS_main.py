@@ -29,10 +29,9 @@ def main():
 
     settings = os.path.join(os.path.dirname(__file__), 'settings.yml')
 
-    session = DelayedNormSession(output_str, output_dir=output_dir, settings_file=settings, n_trials = 3,
-                                 eyetracker_on = False, photodiode_check = False, debug = True)
+    session = DelayedNormSession(output_str, output_dir=output_dir, settings_file=settings, n_trials = None,
+                                 eyetracker_on = True, photodiode_check = False, debug = False) # debug drops frames
     
-    print(list(session.fix_dot_color_timings))
     
     session.create_trials()
     session.run()

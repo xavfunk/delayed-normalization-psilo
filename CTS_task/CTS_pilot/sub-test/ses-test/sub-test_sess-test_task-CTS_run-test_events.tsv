@@ -1,0 +1,62 @@
+trial_nr	onset	event_type	phase	response	nr_frames	trial_type	stim_dur	oneOverF_texture_path	onset_abs	duration
+dummy	0.10838913917541504	stim	0		0	dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	6.104231119155884	0.0031189918518066406
+dummy	0.11150813102722168	stim	1		0	dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	6.10735011100769	0.0012519359588623047
+dummy	0.11276006698608398	stim	2		1980	dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	6.108602046966553	16.503768920898438
+dummy	2.591830015182495	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	8.587671995162964	
+dummy	4.675112009048462	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	10.67095398902893	
+dummy	5.558596134185791	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	11.55443811416626	
+dummy	5.733330011367798	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	11.729171991348267	
+dummy	10.975116968154907	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	16.970958948135376	
+dummy	11.21663212776184	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	17.21247410774231	
+dummy	11.441719055175781	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	17.43756103515625	
+dummy	11.675079107284546	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	17.670921087265015	
+dummy	11.908369064331055	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	17.904211044311523	
+dummy	12.183298110961914	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	18.179140090942383	
+dummy	12.441689014434814	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	18.437530994415283	
+dummy	12.708406925201416	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	18.704248905181885	
+dummy	12.975029945373535	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	18.970871925354004	
+dummy	13.275071144104004	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	19.270913124084473	
+dummy	13.99997591972351	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	19.99581789970398	
+dummy	14.333277940750122	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	20.32911992073059	
+dummy	14.599946022033691	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	20.59578800201416	
+dummy	14.89994192123413	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	20.8957839012146	
+dummy	15.349908113479614	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	21.345750093460083	
+dummy	15.916604995727539	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	21.912446975708008	
+dummy	16.166609048843384	pulse	2	t		dur	0.0	../textures/minmax/oneOverF_texture_1_1024_47.bmp	22.162451028823853	
+0	16.61652898788452	stim	0		18	dur	8.0	../textures/minmax/oneOverF_texture_1_1024_24.bmp	22.61237096786499	0.14987993240356445
+0	16.758355140686035	pulse	0	t		dur	8.0	../textures/minmax/oneOverF_texture_1_1024_24.bmp	22.754197120666504	
+0	16.766408920288086	stim	1		96	dur	8.0	../textures/minmax/oneOverF_texture_1_1024_24.bmp	22.762250900268555	0.8001341819763184
+0	17.566543102264404	stim	2		299	dur	8.0	../textures/minmax/oneOverF_texture_1_1024_24.bmp	23.562385082244873	2.491745948791504
+0	17.666609048843384	pulse	2	t		dur	8.0	../textures/minmax/oneOverF_texture_1_1024_24.bmp	23.662451028823853	
+0	18.574949979782104	pulse	2	t		dur	8.0	../textures/minmax/oneOverF_texture_1_1024_24.bmp	24.570791959762573	
+0	19.47497797012329	pulse	2	t		dur	8.0	../textures/minmax/oneOverF_texture_1_1024_24.bmp	25.47081995010376	
+0	19.783293962478638	pulse	2	t		dur	8.0	../textures/minmax/oneOverF_texture_1_1024_24.bmp	25.779135942459106	
+1	20.058289051055908	stim	0		1	dur	16.0	../textures/minmax/oneOverF_texture_1_1024_68.bmp	26.054131031036377	0.008081912994384766
+1	20.059541940689087	pulse	0	t		dur	16.0	../textures/minmax/oneOverF_texture_1_1024_68.bmp	26.055383920669556	
+1	20.066370964050293	stim	1		96	dur	16.0	../textures/minmax/oneOverF_texture_1_1024_68.bmp	26.06221294403076	0.8001489639282227
+1	20.866519927978516	stim	2		299	dur	16.0	../textures/minmax/oneOverF_texture_1_1024_68.bmp	26.862361907958984	2.49173903465271
+1	20.883300065994263	pulse	2	t		dur	16.0	../textures/minmax/oneOverF_texture_1_1024_68.bmp	26.87914204597473	
+1	22.49166703224182	pulse	2	t		dur	16.0	../textures/minmax/oneOverF_texture_1_1024_68.bmp	28.48750901222229	
+1	23.25827407836914	pulse	2	t		dur	16.0	../textures/minmax/oneOverF_texture_1_1024_68.bmp	29.25411605834961	
+2	23.358258962631226	stim	0		150	dur	2.0	../textures/minmax/oneOverF_texture_1_1024_87.bmp	29.354100942611694	1.2496891021728516
+2	24.599941968917847	pulse	0	t		dur	2.0	../textures/minmax/oneOverF_texture_1_1024_87.bmp	30.595783948898315	
+2	24.607948064804077	stim	1		96	dur	2.0	../textures/minmax/oneOverF_texture_1_1024_87.bmp	30.603790044784546	0.8002328872680664
+2	25.408180952072144	stim	2		299	dur	2.0	../textures/minmax/oneOverF_texture_1_1024_87.bmp	31.404022932052612	2.4915990829467773
+2	25.40949010848999	pulse	2	t		dur	2.0	../textures/minmax/oneOverF_texture_1_1024_87.bmp	31.40533208847046	
+2	26.24988102912903	pulse	2	t		dur	2.0	../textures/minmax/oneOverF_texture_1_1024_87.bmp	32.2457230091095	
+2	27.316543102264404	pulse	2	t		dur	2.0	../textures/minmax/oneOverF_texture_1_1024_87.bmp	33.31238508224487	
+2	27.633222103118896	pulse	2	t		dur	2.0	../textures/minmax/oneOverF_texture_1_1024_87.bmp	33.629064083099365	
+3	27.89978003501892	stim	0		96	isi	2.0	../textures/minmax/oneOverF_texture_1_1024_39.bmp	33.89562201499939	0.799854040145874
+3	28.69156813621521	pulse	0	t		isi	2.0	../textures/minmax/oneOverF_texture_1_1024_39.bmp	34.68741011619568	
+3	28.699634075164795	stim	1		96	isi	2.0	../textures/minmax/oneOverF_texture_1_1024_39.bmp	34.695476055145264	0.8001248836517334
+3	29.49975895881653	stim	2		299	isi	2.0	../textures/minmax/oneOverF_texture_1_1024_39.bmp	35.495600938797	2.491760015487671
+3	29.816494941711426	pulse	2	t		isi	2.0	../textures/minmax/oneOverF_texture_1_1024_39.bmp	35.812336921691895	
+3	30.92498207092285	pulse	2	t		isi	2.0	../textures/minmax/oneOverF_texture_1_1024_39.bmp	36.92082405090332	
+3	31.291528940200806	pulse	2	t		isi	2.0	../textures/minmax/oneOverF_texture_1_1024_39.bmp	37.287370920181274	
+3	31.974875926971436	pulse	2	t		isi	2.0	../textures/minmax/oneOverF_texture_1_1024_39.bmp	37.970717906951904	
+4	31.9915189743042	stim	0		32	blank	0.0	../textures/minmax/oneOverF_texture_1_1024_81.bmp	37.98736095428467	0.2662980556488037
+4	32.24980592727661	pulse	0	t		blank	0.0	../textures/minmax/oneOverF_texture_1_1024_81.bmp	38.24564790725708	
+4	32.257817029953	stim	1		96	blank	0.0	../textures/minmax/oneOverF_texture_1_1024_81.bmp	38.25365900993347	0.8003339767456055
+4	33.05815100669861	stim	2		299	blank	0.0	../textures/minmax/oneOverF_texture_1_1024_81.bmp	39.05399298667908	72.6828510761261
+4	33.716493129730225	pulse	2	t		blank	0.0	../textures/minmax/oneOverF_texture_1_1024_81.bmp	39.71233510971069	
+4	34.641539096832275	pulse	2	t		blank	0.0	../textures/minmax/oneOverF_texture_1_1024_81.bmp	40.637381076812744	

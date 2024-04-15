@@ -33,13 +33,13 @@ if __name__ == '__main__':
 
     # amount of noise
     SNR = 3
-    
+
     if design_type== 'const':
         n_repeats = 5
         n_trials = 79
         n_blank_trials = n_trials - n_conds * n_repeats
         hist = (np.array([n_conds*n_repeats + n_blank_trials]), np.array([3])) # const hist
-    
+
     else:
         n_repeats = 3
         n_trials = n_conds * n_repeats
@@ -57,9 +57,9 @@ if __name__ == '__main__':
 
     # print(int(np.dot(hist[0], hist[1]*TR) * upsample_factor))
     upsampled_size = int(n_TRs*upsample_factor)
-    scaled_events = np.zeros((n_seqs, upsampled_size))  # will contain upsampled and scaled events, just before convolution 
+    scaled_events = np.zeros((n_seqs, upsampled_size))  # will contain upsampled and scaled events, just before convolution
 
-    # TODO try to insert the 1s directly into scaled_events (which now also contains the blank TRs) at the upsampled positions 
+    # TODO try to insert the 1s directly into scaled_events (which now also contains the blank TRs) at the upsampled positions
     # Then, actually cut the convolution (as the last timepoints were empty anyways, given sufficient blank), such that in the end the convolved_timeseries.shape == scaled_events.shape
 
     all_events_dict = {}
@@ -86,7 +86,7 @@ if __name__ == '__main__':
         # remove "blank onsets" (first and last 1 in upsampled)
         # Find the index of the first occurrence of 1
         first_1_index = np.argmax(upsampled != 0)
-        # Find the index of the last occurrence of 1 
+        # Find the index of the last occurrence of 1
         last_1_index = upsampled.size - np.argmax(upsampled[::-1] != 0) - 1
         # remove them
         upsampled[first_1_index] = 0
@@ -94,7 +94,7 @@ if __name__ == '__main__':
 
         scaled_events[i], all_events_dict[i] = scale_amplitudes(upsampled, n_repeats = n_repeats, n_blanks=n_blank_trials)
         convolved_timeseries[i] = convolve_HRF(scaled_events[i], upsample_factor, length=convolution_length)[:upsampled_size]
-            
+
     noisy_timeseries = add_noise(convolved_timeseries, SNR = SNR)
 
     # back down to TR
@@ -114,7 +114,7 @@ if __name__ == '__main__':
 
     # result amplitudes ground truth
     print(np.array(list(trials.values()))[:-1])
-    
+
     amp_gt = np.array(list(trials.values()))[:-1] if design_type== 'const' else np.array(list(trials.values()))
 
     for i in range(len(rand_seqs)):
@@ -123,26 +123,26 @@ if __name__ == '__main__':
         glm = sm.GLM(noisy_timeseries[i], design_matrices[i], family=sm.families.Gaussian())
         stats_results[i] = glm.fit()
         predicted_timeseries[i] = glm.predict(stats_results[i].params)
-        
+
         ## ridge
         # ols = sm.OLS(noisy_timeseries[i], design_matrices[i])
         # stats_results[i] = ols.fit_regularized(alpha = .5, L1_wt = 0)
         # predicted_timeseries[i] = ols.predict(stats_results[i].params)
-        
+
         amp_pred = stats_results[i].params[:-1]
         distance = np.linalg.norm(amp_gt - amp_pred)
-        
+
 
     sort = True
     if sort is True:
         all_r2 = [stats_results[i].pseudo_rsquared() for i in range(len(stats_results))]
         dist_amp = [-np.linalg.norm(amp_gt - stats_results[i].params[:-1]) for i in range(len(stats_results))]
-        
+
         idxs = n_largest_indices(dist_amp, n_best)
     else:
         idxs = range(n_plots)
-    
-    fig, axs = plt.subplots(n_plots, 4, figsize = (20, 10)) 
+
+    fig, axs = plt.subplots(n_plots, 4, figsize = (20, 10))
 
     for i, j in zip(idxs, range(n_plots)):
         # GT
@@ -153,21 +153,21 @@ if __name__ == '__main__':
         # noisy
         plot_trial_sequence(scaled_events[i], all_events_dict[i], axs[j, 1], upsample_factor= upsample_factor)
         axs[j, 1].set_xlim(0, n_TRs)
-        
+
         axs[j, 1].plot(noisy_timeseries[i])
-    
+
         # design
         # axs[j, 2].imshow(design_matrices[i][:, :-1], aspect = .05)
-    
+
         # prediction
         axs[j, 3].plot(noisy_timeseries[i], label = 'observed')
         axs[j, 3].plot(convolved_timeseries[i], label = 'ground truth')
         axs[j, 3].plot(predicted_timeseries[i], label = 'predicted')
-        
+
         # pseudo rsquared
         axs[j, 3].text(len(predicted_timeseries[1])*.8,1.2, f'$R^2$ : {stats_results[i].pseudo_rsquared():.2f}', bbox=dict(facecolor='white', alpha=0.5))
         axs[j, 3].text(len(predicted_timeseries[1])*.8,1.0, f'$-||amp_g-amp_p||$ : {dist_amp[i]:.2f}', bbox=dict(facecolor='white', alpha=0.5))
-        
+
         axs[j, 3].set_xlim(0, n_TRs)
 
         # betas
@@ -188,24 +188,23 @@ if __name__ == '__main__':
         # print(list(zip(rand_seqs[i],all_events_dict[i].values())))
 
 
-  
-    axs[0, 0].set_title("Ground truth: randomized events of\n different amplitudes convolved with HRF") 
-    axs[0, 1].set_title(f"adding noise, SNR = {SNR}") 
-    # axs[0, 2].set_title(f"design matrices") 
-    axs[0, 2].set_title(f"gt vs pred amp") 
 
-    axs[0, 3].set_title(f"predicted timeseries") 
+    axs[0, 0].set_title("Ground truth: randomized events of\n different amplitudes convolved with HRF")
+    axs[0, 1].set_title(f"adding noise, SNR = {SNR}")
+    # axs[0, 2].set_title(f"design matrices")
+    axs[0, 2].set_title(f"gt vs pred amp")
+
+    axs[0, 3].set_title(f"predicted timeseries")
     axs[-1, 3].legend(ncols = 3)
 
     fig.tight_layout()
     plt.show()
-    
-    
+
+
     # Saving
     # for trial_id, i in enumerate(idxs):
     i = 0
     trial_id = 0
-    trial_df_from_simulation(all_events_dict[i], rand_seqs[i], all_r2[i], dist_amp = dist_amp[i], design_type = design_type, trial_id = trial_id, TR=TR, n_conds = n_conds, 
-                                 SNR=SNR, hist_p = hist_p, bins_start = bins_start, n_searched = n_seqs, n_blanks=n_blank_trials, blank_pre=blank_pre, blank_post=blank_post, 
-                                 n_best = n_best, save = True, seed = seed, out_dir = '/home/xavfunk/repos/delayed-normalization-psilo/trial_sequences')
-
+    trial_df_from_simulation(all_events_dict[i], rand_seqs[i], all_r2[i], dist_amp = dist_amp[i], design_type = design_type, trial_id = trial_id, TR=TR, n_conds = n_conds,
+                                 SNR=SNR, hist_p = hist_p, bins_start = bins_start, n_searched = n_seqs, n_blanks=n_blank_trials, blank_pre=blank_pre, blank_post=blank_post,
+                                 n_best = n_best, save = True, seed = seed, out_dir = 'CTS_task/trial_sequences')
