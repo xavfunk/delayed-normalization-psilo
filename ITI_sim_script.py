@@ -22,17 +22,18 @@ if __name__ == '__main__':
     bins_start = 3 # shortest n_TR per trial
     upsample_factor = int(TR * 100)
 
-    n_seqs = 10 # how many seqences to simulate (searchspace is 13! = 6227020800)
+    n_seqs = 100 # how many seqences to simulate (searchspace is 13! = 6227020800)
     n_conds = 13 # number of conditions
+    n_noise_reps = 10
 
     convolution_length = 30
     n_plots = 5 # number of plots ot create
-    n_best = 1 # select the n best sequences
+    n_best = 10 # select the n best sequences
     blank_pre = 13 # blanks before starting trials
     blank_post = 18 # blanks after trials are over
 
     # amount of noise
-    SNR = 3
+    SNR = 2.5
 
     if design_type== 'const':
         n_repeats = 5
@@ -46,11 +47,11 @@ if __name__ == '__main__':
         n_blank_trials = None
         hist = get_geometric_hist(p = hist_p, n_bins = 12, n_trials=n_trials, bins_start=bins_start)
 
-    print(f"length of trials: {np.dot(*hist)} TRs, {np.dot(*hist) * TR} seconds")
-    print(n_trials)
+    # print(f"length of trials: {np.dot(*hist)} TRs, {np.dot(*hist) * TR} seconds")
+    # print(n_trials)
 
     n_TRs = np.dot(*hist) + blank_pre + blank_post
-    print(n_TRs)
+    # print(n_TRs)
 
     # fill an array of size n with randomized seqs
     rand_seqs = np.zeros((n_seqs, n_trials))
@@ -59,13 +60,11 @@ if __name__ == '__main__':
     upsampled_size = int(n_TRs*upsample_factor)
     scaled_events = np.zeros((n_seqs, upsampled_size))  # will contain upsampled and scaled events, just before convolution
 
-    # TODO try to insert the 1s directly into scaled_events (which now also contains the blank TRs) at the upsampled positions
-    # Then, actually cut the convolution (as the last timepoints were empty anyways, given sufficient blank), such that in the end the convolved_timeseries.shape == scaled_events.shape
 
     all_events_dict = {}
     convolved_timeseries = np.zeros((n_seqs, upsampled_size))
-    print(convolved_timeseries.shape)
-    print(f'convolved_timeseries down shape: {convolved_timeseries[:,::upsample_factor].shape}')
+    # print(convolved_timeseries.shape)
+    # print(f'convolved_timeseries down shape: {convolved_timeseries[:,::upsample_factor].shape}')
 
     # generate random distributions over basic histogram
     # searchspace is 13! = 6227020800 possibilities, optseq simply does a subset of those
@@ -77,7 +76,7 @@ if __name__ == '__main__':
                 rand_seqs,
                 np.array([18]*rand_seqs.shape[0]).reshape(-1, 1)))
 
-    print(rand_seqs)
+    # print(rand_seqs)
 
     for i in range(len(rand_seqs)):
 
@@ -96,14 +95,15 @@ if __name__ == '__main__':
         convolved_timeseries[i] = convolve_HRF(scaled_events[i], upsample_factor, length=convolution_length)[:upsampled_size]
 
     noisy_timeseries = add_noise(convolved_timeseries, SNR = SNR)
+    conv_full = convolved_timeseries
 
     # back down to TR
     convolved_timeseries = convolved_timeseries[:, ::upsample_factor]
     noisy_timeseries = noisy_timeseries[:, ::upsample_factor]
 
     design_matrices = np.zeros((n_seqs, n_TRs, 14))
-    print(design_matrices.shape)
-    print(all_events_dict[0])
+    # print(design_matrices.shape)
+    # print(all_events_dict[0])
 
     for i in range(len(rand_seqs)):
         design_matrices[i] = make_design_matrix(all_events_dict[i], max_t = n_TRs, upsample_factor=upsample_factor)[0]
@@ -113,24 +113,53 @@ if __name__ == '__main__':
     predicted_timeseries = np.zeros_like(noisy_timeseries)
 
     # result amplitudes ground truth
-    print(np.array(list(trials.values()))[:-1])
+    # print(np.array(list(trials.values()))[:-1])
 
     amp_gt = np.array(list(trials.values()))[:-1] if design_type== 'const' else np.array(list(trials.values()))
+    
 
-    for i in range(len(rand_seqs)):
 
-        ## GLM
-        glm = sm.GLM(noisy_timeseries[i], design_matrices[i], family=sm.families.Gaussian())
-        stats_results[i] = glm.fit()
-        predicted_timeseries[i] = glm.predict(stats_results[i].params)
+    ## setup score array with shape (n_seqs, n_noise_reps)
+    r2_reps = np.zeros((n_seqs, n_noise_reps))
+    dist_amp_reps = np.zeros((n_seqs, n_noise_reps))
 
-        ## ridge
-        # ols = sm.OLS(noisy_timeseries[i], design_matrices[i])
-        # stats_results[i] = ols.fit_regularized(alpha = .5, L1_wt = 0)
-        # predicted_timeseries[i] = ols.predict(stats_results[i].params)
+    
+    # add outer loop over j
+    for j in range(n_noise_reps):
+        # make time series noisy here
+        noisy_timeseries = add_noise(conv_full, SNR = SNR)[:, ::upsample_factor]
+        # print(noisy_timeseries.shape)
 
-        amp_pred = stats_results[i].params[:-1]
-        distance = np.linalg.norm(amp_gt - amp_pred)
+        for i in range(len(rand_seqs)):
+
+            ## GLM
+            glm = sm.GLM(noisy_timeseries[i], design_matrices[i], family=sm.families.Gaussian())
+            stats_results[i] = glm.fit()
+            predicted_timeseries[i] = glm.predict(stats_results[i].params)
+
+            ## ridge
+            # ols = sm.OLS(noisy_timeseries[i], design_matrices[i])
+            # stats_results[i] = ols.fit_regularized(alpha = .5, L1_wt = 0)
+            # predicted_timeseries[i] = ols.predict(stats_results[i].params)
+
+            amp_pred = stats_results[i].params[:-1]
+            distance = np.linalg.norm(amp_gt - amp_pred)
+
+            r2_reps[i, j] = stats_results[i].pseudo_rsquared()
+            dist_amp_reps[i, j] = -np.linalg.norm(amp_gt - stats_results[i].params[:-1])
+
+            
+    ## median-compress the scores to 1D
+    r2_reps_med = np.median(r2_reps, axis=1)
+    dist_amp_reps_med = np.median(dist_amp_reps, axis=1)
+    # print(r2_reps)
+
+    ## visualize
+    # plt.hist(r2_reps[0])
+    # plt.show()
+
+    # print(r2_reps_med.shape)
+    # print(dist_amp_reps_med.shape)
 
 
     sort = True
@@ -138,7 +167,7 @@ if __name__ == '__main__':
         all_r2 = [stats_results[i].pseudo_rsquared() for i in range(len(stats_results))]
         dist_amp = [-np.linalg.norm(amp_gt - stats_results[i].params[:-1]) for i in range(len(stats_results))]
 
-        idxs = n_largest_indices(dist_amp, n_best)
+        idxs = n_largest_indices(dist_amp_reps_med, n_best)
     else:
         idxs = range(n_plots)
 
@@ -202,9 +231,7 @@ if __name__ == '__main__':
 
 
     # Saving
-    # for trial_id, i in enumerate(idxs):
-    i = 0
-    trial_id = 0
-    trial_df_from_simulation(all_events_dict[i], rand_seqs[i], all_r2[i], dist_amp = dist_amp[i], design_type = design_type, trial_id = trial_id, TR=TR, n_conds = n_conds,
+    for trial_id, i in enumerate(idxs):
+        trial_df_from_simulation(all_events_dict[i], rand_seqs[i], all_r2[i], dist_amp = dist_amp[i], design_type = design_type, trial_id = trial_id, TR=TR, n_conds = n_conds,
                                  SNR=SNR, hist_p = hist_p, bins_start = bins_start, n_searched = n_seqs, n_blanks=n_blank_trials, blank_pre=blank_pre, blank_post=blank_post,
-                                 n_best = n_best, save = True, seed = seed, out_dir = 'CTS_task/trial_sequences')
+                                 n_best = n_best, save = False, seed = seed, out_dir = '/home/xavfunk/repos/delayed-normalization-psilo/CTS_task/trial_sequences')

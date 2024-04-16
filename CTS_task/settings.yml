@@ -77,9 +77,11 @@ mri:
 
 # times in frames based on 120 FPS screen
 stimuli:
-    trial_sequence: 'trial_sequences/d_const_b_14_s_107/trial_sequence_c000_con.csv'
-    # trial_sequence: 'trial_sequences/d_var_p_0.23_s_107/trial_sequence_c000_var.csv'
-    
+	# runs 1, 3, 5, 7, 9, ...
+    trial_sequence: 'trial_sequences/d_const_b_14_s_107/trial_sequence_c000.csv'
+    # runs 2, 4, 6, 8, 10, ...
+    # trial_sequence: 'trial_sequences/d_var_p_0.23_s_107/trial_sequence_c000.csv'
+    # test
     # trial_sequence: 'trial_sequences/test/trial_sequence_s000_short.csv'
 
     tex_type: 'minmax'                     # either of ['rms', 'minmax'], determines the rescaling used

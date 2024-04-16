@@ -284,12 +284,12 @@ def trial_df_from_simulation(events_dict, rand_seq, r2, dist_amp, design_type, t
     cond_frames = [ms_to_frame_120[int(ms)] for ms in cond_ms]
 
 
-    print(len(event_type))
-    print(len(iti_s))
-    print(len(iti_TR))
-    print(len(cond_frames))
-    print(len(cond_ms))
-    print(len(texture_id))
+    # print(len(event_type))
+    # print(len(iti_s))
+    # print(len(iti_TR))
+    # print(len(cond_frames))
+    # print(len(cond_ms))
+    # print(len(texture_id))
     
     df = pd.DataFrame({
         'type':event_type, 
