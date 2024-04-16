@@ -22,7 +22,7 @@ eyetracker:
         y_gaze_constraint: AUTO
 monitor:
     distance: 196
-    gamma: 1
+    gamma: 2.1
     name: default
     width: 69.8
 mouse:
@@ -34,7 +34,7 @@ mri:
     skip: 0
     sound: false
     sync: t
-    topup_duration: 5
+    topup_duration: 45
     topup_scan: true
     volumes: 100
 preferences:
@@ -42,9 +42,8 @@ preferences:
         audioLib: sounddevice
         units: deg
 stimuli:
-    blank_after_trs: 5
-    blank_before_trs: 5
-    dummy_trial_trs: 5
+    blank_after_trs: 18
+    blank_before_trs: 13
     fixed_duration: 16
     iti_const: 120
     iti_durations: 0
@@ -62,9 +61,12 @@ stimuli:
     - dur
     - isi
     tex_type: minmax
-    trial_sequence: trial_sequences/d_var_p_0.23_s_107/trial_sequence_c000_var.csv
+    trial_sequence: trial_sequences/d_const_b_14_s_107/trial_sequence_c000.csv
+    triggerless_trs: 5
+    x_offset: 0.0
+    y_offset: 1.0
 task:
-    color switch interval: 3.5
+    color switch interval: 5
     fix_dot_colors:
     - green
     - red
@@ -75,7 +77,7 @@ window:
     - 0
     - 0
     - 0
-    fullscr: false
+    fullscr: true
     pos:
     - 0
     - 0

@@ -73,17 +73,16 @@ mri:
   skip: 0  # how many frames to silently omit initially during T1 stabilization, no sync pulse.
   sound: False  # simulate scanner noise
   topup_scan: True
-  topup_duration: 45 #45 # topup scan duration in seconds (no 't's)
+  topup_duration: 30 #45 # topup scan duration in seconds (no 't's)
 
 # times in frames based on 120 FPS screen
 stimuli:
-	# runs 1, 3, 5, 7, 9, ...
-    trial_sequence: 'trial_sequences/d_const_b_14_s_107/trial_sequence_c000.csv'
+    # runs 1, 3, 5, 7, 9, ...
+    trial_sequence: 'trial_sequences/d_const_b_14_s_107/trial_sequence_c004.csv'
     # runs 2, 4, 6, 8, 10, ...
-    # trial_sequence: 'trial_sequences/d_var_p_0.23_s_107/trial_sequence_c000.csv'
+    # trial_sequence: 'trial_sequences/d_var_p_0.23_s_107/trial_sequence_c003.csv'
     # test
     # trial_sequence: 'trial_sequences/test/trial_sequence_s000_short.csv'
-
     tex_type: 'minmax'                     # either of ['rms', 'minmax'], determines the rescaling used
     scanner_sync: True                 # set this to true to make phase p0 (prep) end on input 't', overrides default TR/2
     #screenshot: True                   # TODO implement
@@ -98,7 +97,7 @@ stimuli:
     blank_after_trs: 18                 # how many TRs of blank after the task has finished; 18*TR = 23.76s
     # stimulus offsets to correct for bold screen
     x_offset: 0.0 # pos r, neg l
-    y_offset: 0.0 # pos up, neg down
+    y_offset: 1.0 # pos up, neg down
 
 # times in seconds
 task: 

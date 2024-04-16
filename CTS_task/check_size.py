@@ -8,16 +8,16 @@ class TestTrial(Trial):
     """ Simple trial with text (trial x) and fixation. """
     def __init__(self, session, trial_nr, phase_durations, txt=None, **kwargs):
         super().__init__(session, trial_nr, phase_durations, **kwargs)
-        self.txt = TextStim(self.session.win, txt) 
+        self.txt = TextStim(self.session.win, txt)
         x_offset = 0 # positive is right, negative is left
-        y_offset = 0 # positive is up, negative is down
-        
+        y_offset = 1 # positive is up, negative is down
+
         self.session.default_fix.setPos((0+x_offset, 0+y_offset))
 
         # get the 1/f texture
         self.img = ImageStim(self.session.win, "../textures/minmax/oneOverF_texture_1_1024_0.bmp", size = 10, pos = (0+x_offset,0+y_offset),
                              mask = 'raisedCos', maskParams = {'fringeWidth':0.2}) # proportion that will be blurred
-  
+
     def draw(self):
         """ Draws stimuli """
         self.img.draw()
@@ -50,7 +50,7 @@ class TestSession(Session):
         """ Runs experiment. """
         self.start_experiment()
         for trial in self.trials:
-            trial.run()            
+            trial.run()
 
         self.close()
 
