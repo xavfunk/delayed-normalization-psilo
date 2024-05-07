@@ -1,3 +1,8 @@
 audio_recordings/
 textures/pngs/
 textures/colored/
+textures/stimuli-dataset01.mat
+textures/stimuli-dataset01_orig.mat
+textures/stimuli-dataset02_orig.mat
+textures/stimuli-dataset03_orig.mat
+textures/CTStextures.mat
