@@ -139,12 +139,15 @@ def scale_amplitudes(seq_array, trials = trials, n_repeats = 3, n_blanks = None)
     returns appropriately scaled trials and dict specifying when each trial event happened
     """
     event_types = {}
-    
     if n_blanks is None:
         design = list(trials.keys()) * n_repeats 
+    
     else:
         # make design with blanks
-        design = list(trials.keys()) * n_repeats + ['blank_0'] * n_blanks
+        design = list(trials.keys()) * n_repeats# + ['blank_0'] * n_blanks
+        design = design + ['blank_0'] * (n_blanks)
+        # design = list(trials.keys()) * n_repeats + ['blank_0'] * n_blanks
+        
         # add blank condition to trials dict
         trials['blank_0'] = 0
 
@@ -163,6 +166,11 @@ def scale_amplitudes(seq_array, trials = trials, n_repeats = 3, n_blanks = None)
             event_types[i] = design[j]
             # increase counter
             j += 1
+    try:
+        # del blank condition from trials dict again, to not mess with upcoming designs
+        del trials['blank_0']
+    except KeyError:
+        pass
 
     # print("scale_ampl_out: ", out_array.shape)
     return out_array, event_types

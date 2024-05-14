@@ -17,14 +17,14 @@ if __name__ == '__main__':
     design_type= 'const' # 'var'
 
     # simulation variables
-    TR = 1.32
-    hist_p = .23 if design_type== 'var' else None # geometric rate of ITI histogram
+    TR = 1.5
+    hist_p = .27 if design_type== 'var' else None # geometric rate of ITI histogram # .23
     bins_start = 3 # shortest n_TR per trial
     upsample_factor = int(TR * 100)
 
-    n_seqs = 100 # how many seqences to simulate (searchspace is 13! = 6227020800)
+    n_seqs = 1000 # how many seqences to simulate (searchspace is 13! = 6227020800)
     n_conds = 13 # number of conditions
-    n_noise_reps = 10
+    n_noise_reps = 100
 
     convolution_length = 30
     n_plots = 5 # number of plots ot create
@@ -76,7 +76,7 @@ if __name__ == '__main__':
                 rand_seqs,
                 np.array([18]*rand_seqs.shape[0]).reshape(-1, 1)))
 
-    # print(rand_seqs)
+    # print(rand_seqcs)
 
     for i in range(len(rand_seqs)):
 
@@ -142,11 +142,12 @@ if __name__ == '__main__':
             # stats_results[i] = ols.fit_regularized(alpha = .5, L1_wt = 0)
             # predicted_timeseries[i] = ols.predict(stats_results[i].params)
 
-            amp_pred = stats_results[i].params[:-1]
+            amp_pred = stats_results[i].params[:-1] if design_type == 'var' else stats_results[i].params[:-2]
+            
             distance = np.linalg.norm(amp_gt - amp_pred)
 
             r2_reps[i, j] = stats_results[i].pseudo_rsquared()
-            dist_amp_reps[i, j] = -np.linalg.norm(amp_gt - stats_results[i].params[:-1])
+            dist_amp_reps[i, j] = -np.linalg.norm(amp_gt - amp_pred)
 
             
     ## median-compress the scores to 1D
@@ -165,7 +166,9 @@ if __name__ == '__main__':
     sort = True
     if sort is True:
         all_r2 = [stats_results[i].pseudo_rsquared() for i in range(len(stats_results))]
-        dist_amp = [-np.linalg.norm(amp_gt - stats_results[i].params[:-1]) for i in range(len(stats_results))]
+        amp_pred = stats_results[i].params[:-1] if design_type == 'var' else stats_results[i].params[:-2]
+
+        dist_amp = [-np.linalg.norm(amp_gt - amp_pred) for i in range(len(stats_results))]
 
         idxs = n_largest_indices(dist_amp_reps_med, n_best)
     else:
@@ -195,12 +198,13 @@ if __name__ == '__main__':
 
         # pseudo rsquared
         axs[j, 3].text(len(predicted_timeseries[1])*.8,1.2, f'$R^2$ : {stats_results[i].pseudo_rsquared():.2f}', bbox=dict(facecolor='white', alpha=0.5))
-        axs[j, 3].text(len(predicted_timeseries[1])*.8,1.0, f'$-||amp_g-amp_p||$ : {dist_amp[i]:.2f}', bbox=dict(facecolor='white', alpha=0.5))
+        axs[j, 3].text(len(predicted_timeseries[1])*.8,1.0, f'$-||amp_g-amp_p||$ : {dist_amp_reps_med[i]:.2f}', bbox=dict(facecolor='white', alpha=0.5))
 
         axs[j, 3].set_xlim(0, n_TRs)
+        amp_pred = stats_results[i].params[:-1] if design_type == 'var' else stats_results[i].params[:-2]
 
         # betas
-        axs[j, 2].scatter(amp_gt, stats_results[i].params[:-1])
+        axs[j, 2].scatter(amp_gt, amp_pred)
         axs[j, 2].set_xlabel('amp_gt')
         axs[j, 2].set_ylabel('amp_pred')
 
@@ -232,6 +236,8 @@ if __name__ == '__main__':
 
     # Saving
     for trial_id, i in enumerate(idxs):
-        trial_df_from_simulation(all_events_dict[i], rand_seqs[i], all_r2[i], dist_amp = dist_amp[i], design_type = design_type, trial_id = trial_id, TR=TR, n_conds = n_conds,
+        # only saving one
+        if trial_id ==0:
+            trial_df_from_simulation(all_events_dict[i], rand_seqs[i], all_r2[i], dist_amp = dist_amp[i], design_type = design_type, trial_id = trial_id, TR=TR, n_conds = n_conds,
                                  SNR=SNR, hist_p = hist_p, bins_start = bins_start, n_searched = n_seqs, n_blanks=n_blank_trials, blank_pre=blank_pre, blank_post=blank_post,
-                                 n_best = n_best, save = False, seed = seed, out_dir = '/home/xavfunk/repos/delayed-normalization-psilo/CTS_task/trial_sequences')
+                                 n_best = n_best, save = True, seed = seed, out_dir = '/home/xavfunk/repos/delayed-normalization-psilo/CTS_task/trial_sequences/const_fix')
