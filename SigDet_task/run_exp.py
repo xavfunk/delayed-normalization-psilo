@@ -44,6 +44,8 @@ settings_file = glob.glob('settings.yml')[0]
 np.random.seed(1)   # NOTE: because of this line all experiments will always be idential in the order of stimuli. Feel free to remove if unwanted.
 max_trials = 400    # Total number of trials in experiment
 block_len = 100     # Number of trials per block
+# max_trials = 10    # Total number of trials in experiment
+# block_len = 10     # Number of trials per block
 
 tracker_on = False
 signal_parameters = {'contrast': 0.8, 'spatial_freq': 0.035, 'size': 17} # Note: size in degrees
@@ -178,8 +180,9 @@ class DetectTrial(Trial):
             # draw:
             self.noise.draw()
             self.fixation.draw() 
-
+    
     def event(self):
+        # a-1 s-3 k-4 l-2 keyboard-button box
         # trigger = None
         for ev, t in event.getKeys(timeStamped=self.session.clock):
            
@@ -195,12 +198,13 @@ class DetectTrial(Trial):
                         self.first_trial_hold = False
                         self.stop_phase()
 
-                elif ev == 'space':
+                elif (ev == 'space') or (ev == 'enter'):
                     if self.phase == 0:
                         self.first_trial_hold = False
                         self.stop_phase()
 
-                elif ev == 'a':
+                # elif ev == 'a':
+                elif ev == '1':
 
                     if self.phase == 3:
                         idx = self.session.global_log.shape[0]
@@ -235,7 +239,8 @@ class DetectTrial(Trial):
 
                                             
 
-                elif ev == 's':
+                # elif ev == 's':
+                elif ev == '3':
 
                     if self.phase == 3:
                         idx = self.session.global_log.shape[0]
@@ -268,7 +273,8 @@ class DetectTrial(Trial):
 
                         self.stop_phase()
 
-                elif ev == 'k':
+                # elif ev == 'k':
+                elif ev == '4':
 
                     if self.phase == 3:
                         idx = self.session.global_log.shape[0]
@@ -301,7 +307,8 @@ class DetectTrial(Trial):
 
                         self.stop_phase()
 
-                elif ev == 'l':
+                # elif ev == 'l':
+                elif ev == '2':
 
                     if self.phase == 3:
                         idx = self.session.global_log.shape[0]
@@ -436,6 +443,11 @@ class DetectSession(PylinkEyetrackerSession):
         self.block_len = block_len
         self.index = index
         self.block=block
+        # from future exptools2 version, Session init
+        self.width_deg = 2 * np.degrees(
+            np.arctan(self.monitor.getWidth() / self.monitor.getDistance())
+        )
+        self.pix_per_deg = self.win.size[0] / self.width_deg
         self.create_yes_no_trials()
         self.settings_file = 'settings.yml'
 
@@ -577,4 +589,3 @@ if __name__ == '__main__':
     index = 0
 
     main(initials=initials, index=index, block = 0)
-

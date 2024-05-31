@@ -1,25 +1,31 @@
 preferences:
   general:
-    audioLib: PTB
+    audioLib: sounddevice
     units: deg
 
 window:
   screen: 1
-  size:  [1920, 1080] #[1280, 720]
+  size: [1920, 1080] #[1280, 720]
   pos: [0, 0]
   color: [0, 0, 0]
-  fullscr: False
-  # winType: pyglet
+  fullscr: True
+  winType: pyglet
   waitBlanking: True
 
 monitor:
   name: default
-  width: 53  # in cm
-  distance: 65  # in cm
+  # width: 53  # in cm
+  # distance: 65  # in cm
+  width: 69.8  # in cm
+  distance: 196  # in cm
+  gamma: 2.1 
   gamma: 1
 
 mouse:
   visible: False
+
+response:
+  device: 'button_box' # 'keyboard' or 'button_box'
 
 eyetracker:
   address: '100.1.1.1'
