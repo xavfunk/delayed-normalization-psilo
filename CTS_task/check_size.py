@@ -9,13 +9,24 @@ class TestTrial(Trial):
     def __init__(self, session, trial_nr, phase_durations, txt=None, **kwargs):
         super().__init__(session, trial_nr, phase_durations, **kwargs)
         self.txt = TextStim(self.session.win, txt)
-        x_offset = 0 # positive is right, negative is left
-        y_offset = 1 # positive is up, negative is down
+        
+        ## manually
+        # x_offset = 0 # positive is right, negative is left
+        # y_offset = 1 # positive is up, negative is down
+        
+        ## directly from settings
+        x_offset = self.session.settings['stimuli']['x_offset'] # positive is right, negative is left
+        y_offset = self.session.settings['stimuli']['y_offset'] # positive is up, negative is down
+
 
         self.session.default_fix.setPos((0+x_offset, 0+y_offset))
 
         # get the 1/f texture
-        self.img = ImageStim(self.session.win, "../textures/minmax/oneOverF_texture_1_1024_0.bmp", size = 10, pos = (0+x_offset,0+y_offset),
+        #self.img = ImageStim(self.session.win, "../textures/minmax/oneOverF_texture_1_1024_0.bmp", size = 10, pos = (0+x_offset,0+y_offset),
+        #                     mask = 'raisedCos', maskParams = {'fringeWidth':0.2}) # proportion that will be blurred
+	
+# snakes
+        self.img = ImageStim(self.session.win, "../textures/examples_knk/snakey_full/img85.bmp", size = 10, pos = (0+x_offset,0+y_offset),
                              mask = 'raisedCos', maskParams = {'fringeWidth':0.2}) # proportion that will be blurred
 
     def draw(self):

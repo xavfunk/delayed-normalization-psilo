@@ -1,0 +1,107 @@
+{
+    "preferences": {
+        "general": {
+            "audioLib": "sounddevice",
+            "units": "deg"
+        }
+    },
+    "window": {
+        "size": [
+            1920,
+            1080
+        ],
+        "pos": [
+            0,
+            0
+        ],
+        "color": [
+            0,
+            0,
+            0
+        ],
+        "fullscr": true,
+        "waitBlanking": true,
+        "winType": "pyglet",
+        "screen": 1
+    },
+    "monitor": {
+        "name": "default",
+        "width": 69.8,
+        "distance": 196,
+        "gamma": 2.1
+    },
+    "mouse": {
+        "visible": false
+    },
+    "eyetracker": {
+        "address": "100.1.1.1",
+        "dot_size": 0.1,
+        "options": {
+            "binocular_enabled": false,
+            "heuristic_filter": 2,
+            "pupil_size_diameter": true,
+            "file_event_filter": "LEFT,RIGHT,FIXATION,SACCADE,BLINK,MESSAGE,BUTTON,INPUT",
+            "link_event_filter": "LEFT,RIGHT,FIXATION,SACCADE,BLINK,BUTTON",
+            "link_sample_data": "LEFT,RIGHT,GAZE,GAZERES,AREA,STATUS,HTARGET",
+            "calibration_type": "HV9",
+            "x_gaze_constraint": "AUTO",
+            "y_gaze_constraint": "AUTO",
+            "enable_automatic_calibration": true,
+            "automatic_calibration_pacing": 1000,
+            "enable_search_limits": true,
+            "track_search_limits": true,
+            "autothreshold_click": true,
+            "autothreshold_repeat": true,
+            "enable_camera_position_detect": true,
+            "sample_rate": 1000,
+            "active_eye": "left"
+        }
+    },
+    "mri": {
+        "simulate": false,
+        "TR": 1.5,
+        "TA": 1.5,
+        "volumes": 100,
+        "sync": "t",
+        "skip": 0,
+        "sound": false,
+        "topup_scan": true,
+        "topup_duration": 30
+    },
+    "stimuli": {
+        "trial_sequence": "trial_sequences/d_var_p_0.23_s_107/trial_sequence_c001.csv",
+        "tex_type": "snakes-new/density-4",
+        "scanner_sync": true,
+        "stim_types": [
+            "dur",
+            "isi"
+        ],
+        "stim_conds": [
+            0,
+            2,
+            4,
+            8,
+            16,
+            32,
+            64
+        ],
+        "fixed_duration": 16,
+        "stim_duration": 96,
+        "iti_durations": 0,
+        "iti_const": 120,
+        "triggerless_trs": 5,
+        "blank_before_trs": 13,
+        "blank_after_trs": 18,
+        "x_offset": 0.0,
+        "y_offset": 0.8
+    },
+    "task": {
+        "response interval": 0.8,
+        "color switch interval": 5,
+        "fix_dot_size": 0.5,
+        "fix_dot_colors": [
+            "green",
+            "red"
+        ]
+    }
+}

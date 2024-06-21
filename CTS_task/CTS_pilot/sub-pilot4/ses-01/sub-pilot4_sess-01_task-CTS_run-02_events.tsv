@@ -1,0 +1,352 @@
+trial_nr	onset	event_type	phase	response	nr_frames	trial_type	stim_dur	oneOverF_texture_path	onset_abs	duration
+dummy	0.008298873901367188	stim	0		0	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	49.870497703552246	0.0026640892028808594
+dummy	0.010962963104248047	stim	1		0	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	49.87316179275513	0.0011348724365234375
+dummy	0.012097835540771484	stim	2		2016	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	49.87429666519165	16.796184062957764
+dummy	1.591722011566162	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	51.45392084121704	
+dummy	2.766680955886841	response	2	b		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	52.62887978553772	
+dummy	3.1917450428009033	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	53.05394387245178	
+dummy	4.791723966598511	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	54.65392279624939	
+dummy	6.391700983047485	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	56.253899812698364	
+dummy	7.991742849349976	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	57.853941679000854	
+dummy	9.591689825057983	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	59.45388865470886	
+dummy	11.191761016845703	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	61.05395984649658	
+dummy	12.791671991348267	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	62.653870820999146	
+dummy	14.241703987121582	response	2	b		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	64.10390281677246	
+dummy	14.391656875610352	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	64.25385570526123	
+dummy	15.991649866104126	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp	65.853848695755	
+0	16.808281898498535	stim	0		95	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-9_new-transposed-rot90.bmp	66.67048072814941	0.791558027267456
+0	17.591655015945435	pulse	0	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-9_new-transposed-rot90.bmp	67.45385384559631	
+0	17.59983992576599	stim	1		96	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-9_new-transposed-rot90.bmp	67.46203875541687	0.800055980682373
+0	18.399895906448364	stim	2		192	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-9_new-transposed-rot90.bmp	68.26209473609924	1.5999670028686523
+0	19.191757917404175	pulse	2	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-9_new-transposed-rot90.bmp	69.05395674705505	
+1	19.999862909317017	stim	0		96	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	69.8620617389679	0.800044059753418
+1	20.79162287712097	pulse	0	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	70.65382170677185	
+1	20.799906969070435	stim	1		96	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	70.66210579872131	0.7999579906463623
+1	21.599864959716797	stim	2		768	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	71.46206378936768	6.3999738693237305
+1	22.3917338848114	pulse	2	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	72.25393271446228	
+1	23.299957990646362	response	2	b		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	73.16215682029724	
+1	23.991623878479004	pulse	2	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	73.85382270812988	
+1	25.591670989990234	pulse	2	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	75.45386981964111	
+1	27.191577911376953	pulse	2	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp	77.05377674102783	
+2	27.999838829040527	stim	0		96	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot270.bmp	77.8620376586914	0.8000261783599854
+2	28.791581869125366	pulse	0	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot270.bmp	78.65378069877625	
+2	28.799865007400513	stim	1		96	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot270.bmp	78.66206383705139	0.7999708652496338
+2	29.599835872650146	stim	2		576	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot270.bmp	79.46203470230103	4.800018072128296
+2	30.39167094230652	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot270.bmp	80.2538697719574	
+2	31.991590976715088	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot270.bmp	81.85378980636597	
+2	33.59170603752136	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot270.bmp	83.45390486717224	
+2	34.09997487068176	response	2	b		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot270.bmp	83.96217370033264	
+3	34.39985394477844	stim	0		96	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot270.bmp	84.26205277442932	0.7999858856201172
+3	35.19151592254639	pulse	0	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot270.bmp	85.05371475219727	
+3	35.19983983039856	stim	1		96	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot270.bmp	85.06203866004944	0.7999470233917236
+3	35.99978685379028	stim	2		192	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot270.bmp	85.86198568344116	1.6000001430511475
+3	36.79159092903137	pulse	2	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot270.bmp	86.65378975868225	
+4	37.59978699684143	stim	0		96	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot180.bmp	87.46198582649231	0.7999539375305176
+4	38.39158797264099	pulse	0	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot180.bmp	88.25378680229187	
+4	38.39974093437195	stim	1		96	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot180.bmp	88.26193976402283	0.8000929355621338
+4	39.19983386993408	stim	2		576	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot180.bmp	89.06203269958496	4.799919128417969
+4	39.991507053375244	pulse	2	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot180.bmp	89.85370588302612	
+4	41.591557025909424	pulse	2	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot180.bmp	91.4537558555603	
+4	43.19157385826111	pulse	2	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot180.bmp	93.05377268791199	
+5	43.99975299835205	stim	0		96	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	93.86195182800293	0.8000600337982178
+5	44.791571855545044	pulse	0	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	94.65377068519592	
+5	44.79981303215027	stim	1		96	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	94.66201186180115	0.7999579906463623
+5	45.59977102279663	stim	2		768	dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	95.46196985244751	6.399982929229736
+5	46.391610860824585	pulse	2	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	96.25380969047546	
+5	47.99156999588013	pulse	2	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	97.853768825531	
+5	49.39149498939514	response	2	b		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	99.25369381904602	
+5	49.59149694442749	pulse	2	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	99.45369577407837	
+5	51.191468954086304	pulse	2	t		dur	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed.bmp	101.05366778373718	
+6	51.99975395202637	stim	0		96	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	101.86195278167725	0.8001000881195068
+6	52.79154586791992	pulse	0	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	102.6537446975708	
+6	52.799854040145874	stim	1		96	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	102.66205286979675	0.79988694190979
+6	53.599740982055664	stim	2		960	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	103.46193981170654	7.999956846237183
+6	54.391520977020264	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	104.25371980667114	
+6	55.99146389961243	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	105.8536627292633	
+6	57.591596841812134	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	107.45379567146301	
+6	58.308167934417725	response	2	b		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	108.1703667640686	
+6	59.191412925720215	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	109.0536117553711	
+6	60.79150891304016	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-rot90.bmp	110.65370774269104	
+7	61.59969782829285	stim	0		96	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-transposed.bmp	111.46189665794373	0.7999842166900635
+7	62.39147186279297	pulse	0	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-transposed.bmp	112.25367069244385	
+7	62.39968204498291	stim	1		96	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-transposed.bmp	112.26188087463379	0.7999649047851562
+7	63.199646949768066	stim	2		192	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-transposed.bmp	113.06184577941895	1.600045919418335
+7	63.99145197868347	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-transposed.bmp	113.85365080833435	
+7	64.2330150604248	response	2	b		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-transposed.bmp	114.09521389007568	
+8	64.7996928691864	stim	0		96	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	114.66189169883728	0.7999370098114014
+8	65.59144496917725	pulse	0	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	115.45364379882812	
+8	65.5996298789978	stim	1		96	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	115.46182870864868	0.800044059753418
+8	66.39967393875122	stim	2		960	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	116.2618727684021	7.999952077865601
+8	67.19143390655518	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	117.05363273620605	
+8	68.4663770198822	response	2	b		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	118.32857584953308	
+8	68.79142999649048	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	118.65362882614136	
+8	70.39143586158752	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	120.2536346912384	
+8	71.99140787124634	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	121.85360670089722	
+8	73.05814790725708	response	2	b		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	122.92034673690796	
+8	73.59140396118164	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot180.bmp	123.45360279083252	
+9	74.39962601661682	stim	0		96	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-4_new-transposed-rot270.bmp	124.2618248462677	0.8000798225402832
+9	75.19142603874207	pulse	0	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-4_new-transposed-rot270.bmp	125.05362486839294	
+9	75.1997058391571	stim	1		96	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-4_new-transposed-rot270.bmp	125.06190466880798	0.7999241352081299
+9	75.99962997436523	stim	2		192	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-4_new-transposed-rot270.bmp	125.86182880401611	1.5999979972839355
+9	76.79149293899536	pulse	2	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-4_new-transposed-rot270.bmp	126.65369176864624	
+10	77.59962797164917	stim	0		96	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	127.46182680130005	0.7999880313873291
+10	78.34968400001526	response	0	b		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	128.21188282966614	
+10	78.39136004447937	pulse	0	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	128.25355887413025	
+10	78.3996160030365	stim	1		96	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	128.26181483268738	0.8000049591064453
+10	79.19962096214294	stim	2		960	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	129.06181979179382	7.999976873397827
+10	79.99139595031738	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	129.85359477996826	
+10	81.5913598537445	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	131.45355868339539	
+10	83.19140791893005	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	133.05360674858093	
+10	83.84130692481995	response	2	b		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	133.70350575447083	
+10	84.79136490821838	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	134.65356373786926	
+10	86.39137196540833	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new.bmp	136.2535707950592	
+11	87.19959783554077	stim	0		96	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	137.06179666519165	0.8000051975250244
+11	87.99149894714355	pulse	0	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	137.85369777679443	
+11	87.9996030330658	stim	1		96	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	137.86180186271667	0.799983024597168
+11	88.79958605766296	stim	2		768	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	138.66178488731384	6.399949789047241
+11	89.54133486747742	response	2	b		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	139.4035336971283	
+11	89.5912868976593	pulse	2	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	139.45348572731018	
+11	91.19132494926453	pulse	2	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	141.0535237789154	
+11	92.7913830280304	pulse	2	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	142.65358185768127	
+11	92.86639189720154	response	2	b		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	142.72859072685242	
+11	94.39128184318542	pulse	2	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp	144.2534806728363	
+12	95.1995358467102	stim	0		96	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot270.bmp	145.06173467636108	0.7999570369720459
+12	95.99129796028137	pulse	0	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot270.bmp	145.85349678993225	
+12	95.99949288368225	stim	1		96	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot270.bmp	145.86169171333313	0.800076961517334
+12	96.79956984519958	stim	2		576	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot270.bmp	146.66176867485046	4.799938201904297
+12	97.5912458896637	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot270.bmp	147.45344471931458	
+12	98.54128885269165	response	2	b		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot270.bmp	148.40348768234253	
+12	99.19125890731812	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot270.bmp	149.053457736969	
+12	100.79121804237366	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot270.bmp	150.65341687202454	
+13	101.59950804710388	stim	0		96	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	151.46170687675476	0.7999899387359619
+13	102.39131689071655	pulse	0	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	152.25351572036743	
+13	102.39949798583984	stim	1		96	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	152.26169681549072	0.8000788688659668
+13	103.19957685470581	stim	2		768	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	153.0617756843567	6.399929046630859
+13	103.99125099182129	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	153.85344982147217	
+13	104.46621990203857	response	2	b		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	154.32841873168945	
+13	105.59125995635986	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	155.45345878601074	
+13	107.1913468837738	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	157.05354571342468	
+13	107.52454590797424	response	2	b		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	157.38674473762512	
+13	108.79119682312012	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-rot90.bmp	158.653395652771	
+14	109.59950590133667	stim	0		96	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new.bmp	159.46170473098755	0.7999410629272461
+14	110.39126586914062	pulse	0	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new.bmp	160.2534646987915	
+14	110.39944696426392	stim	1		96	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new.bmp	160.2616457939148	0.8000240325927734
+14	111.19947099685669	stim	2		192	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new.bmp	161.06166982650757	1.5999510288238525
+14	111.99124193191528	pulse	2	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new.bmp	161.85344076156616	
+15	112.79942202568054	stim	0		96	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot180.bmp	162.66162085533142	0.8000550270080566
+15	113.59123086929321	pulse	0	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot180.bmp	163.4534296989441	
+15	113.5994770526886	stim	1		96	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot180.bmp	163.46167588233948	0.7999699115753174
+15	114.39944696426392	stim	2		192	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot180.bmp	164.2616457939148	1.6000549793243408
+15	115.19127583503723	pulse	2	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot180.bmp	165.0534746646881	
+16	115.99950194358826	stim	0		96	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	165.86170077323914	0.7999410629272461
+16	116.79123997688293	pulse	0	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	166.6534388065338	
+16	116.7994430065155	stim	1		96	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	166.66164183616638	0.7999999523162842
+16	117.59944295883179	stim	2		768	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	167.46164178848267	6.399945974349976
+16	118.39118695259094	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	168.25338578224182	
+16	119.9911699295044	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	169.85336875915527	
+16	121.59115695953369	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	171.45335578918457	
+16	122.69113993644714	response	2	b		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	172.55333876609802	
+16	123.19124388694763	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new-rot180.bmp	173.0534427165985	
+17	123.99938893318176	stim	0		96	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-transposed-rot180.bmp	173.86158776283264	0.8001060485839844
+17	124.79117488861084	pulse	0	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-transposed-rot180.bmp	174.65337371826172	
+17	124.79949498176575	stim	1		96	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-transposed-rot180.bmp	174.66169381141663	0.7999129295349121
+17	125.59940791130066	stim	2		192	isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-transposed-rot180.bmp	175.46160674095154	1.6000490188598633
+17	126.39119386672974	pulse	2	t		isi	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-transposed-rot180.bmp	176.25339269638062	
+18	127.19945693016052	stim	0		96	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot270.bmp	177.0616557598114	0.7999470233917236
+18	127.99110388755798	pulse	0	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot270.bmp	177.85330271720886	
+18	127.99940395355225	stim	1		96	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot270.bmp	177.86160278320312	0.7999699115753174
+18	128.79937386512756	stim	2		192	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot270.bmp	178.66157269477844	1.6000280380249023
+18	129.39124488830566	response	2	b		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot270.bmp	179.25344371795654	
+18	129.59118390083313	pulse	2	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot270.bmp	179.453382730484	
+19	130.39940190315247	stim	0		96	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	180.26160073280334	0.8000280857086182
+19	131.19121599197388	pulse	0	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	181.05341482162476	
+19	131.19942998886108	stim	1		96	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	181.06162881851196	0.7999770641326904
+19	131.99940705299377	stim	2		1344	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	181.86160588264465	11.199899911880493
+19	132.79118704795837	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	182.65338587760925	
+19	134.24112582206726	response	2	b		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	184.10332465171814	
+19	134.39112496376038	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	184.25332379341125	
+19	135.9911699295044	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	185.85336875915527	
+19	137.59108686447144	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	187.45328569412231	
+19	139.14106702804565	response	2	b		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	189.00326585769653	
+19	139.19111490249634	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	189.05331373214722	
+19	140.79103589057922	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	190.6532347202301	
+19	142.3911108970642	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp	192.2533097267151	
+20	143.19930696487427	stim	0		96	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-rot90.bmp	193.06150579452515	0.8000290393829346
+20	143.37442302703857	response	0	b		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-rot90.bmp	193.23662185668945	
+20	143.9911069869995	pulse	0	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-rot90.bmp	193.8533058166504	
+20	143.9993360042572	stim	1		96	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-rot90.bmp	193.86153483390808	0.8000059127807617
+20	144.79934191703796	stim	2		192	isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-rot90.bmp	194.66154074668884	1.5999610424041748
+20	145.59109687805176	pulse	2	t		isi	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-rot90.bmp	195.45329570770264	
+21	146.39930295944214	stim	0		96	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	196.26150178909302	0.8000118732452393
+21	147.19117498397827	pulse	0	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	197.05337381362915	
+21	147.19931483268738	stim	1		96	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	197.06151366233826	0.7999730110168457
+21	147.99928784370422	stim	2		768	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	197.8614866733551	6.399990081787109
+21	148.79102087020874	pulse	2	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	198.65321969985962	
+21	150.39103484153748	pulse	2	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	200.25323367118835	
+21	151.99097990989685	pulse	2	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	201.85317873954773	
+21	153.14107990264893	response	2	b		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	203.0032787322998	
+21	153.59101700782776	pulse	2	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp	203.45321583747864	
+22	154.39927792549133	stim	0		96	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp	204.2614767551422	0.8000249862670898
+22	155.19112992286682	pulse	0	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp	205.0533287525177	
+22	155.19930291175842	stim	1		96	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp	205.0615017414093	0.7999060153961182
+22	155.99920892715454	stim	2		576	isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp	205.86140775680542	4.800018072128296
+22	156.79103302955627	pulse	2	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp	206.65323185920715	
+22	158.3911759853363	pulse	2	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp	208.25337481498718	
+22	158.58264088630676	response	2	b		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp	208.44483971595764	
+22	159.9909689426422	pulse	2	t		isi	64.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp	209.8531677722931	
+23	160.79922699928284	stim	0		96	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	210.66142582893372	0.8000550270080566
+23	161.59094500541687	pulse	0	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	211.45314383506775	
+23	161.5992820262909	stim	1		96	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	211.46148085594177	0.7999849319458008
+23	162.3992669582367	stim	2		768	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	212.26146578788757	6.399925947189331
+23	163.19112586975098	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	213.05332469940186	
+23	164.79107093811035	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	214.65326976776123	
+23	166.39101386070251	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	216.2532126903534	
+23	167.99099802970886	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	217.85319685935974	
+23	168.5826199054718	response	2	b		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp	218.44481873512268	
+24	168.79919290542603	stim	0		96	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	218.6613917350769	0.7999701499938965
+24	169.59098601341248	pulse	0	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	219.45318484306335	
+24	169.59916305541992	stim	1		96	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	219.4613618850708	0.8001558780670166
+24	170.39931893348694	stim	2		1344	dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	220.26151776313782	11.199810981750488
+24	171.19097590446472	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	221.0531747341156	
+24	172.79095697402954	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	222.65315580368042	
+24	173.29918098449707	response	2	b		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	223.16137981414795	
+24	174.39096403121948	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	224.25316286087036	
+24	175.99097299575806	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	225.85317182540894	
+24	177.59096598625183	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	227.4531648159027	
+24	177.99921488761902	response	2	b		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	227.8614137172699	
+24	179.19091701507568	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	229.05311584472656	
+24	180.79092001914978	pulse	2	t		dur	0.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed.bmp	230.65311884880066	
+25	181.59912991523743	stim	0		96	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	231.4613287448883	0.7999889850616455
+25	182.3910059928894	pulse	0	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	232.25320482254028	
+25	182.39911890029907	stim	1		96	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	232.26131772994995	0.8000030517578125
+25	183.19912195205688	stim	2		768	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	233.06132078170776	6.400017023086548
+25	183.9909210205078	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	233.8531198501587	
+25	185.5909309387207	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	235.45312976837158	
+25	187.19087100028992	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	237.0530698299408	
+25	188.15766787528992	response	2	b		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	238.0198667049408	
+25	188.79090094566345	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot180.bmp	238.65309977531433	
+26	189.59913897514343	stim	0		96	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	239.4613378047943	0.7999770641326904
+26	190.39095401763916	pulse	0	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	240.25315284729004	
+26	190.39911603927612	stim	1		96	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	240.261314868927	0.7999758720397949
+26	191.19909191131592	stim	2		960	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	241.0612907409668	7.999943971633911
+26	191.99090385437012	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	241.853102684021	
+26	193.59084796905518	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	243.45304679870605	
+26	194.20751285552979	response	2	b		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	244.06971168518066	
+26	195.19085097312927	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	245.05304980278015	
+26	196.79082489013672	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	246.6530237197876	
+26	198.39083790779114	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	248.25303673744202	
+26	198.85752487182617	response	2	b		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-15_new.bmp	248.71972370147705	
+27	199.19903588294983	stim	0		96	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	249.0612347126007	0.800105094909668
+27	199.9908149242401	pulse	0	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	249.853013753891	
+27	199.9991409778595	stim	1		96	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	249.86133980751038	0.7999370098114014
+27	200.7990779876709	stim	2		1344	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	250.66127681732178	11.199939012527466
+27	201.59096789360046	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	251.45316672325134	
+27	203.1908688545227	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	253.05306768417358	
+27	203.33243799209595	response	2	b		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	253.19463682174683	
+27	204.790874004364	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	254.6530728340149	
+27	206.3907790184021	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	256.252977848053	
+27	207.9908049106598	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	257.85300374031067	
+27	208.090744972229	response	2	b		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	257.9529438018799	
+27	209.59076499938965	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	259.4529638290405	
+27	211.19081282615662	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot90.bmp	261.0530116558075	
+28	211.99901700019836	stim	0		96	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	261.86121582984924	0.7999849319458008
+28	212.79082202911377	pulse	0	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	262.65302085876465	
+28	212.79900193214417	stim	1		96	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	262.66120076179504	0.799950122833252
+28	213.59895205497742	stim	2		768	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	263.4611508846283	6.4000959396362305
+28	214.3491518497467	response	2	b		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	264.2113506793976	
+28	214.39070796966553	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	264.2529067993164	
+28	215.99071288108826	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	265.85291171073914	
+28	217.59071493148804	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	267.4529137611389	
+28	217.88232588768005	response	2	b		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	267.74452471733093	
+28	219.19073700904846	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot90.bmp	269.05293583869934	
+29	219.99904799461365	stim	0		96	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new.bmp	269.8612468242645	0.7999248504638672
+29	220.79069089889526	pulse	0	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new.bmp	270.65288972854614	
+29	220.79897284507751	stim	1		96	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new.bmp	270.6611716747284	0.8000311851501465
+29	221.59900403022766	stim	2		576	dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new.bmp	271.46120285987854	4.799953937530518
+29	222.39076685905457	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new.bmp	272.25296568870544	
+29	223.88235998153687	response	2	b		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new.bmp	273.74455881118774	
+29	223.99074482917786	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new.bmp	273.85294365882874	
+29	225.59070301055908	pulse	2	t		dur	32.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new.bmp	275.45290184020996	
+30	226.39895796775818	stim	0		96	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	276.26115679740906	0.800044059753418
+30	227.190673828125	pulse	0	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	277.0528726577759	
+30	227.1990020275116	stim	1		96	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	277.0612008571625	0.7999398708343506
+30	227.99894189834595	stim	2		768	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	277.8611407279968	6.39997410774231
+30	228.79081892967224	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	278.6530177593231	
+30	229.40733885765076	response	2	b		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	279.26953768730164	
+30	230.39066886901855	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	280.25286769866943	
+30	231.99068093299866	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	281.85287976264954	
+30	233.19065403938293	response	2	b		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	283.0528528690338	
+30	233.59064483642578	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot270.bmp	283.45284366607666	
+31	234.39891600608826	stim	0		96	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	284.26111483573914	0.7999889850616455
+31	235.19078302383423	pulse	0	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	285.0529818534851	
+31	235.1989049911499	stim	1		96	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	285.0611038208008	0.7999520301818848
+31	235.9988570213318	stim	2		768	dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	285.86105585098267	6.400029897689819
+31	236.79069185256958	pulse	2	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	286.65289068222046	
+31	237.74911999702454	response	2	b		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	287.6113188266754	
+31	238.3906500339508	pulse	2	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	288.2528488636017	
+31	239.99060988426208	pulse	2	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	289.85280871391296	
+31	241.5906548500061	pulse	2	t		dur	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp	291.452853679657	
+32	242.3988869190216	stim	0		96	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new.bmp	292.2610857486725	0.7999551296234131
+32	242.7655839920044	response	0	b		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new.bmp	292.6277828216553	
+32	243.19066500663757	pulse	0	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new.bmp	293.05286383628845	
+32	243.19884204864502	stim	1		96	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new.bmp	293.0610408782959	0.800076961517334
+32	243.99891901016235	stim	2		192	isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new.bmp	293.86111783981323	1.5999410152435303
+32	244.79061794281006	pulse	2	t		isi	2.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new.bmp	294.65281677246094	
+33	245.59886002540588	stim	0		96	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-transposed-rot90.bmp	295.46105885505676	0.8000249862670898
+33	246.39064288139343	pulse	0	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-transposed-rot90.bmp	296.2528417110443	
+33	246.39888501167297	stim	1		96	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-transposed-rot90.bmp	296.26108384132385	0.7999818325042725
+33	247.19886684417725	stim	2		192	dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-transposed-rot90.bmp	297.0610656738281	1.5999720096588135
+33	247.9906849861145	pulse	2	t		dur	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-transposed-rot90.bmp	297.8528838157654	
+34	248.79883885383606	stim	0		96	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-transposed-rot270.bmp	298.66103768348694	0.8000102043151855
+34	249.59065794944763	pulse	0	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-transposed-rot270.bmp	299.4528567790985	
+34	249.59884905815125	stim	1		96	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-transposed-rot270.bmp	299.4610478878021	0.7999858856201172
+34	250.39883494377136	stim	2		576	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-transposed-rot270.bmp	300.26103377342224	4.799967050552368
+34	251.19059896469116	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-transposed-rot270.bmp	301.05279779434204	
+34	252.79051089286804	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-transposed-rot270.bmp	302.6527097225189	
+34	254.05727887153625	response	2	b		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-transposed-rot270.bmp	303.91947770118713	
+34	254.39064598083496	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-2_new-transposed-rot270.bmp	304.25284481048584	
+35	255.19880199432373	stim	0		96	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new-transposed.bmp	305.0610008239746	0.8000240325927734
+35	255.99066996574402	pulse	0	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new-transposed.bmp	305.8528687953949	
+35	255.9988260269165	stim	1		96	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new-transposed.bmp	305.8610248565674	0.79994797706604
+35	256.79877400398254	stim	2		192	isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new-transposed.bmp	306.6609728336334	1.6000330448150635
+35	257.5905718803406	pulse	2	t		isi	8.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new-transposed.bmp	307.45277070999146	
+36	258.3988070487976	stim	0		96	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	308.2610058784485	0.799968957901001
+36	258.4822599887848	response	0	b		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	308.34445881843567	
+36	259.19053292274475	pulse	0	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	309.05273175239563	
+36	259.1987760066986	stim	1		96	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	309.0609748363495	0.800062894821167
+36	259.9988389015198	stim	2		1344	isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	309.86103773117065	11.199949026107788
+36	260.7905240058899	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	310.65272283554077	
+36	262.3905508518219	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	312.2527496814728	
+36	262.7488100528717	response	2	b		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	312.6110088825226	
+36	263.99058389663696	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	313.85278272628784	
+36	265.59051489830017	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	315.45271372795105	
+36	267.1906728744507	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	317.05287170410156	
+36	268.7905259132385	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	318.6527247428894	
+36	269.3155348300934	response	2	b		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	319.17773365974426	
+36	270.39049005508423	pulse	2	t		isi	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp	320.2526888847351	
+37	271.19878792762756	stim	0		96	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	321.06098675727844	0.7999799251556396
+37	271.9904839992523	pulse	0	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	321.8526828289032	
+37	271.9987678527832	stim	1		96	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	321.8609666824341	0.8000071048736572
+37	272.79877495765686	stim	2		1344	dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	322.66097378730774	11.199917078018188
+37	273.590754032135	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	323.4529528617859	
+37	275.19046998023987	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	325.05266880989075	
+37	276.79051995277405	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	326.6527187824249	
+37	278.16549491882324	response	2	b		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	328.0276937484741	
+37	278.39049100875854	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	328.2526898384094	
+37	279.99050402641296	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	329.85270285606384	
+37	281.59052300453186	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	331.45272183418274	
+37	283.1904468536377	pulse	2	t		dur	4.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-rot90.bmp	333.0526456832886	
+38	283.99869203567505	stim	0		96	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	333.8608908653259	0.7999799251556396
+38	284.4071660041809	response	0	b		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	334.2693648338318	
+38	284.79050302505493	pulse	0	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	334.6527018547058	
+38	284.7986719608307	stim	1		96	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	334.66087079048157	0.8000400066375732
+38	285.59871196746826	stim	2		1344	dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	335.46091079711914	89.02460098266602
+38	286.390398979187	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	336.2525978088379	
+38	287.5904588699341	response	2	b		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	337.45265769958496	
+38	287.99043703079224	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	337.8526358604431	
+38	289.5904760360718	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	339.45267486572266	
+38	291.19050788879395	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	341.0527067184448	
+38	292.79044103622437	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	342.65263986587524	
+38	293.9987599849701	response	2	b		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	343.860958814621	
+38	294.39038705825806	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	344.25258588790894	
+38	295.9903919696808	pulse	2	t		dur	16.0	../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-rot90.bmp	345.85259079933167	

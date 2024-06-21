@@ -45,7 +45,7 @@ class DelayedNormSession(PylinkEyetrackerSession):
         self.fix_dot_color_idx = 0
         self.fix_dot_colors = ['green', 'red']
         self.default_fix.setSize(self.settings['task']['fix_dot_size'])
-        self.default_fix.setColor('red') # starting color
+        self.default_fix.setColor('green') # starting color
         self.default_fix.setPos((self.settings['stimuli']['x_offset'], self.settings['stimuli']['y_offset'])) # starting color        
         # self.default_fix.setPos(self.settings['stimuli']['x_offset'],self.settings['stimuli']['y_offset']) # starting color        
 
@@ -53,13 +53,15 @@ class DelayedNormSession(PylinkEyetrackerSession):
         self.total_TRs = self.settings['stimuli']['blank_before_trs'] + np.sum(self.trial_sequence_df.iti_TR) + self.settings['stimuli']['blank_after_trs']
         self.total_exp_duration_s = self.total_TRs * self.TR
         self.total_exp_duration_f = self.total_exp_duration_s * 120
-
+        print(f'total TRs: {self.total_TRs}')
         # adding the triggerless should not be necessary, as the clock gets reset with start_experiment
         self.total_fix_duration = self.total_exp_duration_s
         # self.total_fix_duration = self.total_exp_duration_s + self.settings['stimuli']['triggerless_trs'] * self.TR
 
         if self.settings['mri']['topup_scan']: 
             self.total_fix_duration += self.settings['mri']['topup_duration']
+        
+        print(f'total fix duration: {self.total_fix_duration}')
 
         if debug:
             print(f'total TRs: {self.total_TRs}')
@@ -335,8 +337,6 @@ class DelayedNormSession(PylinkEyetrackerSession):
         keys = []
         if self.debug:
             self.debug_message.setText("preparing to run, awaiting trigger")
-
-        # TODO test with eyetracker
 
         if self.eyetracker_on:
             self.calibrate_eyetracker()

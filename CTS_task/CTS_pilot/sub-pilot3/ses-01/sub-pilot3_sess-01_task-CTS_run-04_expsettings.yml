@@ -1,0 +1,89 @@
+eyetracker:
+    address: 100.1.1.1
+    dot_size: 0.1
+    options:
+        active_eye: left
+        automatic_calibration_pacing: 1000
+        autothreshold_click: true
+        autothreshold_repeat: true
+        binocular_enabled: false
+        calibration_type: HV9
+        enable_automatic_calibration: true
+        enable_camera_position_detect: true
+        enable_search_limits: true
+        file_event_filter: LEFT,RIGHT,FIXATION,SACCADE,BLINK,MESSAGE,BUTTON,INPUT
+        heuristic_filter: 2
+        link_event_filter: LEFT,RIGHT,FIXATION,SACCADE,BLINK,BUTTON
+        link_sample_data: LEFT,RIGHT,GAZE,GAZERES,AREA,STATUS,HTARGET
+        pupil_size_diameter: true
+        sample_rate: 1000
+        track_search_limits: true
+        x_gaze_constraint: AUTO
+        y_gaze_constraint: AUTO
+monitor:
+    distance: 196
+    gamma: 2.1
+    name: default
+    width: 69.8
+mouse:
+    visible: false
+mri:
+    TA: 1.5
+    TR: 1.5
+    simulate: false
+    skip: 0
+    sound: false
+    sync: t
+    topup_duration: 30
+    topup_scan: true
+    volumes: 100
+preferences:
+    general:
+        audioLib: sounddevice
+        units: deg
+stimuli:
+    blank_after_trs: 18
+    blank_before_trs: 13
+    fixed_duration: 16
+    iti_const: 120
+    iti_durations: 0
+    scanner_sync: true
+    stim_conds:
+    - 0
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    stim_duration: 96
+    stim_types:
+    - dur
+    - isi
+    tex_type: snakes-new/density-4
+    trial_sequence: trial_sequences/d_var_p_0.23_s_107/trial_sequence_c003.csv
+    triggerless_trs: 5
+    x_offset: 0.0
+    y_offset: 0.8
+task:
+    color switch interval: 5
+    fix_dot_colors:
+    - green
+    - red
+    fix_dot_size: 0.5
+    response interval: 0.8
+window:
+    color:
+    - 0
+    - 0
+    - 0
+    fullscr: true
+    pos:
+    - 0
+    - 0
+    screen: 1
+    size:
+    - 1920
+    - 1080
+    waitBlanking: true
+    winType: pyglet

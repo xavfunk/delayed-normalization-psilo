@@ -13,7 +13,8 @@ class DelayedNormTrial(Trial):
         super().__init__(session, trial_nr, phase_durations, **kwargs)
         
         # get the 1/f texture
-        self.img = ImageStim(self.session.win, self.parameters['oneOverF_texture_path'], size = 10, pos = (self.session.settings['stimuli']['x_offset'], self.session.settings['stimuli']['y_offset']),
+        self.img = ImageStim(self.session.win, self.parameters['oneOverF_texture_path'], name=self.parameters['oneOverF_texture_path'],#size = 10,
+         pos = (self.session.settings['stimuli']['x_offset'], self.session.settings['stimuli']['y_offset']),
                              mask = 'raisedCos', maskParams = {'fringeWidth':0.2}) # proportion that will be blurred
         self.check_frames = np.zeros((96, 3))
         

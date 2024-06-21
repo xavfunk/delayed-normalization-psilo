@@ -1,0 +1,743 @@
+7.0742 	WARNING 	We strongly recommend you activate the PTB sound engine in PsychoPy prefs as the preferred audio engine. Its timing is vastly superior. Your prefs are currently set to use ['sounddevice', 'PTB', 'pyo', 'pygame'] (in that order).
+12.5019 	WARNING 	Actual framerate: 120.02346 (1 frame = 0.00833)
+12.5248 	EXP 	Created unnamed Circle = Circle(__class__=<class 'psychopy.visual.circle.Circle'>, anchor=('center', 'center'), autoDraw=False, autoLog=True, closeShape=True, color=method-wrapper(...), colorSpace='rgb', contrast=None, depth=0, fillColor=array([1, 1, 1]), fillColorSpace='rgb', fillRGB=array([1, 1, 1]), interpolate=True, lineColor=array([0, 0, 0]), lineColorSpace='rgb', lineRGB=array([0, 0, 0]), lineWidth=1.5, name='unnamed Circle', opacity=0.5, ori=0.0, pos=array([0., 0.]), size=array([1., 1.]), units='deg', vertices=ndarray(...), win=Window(...))
+12.7578 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+12.8606 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-transposed-rot180.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+12.9621 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-transposed-rot180.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.0633 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-13_new-transposed-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.1641 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new-transposed-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.2664 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.3729 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-10_new.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.4735 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new-rot180.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.5750 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.6769 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.7777 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-19_new-transposed.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.8795 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new-transposed-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+13.9820 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-transposed-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.0828 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-3_new-transposed.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.1834 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new-rot180.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.2918 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-0_new.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.3940 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.4997 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-11_new-rot180.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.6016 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot180.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.7030 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.8039 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+14.9053 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.0066 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-4_new.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.1069 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-4_new-transposed.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.2178 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-16_new-transposed-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.3197 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-1_new-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.4204 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-transposed.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.5269 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.6289 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new-transposed-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.7312 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new-transposed.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.8328 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-18_new.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+15.9339 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-7_new-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.0352 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-8_new.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.1374 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-6_new-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.2414 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-6_new-transposed-rot180.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.3437 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-9_new-transposed-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.4450 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-5_new-transposed-rot180.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.5463 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-17_new-transposed-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.6491 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-12_new-rot90.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.7408 	EXP 	Created ../textures/snakes-new/density-4/snake_bp-3_density-4_id-14_new-transposed-rot270.bmp = ImageStim(__class__=<class 'psychopy.visual.image.ImageStim'>, anchor=('center', 'center'), autoLog=True, color=array([1., 1., 1.]), colorSpace='rgb', contrast=1.0, depth=0, flipHoriz=False, flipVert=False, image=str(...), interpolate=False, mask='raisedCos', maskParams={'fringeWidth': 0.2}, name=str(...), opacity=1.0, ori=0.0, pos=array([0., 1.]), size=array([9.97800832, 9.97800832]), texRes=128, units='deg', win=Window(...))
+16.7448 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+16.7448 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+16.7448 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+19.8435 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+19.8435 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+19.8435 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+25.4018 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+25.4018 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+25.4018 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+26.2330 	DATA 	Keypress: b
+29.4851 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+29.4851 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+29.4851 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+30.1519 	DATA 	Keypress: b
+35.1434 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+35.1434 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+35.1434 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+35.6099 	DATA 	Keypress: b
+39.5934 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+39.5934 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+39.5934 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+39.9768 	DATA 	Keypress: b
+44.5183 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+44.5183 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+44.5183 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+44.8685 	DATA 	Keypress: b
+49.5183 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+49.5183 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+49.5183 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+49.8518 	DATA 	Keypress: b
+55.4933 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+55.4933 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+55.4933 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+55.8767 	DATA 	Keypress: b
+59.5349 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+59.5349 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+59.5349 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+59.9601 	DATA 	Keypress: b
+63.9433 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+63.9433 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+63.9433 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+64.3768 	DATA 	Keypress: b
+70.3682 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+70.3682 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+70.3682 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+70.7268 	DATA 	Keypress: b
+74.9182 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+74.9182 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+74.9182 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+75.2766 	DATA 	Keypress: b
+80.1766 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+80.1766 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+80.1766 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+80.5016 	DATA 	Keypress: b
+84.4765 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+84.4765 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+84.4765 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+84.8682 	DATA 	Keypress: b
+89.6348 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+89.6348 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+89.6348 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+89.9682 	DATA 	Keypress: b
+94.6848 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+94.6848 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+94.6848 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+95.0516 	DATA 	Keypress: b
+98.8597 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+98.8597 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+98.8597 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+99.2431 	DATA 	Keypress: b
+105.2014 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+105.2014 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+105.2014 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+105.5515 	DATA 	Keypress: b
+109.2347 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+109.2347 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+109.2347 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+109.6515 	DATA 	Keypress: b
+113.7680 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+113.7680 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+113.7680 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+114.1102 	DATA 	Keypress: b
+119.8346 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+119.8346 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+119.8346 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+120.1430 	DATA 	Keypress: b
+125.2930 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+125.2930 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+125.2930 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+125.6932 	DATA 	Keypress: b
+129.5596 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+129.5596 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+129.5596 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+130.0014 	DATA 	Keypress: b
+134.3680 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+134.3680 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+134.3680 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+134.7347 	DATA 	Keypress: b
+140.3679 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+140.3679 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+140.3679 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+140.7514 	DATA 	Keypress: b
+145.0678 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+145.0678 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+145.0678 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+145.4098 	DATA 	Keypress: b
+149.5678 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+149.5678 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+149.5678 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+149.9513 	DATA 	Keypress: b
+155.4678 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+155.4678 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+155.4678 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+155.7596 	DATA 	Keypress: b
+159.0678 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+159.0678 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+159.0678 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+159.5762 	DATA 	Keypress: b
+165.2594 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+165.2594 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+165.2594 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+165.6846 	DATA 	Keypress: b
+169.8678 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+169.8678 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+169.8678 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+170.3429 	DATA 	Keypress: b
+175.2094 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+175.2094 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+175.2094 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+175.5596 	DATA 	Keypress: b
+188.2845 	DATA 	Keypress: t
+188.2927 	EXP 	window1: recordFrameIntervals = True
+188.3177 	WARNING 	t of last frame was 16.70ms (=1/59)
+189.7844 	DATA 	Keypress: t
+191.2844 	DATA 	Keypress: t
+192.7844 	DATA 	Keypress: t
+194.2845 	DATA 	Keypress: t
+195.7844 	DATA 	Keypress: t
+196.5426 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+196.5426 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+196.5426 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+196.5510 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+196.5510 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+196.5510 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+197.2844 	DATA 	Keypress: t
+198.7845 	DATA 	Keypress: t
+200.2844 	DATA 	Keypress: t
+201.7844 	DATA 	Keypress: t
+202.1010 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+202.1010 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+202.1010 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+202.5506 	DATA 	Keypress: b
+203.2840 	DATA 	Keypress: t
+204.7846 	DATA 	Keypress: t
+206.2844 	DATA 	Keypress: t
+207.7843 	DATA 	Keypress: t
+209.2843 	DATA 	Keypress: t
+210.7844 	DATA 	Keypress: t
+211.8508 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+211.8508 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+211.8508 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+212.2843 	DATA 	Keypress: t
+212.2844 	DATA 	Keypress: b
+213.7843 	DATA 	Keypress: t
+215.2843 	DATA 	Keypress: t
+216.3009 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+216.3009 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+216.3009 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+216.7843 	DATA 	Keypress: t
+216.8010 	DATA 	Keypress: b
+218.2843 	DATA 	Keypress: t
+219.7843 	DATA 	Keypress: t
+221.2258 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+221.2258 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+221.2258 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+221.2843 	DATA 	Keypress: t
+221.6260 	DATA 	Keypress: b
+222.7842 	DATA 	Keypress: t
+224.2844 	DATA 	Keypress: t
+225.7843 	DATA 	Keypress: t
+226.2259 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+226.2259 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+226.2259 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+226.6759 	DATA 	Keypress: b
+227.2844 	DATA 	Keypress: t
+228.7842 	DATA 	Keypress: t
+230.2843 	DATA 	Keypress: t
+231.7842 	DATA 	Keypress: t
+232.2008 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+232.2008 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+232.2008 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+232.6259 	DATA 	Keypress: b
+233.2842 	DATA 	Keypress: t
+234.7842 	DATA 	Keypress: t
+236.2425 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+236.2425 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+236.2425 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+236.2842 	DATA 	Keypress: t
+236.7009 	DATA 	Keypress: b
+237.7842 	DATA 	Keypress: t
+239.2842 	DATA 	Keypress: t
+240.6508 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+240.6508 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+240.6508 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+240.7842 	DATA 	Keypress: t
+241.0175 	DATA 	Keypress: b
+242.2841 	DATA 	Keypress: t
+243.7843 	DATA 	Keypress: t
+245.2842 	DATA 	Keypress: t
+246.7842 	DATA 	Keypress: t
+247.1178 	DATA 	Keypress: b
+248.2841 	DATA 	Keypress: t
+249.7842 	DATA 	Keypress: t
+251.2841 	DATA 	Keypress: t
+251.6257 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+251.6257 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+251.6257 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+252.1258 	DATA 	Keypress: b
+252.7841 	DATA 	Keypress: t
+254.2841 	DATA 	Keypress: t
+255.7842 	DATA 	Keypress: t
+256.8841 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+256.8841 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+256.8841 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+257.2841 	DATA 	Keypress: t
+257.4342 	DATA 	Keypress: b
+258.7837 	DATA 	Keypress: t
+260.2839 	DATA 	Keypress: t
+261.1839 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+261.1839 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+261.1839 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+261.6174 	DATA 	Keypress: b
+261.7840 	DATA 	Keypress: t
+263.2840 	DATA 	Keypress: t
+264.7841 	DATA 	Keypress: t
+266.2839 	DATA 	Keypress: t
+267.7840 	DATA 	Keypress: t
+269.2840 	DATA 	Keypress: t
+270.7840 	DATA 	Keypress: t
+271.3922 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+271.3922 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+271.3922 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+271.7843 	DATA 	Keypress: b
+272.2840 	DATA 	Keypress: t
+273.7842 	DATA 	Keypress: t
+275.2840 	DATA 	Keypress: t
+275.5672 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+275.5672 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+275.5672 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+276.3757 	DATA 	Keypress: b
+276.7840 	DATA 	Keypress: t
+278.2840 	DATA 	Keypress: t
+279.7840 	DATA 	Keypress: t
+281.2840 	DATA 	Keypress: t
+281.9089 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+281.9089 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+281.9089 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+282.4173 	DATA 	Keypress: b
+282.7840 	DATA 	Keypress: t
+284.2840 	DATA 	Keypress: t
+285.7840 	DATA 	Keypress: t
+287.2839 	DATA 	Keypress: t
+288.7839 	DATA 	Keypress: t
+290.2839 	DATA 	Keypress: t
+291.7839 	DATA 	Keypress: t
+293.2840 	DATA 	Keypress: t
+294.7839 	DATA 	Keypress: t
+296.2839 	DATA 	Keypress: t
+296.5422 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+296.5422 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+296.5422 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+297.0256 	DATA 	Keypress: b
+297.7839 	DATA 	Keypress: t
+299.2839 	DATA 	Keypress: t
+300.7839 	DATA 	Keypress: t
+302.0004 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+302.0004 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+302.0004 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+302.2839 	DATA 	Keypress: t
+302.5423 	DATA 	Keypress: b
+303.7839 	DATA 	Keypress: t
+305.2839 	DATA 	Keypress: t
+306.2671 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+306.2671 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+306.2671 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+306.7838 	DATA 	Keypress: t
+306.8004 	DATA 	Keypress: b
+308.2838 	DATA 	Keypress: t
+309.7838 	DATA 	Keypress: t
+311.0754 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+311.0754 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+311.0754 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+311.2839 	DATA 	Keypress: t
+311.6005 	DATA 	Keypress: b
+312.7838 	DATA 	Keypress: t
+314.2835 	DATA 	Keypress: t
+315.7840 	DATA 	Keypress: t
+317.0753 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+317.0753 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+317.0753 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+317.2838 	DATA 	Keypress: t
+317.4838 	DATA 	Keypress: b
+318.7838 	DATA 	Keypress: t
+320.2838 	DATA 	Keypress: t
+321.7754 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+321.7754 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+321.7754 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+321.7838 	DATA 	Keypress: t
+322.2920 	DATA 	Keypress: b
+323.2837 	DATA 	Keypress: t
+324.7837 	DATA 	Keypress: t
+326.2753 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+326.2753 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+326.2753 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+326.2837 	DATA 	Keypress: t
+326.7004 	DATA 	Keypress: b
+327.7838 	DATA 	Keypress: t
+329.2837 	DATA 	Keypress: t
+330.7838 	DATA 	Keypress: t
+332.1753 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+332.1753 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+332.1753 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+332.2837 	DATA 	Keypress: t
+333.4338 	DATA 	Keypress: b
+333.7837 	DATA 	Keypress: t
+335.2837 	DATA 	Keypress: t
+335.7753 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+335.7753 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+335.7753 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+336.2587 	DATA 	Keypress: b
+336.7837 	DATA 	Keypress: t
+338.2837 	DATA 	Keypress: t
+339.7837 	DATA 	Keypress: t
+341.2837 	DATA 	Keypress: t
+342.7837 	DATA 	Keypress: t
+344.2836 	DATA 	Keypress: t
+345.7837 	DATA 	Keypress: t
+346.5752 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+346.5752 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+346.5752 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+347.0087 	DATA 	Keypress: b
+347.2837 	DATA 	Keypress: t
+348.7837 	DATA 	Keypress: t
+350.2836 	DATA 	Keypress: t
+351.7837 	DATA 	Keypress: t
+351.9169 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+351.9169 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+351.9169 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+352.3670 	DATA 	Keypress: b
+353.2837 	DATA 	Keypress: t
+354.7836 	DATA 	Keypress: t
+356.2836 	DATA 	Keypress: t
+356.6169 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+356.6169 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+356.6169 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+357.1170 	DATA 	Keypress: b
+357.7836 	DATA 	Keypress: t
+359.2836 	DATA 	Keypress: t
+360.7836 	DATA 	Keypress: t
+362.2836 	DATA 	Keypress: t
+363.7836 	DATA 	Keypress: t
+365.2835 	DATA 	Keypress: t
+366.7836 	DATA 	Keypress: t
+368.2836 	DATA 	Keypress: t
+369.7831 	DATA 	Keypress: t
+370.8498 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+370.8498 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+370.8498 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+371.2749 	DATA 	Keypress: b
+371.2833 	DATA 	Keypress: t
+372.7835 	DATA 	Keypress: t
+374.2836 	DATA 	Keypress: t
+375.7501 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+375.7501 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+375.7501 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+375.7836 	DATA 	Keypress: t
+376.5419 	DATA 	Keypress: b
+377.2836 	DATA 	Keypress: t
+378.7835 	DATA 	Keypress: t
+380.2835 	DATA 	Keypress: t
+381.7500 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+381.7500 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+381.7500 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+381.7835 	DATA 	Keypress: t
+382.2001 	DATA 	Keypress: b
+383.2835 	DATA 	Keypress: t
+384.7835 	DATA 	Keypress: t
+386.2835 	DATA 	Keypress: t
+387.7834 	DATA 	Keypress: t
+389.2835 	DATA 	Keypress: t
+390.7835 	DATA 	Keypress: t
+391.6917 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+391.6917 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+391.6917 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+392.2002 	DATA 	Keypress: b
+392.2834 	DATA 	Keypress: t
+393.7834 	DATA 	Keypress: t
+395.2835 	DATA 	Keypress: t
+396.7834 	DATA 	Keypress: t
+397.2083 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+397.2083 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+397.2083 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+397.7751 	DATA 	Keypress: b
+398.2834 	DATA 	Keypress: t
+399.7834 	DATA 	Keypress: t
+401.1333 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+401.1333 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+401.1333 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+401.2835 	DATA 	Keypress: t
+401.6833 	DATA 	Keypress: b
+402.7834 	DATA 	Keypress: t
+404.2834 	DATA 	Keypress: t
+405.7834 	DATA 	Keypress: t
+407.2250 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+407.2250 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+407.2250 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+407.2834 	DATA 	Keypress: t
+407.7168 	DATA 	Keypress: b
+408.7834 	DATA 	Keypress: t
+410.2834 	DATA 	Keypress: t
+410.9333 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+410.9333 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+410.9333 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+411.4500 	DATA 	Keypress: b
+411.7833 	DATA 	Keypress: t
+413.2833 	DATA 	Keypress: t
+414.7834 	DATA 	Keypress: t
+416.0999 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+416.0999 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+416.0999 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+416.2833 	DATA 	Keypress: t
+416.5500 	DATA 	Keypress: b
+417.7834 	DATA 	Keypress: t
+419.2833 	DATA 	Keypress: t
+420.6749 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+420.6749 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+420.6749 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+420.7833 	DATA 	Keypress: t
+421.1583 	DATA 	Keypress: b
+422.2833 	DATA 	Keypress: t
+423.7834 	DATA 	Keypress: t
+425.2828 	DATA 	Keypress: t
+425.9911 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+425.9911 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+425.9911 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+426.4412 	DATA 	Keypress: b
+426.7829 	DATA 	Keypress: t
+428.2831 	DATA 	Keypress: t
+429.7833 	DATA 	Keypress: t
+431.1665 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+431.1665 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+431.1665 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+431.2833 	DATA 	Keypress: t
+431.7083 	DATA 	Keypress: b
+432.7833 	DATA 	Keypress: t
+434.2832 	DATA 	Keypress: t
+435.7748 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+435.7748 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+435.7748 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+435.7833 	DATA 	Keypress: t
+436.4834 	DATA 	Keypress: b
+437.2832 	DATA 	Keypress: t
+438.7833 	DATA 	Keypress: t
+440.2832 	DATA 	Keypress: t
+441.0247 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+441.0247 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+441.0247 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+441.4665 	DATA 	Keypress: b
+441.7832 	DATA 	Keypress: t
+443.2832 	DATA 	Keypress: t
+444.7832 	DATA 	Keypress: t
+446.1414 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+446.1414 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+446.1414 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+446.2832 	DATA 	Keypress: t
+446.6165 	DATA 	Keypress: b
+447.7831 	DATA 	Keypress: t
+449.2832 	DATA 	Keypress: t
+450.7832 	DATA 	Keypress: t
+452.2664 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+452.2664 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+452.2664 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+452.2832 	DATA 	Keypress: t
+452.8331 	DATA 	Keypress: b
+453.7832 	DATA 	Keypress: t
+455.2831 	DATA 	Keypress: t
+456.7831 	DATA 	Keypress: t
+457.0164 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+457.0164 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+457.0164 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+457.7081 	DATA 	Keypress: b
+458.2831 	DATA 	Keypress: t
+459.7831 	DATA 	Keypress: t
+461.2831 	DATA 	Keypress: t
+462.2496 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+462.2496 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+462.2496 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+462.7664 	DATA 	Keypress: b
+462.7830 	DATA 	Keypress: t
+464.2830 	DATA 	Keypress: t
+465.4496 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+465.4496 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+465.4496 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+465.7830 	DATA 	Keypress: t
+466.0664 	DATA 	Keypress: b
+467.2831 	DATA 	Keypress: t
+468.7831 	DATA 	Keypress: t
+470.2831 	DATA 	Keypress: t
+471.6330 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+471.6330 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+471.6330 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+471.7831 	DATA 	Keypress: t
+472.1164 	DATA 	Keypress: b
+473.2830 	DATA 	Keypress: t
+474.7830 	DATA 	Keypress: t
+475.4913 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+475.4913 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+475.4913 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+476.1831 	DATA 	Keypress: b
+476.2830 	DATA 	Keypress: t
+477.7831 	DATA 	Keypress: t
+479.2831 	DATA 	Keypress: t
+480.7830 	DATA 	Keypress: t
+480.8329 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+480.8329 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+480.8329 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+481.2416 	DATA 	Keypress: b
+482.2826 	DATA 	Keypress: t
+483.7832 	DATA 	Keypress: t
+485.2830 	DATA 	Keypress: t
+485.4496 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+485.4496 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+485.4496 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+485.9580 	DATA 	Keypress: b
+486.7829 	DATA 	Keypress: t
+488.2829 	DATA 	Keypress: t
+489.7828 	DATA 	Keypress: t
+490.8078 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+490.8078 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+490.8078 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+491.2829 	DATA 	Keypress: t
+491.2996 	DATA 	Keypress: b
+492.7829 	DATA 	Keypress: t
+494.2829 	DATA 	Keypress: t
+495.7829 	DATA 	Keypress: t
+497.0412 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+497.0412 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+497.0412 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+497.2829 	DATA 	Keypress: t
+497.4165 	DATA 	Keypress: b
+498.7829 	DATA 	Keypress: t
+500.2829 	DATA 	Keypress: t
+501.7829 	DATA 	Keypress: t
+503.2829 	DATA 	Keypress: t
+504.7829 	DATA 	Keypress: t
+506.2829 	DATA 	Keypress: t
+507.2327 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+507.2327 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+507.2327 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+507.7328 	DATA 	Keypress: b
+507.7828 	DATA 	Keypress: t
+509.2829 	DATA 	Keypress: t
+510.7829 	DATA 	Keypress: t
+511.3745 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+511.3745 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+511.3745 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+511.8911 	DATA 	Keypress: b
+512.2828 	DATA 	Keypress: t
+513.7828 	DATA 	Keypress: t
+515.2828 	DATA 	Keypress: t
+516.7828 	DATA 	Keypress: t
+516.8494 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+516.8494 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+516.8494 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+517.4495 	DATA 	Keypress: b
+518.2828 	DATA 	Keypress: t
+519.7828 	DATA 	Keypress: t
+521.0244 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+521.0244 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+521.0244 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+521.2828 	DATA 	Keypress: t
+521.6414 	DATA 	Keypress: b
+522.7827 	DATA 	Keypress: t
+524.2829 	DATA 	Keypress: t
+525.6577 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+525.6577 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+525.6577 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+525.7828 	DATA 	Keypress: t
+526.1411 	DATA 	Keypress: b
+527.2827 	DATA 	Keypress: t
+528.7828 	DATA 	Keypress: t
+530.2828 	DATA 	Keypress: t
+531.3160 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+531.3160 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+531.3160 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+531.7411 	DATA 	Keypress: b
+531.7828 	DATA 	Keypress: t
+533.2827 	DATA 	Keypress: t
+534.7828 	DATA 	Keypress: t
+536.2827 	DATA 	Keypress: t
+537.7823 	DATA 	Keypress: t
+539.2825 	DATA 	Keypress: t
+540.7828 	DATA 	Keypress: t
+541.2659 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+541.2659 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+541.2659 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+541.8078 	DATA 	Keypress: b
+542.2827 	DATA 	Keypress: t
+543.7829 	DATA 	Keypress: t
+545.2828 	DATA 	Keypress: t
+546.7827 	DATA 	Keypress: t
+546.8325 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+546.8325 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+546.8325 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+547.3576 	DATA 	Keypress: b
+548.2826 	DATA 	Keypress: t
+549.7827 	DATA 	Keypress: t
+551.2826 	DATA 	Keypress: t
+551.5492 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+551.5492 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+551.5492 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+552.0660 	DATA 	Keypress: b
+552.7826 	DATA 	Keypress: t
+554.2826 	DATA 	Keypress: t
+555.7826 	DATA 	Keypress: t
+555.8659 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+555.8659 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+555.8659 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+556.3160 	DATA 	Keypress: b
+557.2826 	DATA 	Keypress: t
+558.7826 	DATA 	Keypress: t
+560.2826 	DATA 	Keypress: t
+560.8492 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+560.8492 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+560.8492 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+561.6660 	DATA 	Keypress: b
+561.7826 	DATA 	Keypress: t
+563.2829 	DATA 	Keypress: t
+564.7828 	DATA 	Keypress: t
+566.0991 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+566.0991 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+566.0991 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+566.2828 	DATA 	Keypress: t
+566.5329 	DATA 	Keypress: b
+567.7828 	DATA 	Keypress: t
+569.2828 	DATA 	Keypress: t
+570.7828 	DATA 	Keypress: t
+572.2575 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+572.2575 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+572.2575 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+572.2829 	DATA 	Keypress: t
+572.6994 	DATA 	Keypress: b
+573.7827 	DATA 	Keypress: t
+575.2828 	DATA 	Keypress: t
+576.4326 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+576.4326 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+576.4326 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+576.7828 	DATA 	Keypress: t
+576.9328 	DATA 	Keypress: b
+578.2828 	DATA 	Keypress: t
+579.7827 	DATA 	Keypress: t
+581.2828 	DATA 	Keypress: t
+582.2407 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+582.2407 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+582.2407 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+582.7161 	DATA 	Keypress: b
+582.7827 	DATA 	Keypress: t
+584.2828 	DATA 	Keypress: t
+585.6574 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+585.6574 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+585.6574 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+585.7827 	DATA 	Keypress: t
+586.2244 	DATA 	Keypress: b
+587.2828 	DATA 	Keypress: t
+588.7827 	DATA 	Keypress: t
+590.8158 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+590.8158 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+590.8158 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+591.3743 	DATA 	Keypress: b
+596.8991 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+596.8991 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+596.8991 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+597.3411 	DATA 	Keypress: b
+601.4072 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+601.4072 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+601.4072 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+601.9493 	DATA 	Keypress: b
+605.7740 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+605.7740 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+605.7740 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+606.2494 	DATA 	Keypress: b
+611.5156 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: green, alpha=1.0>
+611.5156 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: green, alpha=1.0>
+611.5156 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: green, alpha=1.0>
+611.9576 	DATA 	Keypress: b
+620.3072 	EXP 	unnamed Circle: foreColor = <psychopy.colors.Color: red, alpha=1.0>
+620.3072 	EXP 	unnamed Circle: borderColor = <psychopy.colors.Color: red, alpha=1.0>
+620.3072 	EXP 	unnamed Circle: fillColor = <psychopy.colors.Color: red, alpha=1.0>
+620.3156 	EXP 	window1: recordFrameIntervals = False
+622.2091 	EXP 	window1: mouseVisible = True
