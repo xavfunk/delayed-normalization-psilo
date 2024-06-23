@@ -144,7 +144,7 @@ class BlockSession(PylinkEyetrackerSession):
 
         # set fix dot params
         self.fix_dot_color_idx = 0
-        self.fix_dot_colors = ['green', 'red']
+        self.fix_dot_colors = ['red', 'green']
         self.default_fix.setSize(self.settings['task']['fix_dot_size'])
         self.default_fix.setPos((0+x_offset, 0+y_offset))
         self.default_fix.setColor('green') # starting color
@@ -232,8 +232,9 @@ class BlockSession(PylinkEyetrackerSession):
         if np.isclose(self.clock.getTime(), self.fix_dot_color_timings[self.fix_dot_color_idx%len(self.fix_dot_color_timings)], atol = atol):
         
             # change color
-            self.fix_dot_color_idx += 1
+#             self.fix_dot_color_idx += 1
             self.default_fix.setColor(self.fix_dot_colors[self.fix_dot_color_idx % len(self.fix_dot_colors)])
+            self.fix_dot_color_idx += 1
 
 
     def end_experiment(self):
@@ -280,9 +281,17 @@ class BlockSession(PylinkEyetrackerSession):
         self.clock.reset()  # resets global clock
         self.timer.reset()  # phase-timer
         
+        # get last index
+        last_idx = self.fix_dot_color_idx
         # reset fix dot color index
         self.fix_dot_color_idx = 0
-
+        # switch colors if needed, to prevent long switch times
+#         print(f'fixcolor is {self.fix_dot_colors[last_idx%2]} fix[0] is {self.fix_dot_colors[0]}')
+        if self.fix_dot_colors[last_idx%2] != self.fix_dot_colors[0]:
+#             print('reversing')
+            self.fix_dot_colors.reverse()
+#             print(self.fix_dot_colors)
+            
 
         if self.mri_simulator is not None:
             self.mri_simulator.start()
