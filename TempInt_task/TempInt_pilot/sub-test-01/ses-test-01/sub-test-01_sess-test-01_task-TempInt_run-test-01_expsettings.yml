@@ -1,0 +1,83 @@
+eyetracker:
+    address: 100.1.1.1
+    dot_size: 0.1
+    options:
+        active_eye: left
+        automatic_calibration_pacing: 1000
+        autothreshold_click: true
+        autothreshold_repeat: true
+        binocular_enabled: false
+        calibration_type: HV9
+        enable_automatic_calibration: true
+        enable_camera_position_detect: true
+        enable_search_limits: true
+        file_event_filter: LEFT,RIGHT,FIXATION,SACCADE,BLINK,MESSAGE,BUTTON,INPUT
+        heuristic_filter: 2
+        link_event_filter: LEFT,RIGHT,FIXATION,SACCADE,BLINK,BUTTON
+        link_sample_data: LEFT,RIGHT,GAZE,GAZERES,AREA,STATUS,HTARGET
+        pupil_size_diameter: true
+        sample_rate: 1000
+        track_search_limits: true
+        x_gaze_constraint: AUTO
+        y_gaze_constraint: AUTO
+monitor:
+    distance: 196
+    gamma: 1
+    name: default
+    width: 69.8
+mouse:
+    visible: false
+mri:
+    TA: 1.32
+    TR: 1.32
+    simulate: false
+    skip: 0
+    sound: false
+    sync: t
+    topup_duration: 45
+    topup_scan: true
+    volumes: 100
+preferences:
+    general:
+        audioLib: PTB
+        units: deg
+    hardware:
+        audioLatencyMode: 3
+stimuli:
+    button_size: 1
+    eye_size: 1
+    n_repeats: 20
+    stim_conds:
+    - AV
+    - VA
+    stim_dur: 4
+    stim_onset_asynch:
+    - 0
+    - 2
+    - 4
+    - 8
+    - 16
+    - 32
+    - 64
+    tex_type: snakes-new
+task:
+    response_device: keyboard
+    response_keys:
+    - a
+    - l
+    type: TOJ
+window:
+    color:
+    - 0
+    - 0
+    - 0
+    fullscr: true
+    pos:
+    - 0
+    - 0
+    screen: 0
+    size:
+    - 1920
+    - 1080
+    waitBlanking: true
+    winType: pyglet

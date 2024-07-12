@@ -1,0 +1,89 @@
+preferences:
+  general:
+    audioLib: PTB
+    units: deg
+  hardware:
+    audioLatencyMode: 3 
+
+window:
+    size: [1920, 1080]
+    pos: [0, 0]
+    color: [0, 0, 0]
+    fullscr: True
+    winType: pyglet
+    waitBlanking: True
+    screen: 0
+
+monitor:
+    name: default
+    width: 69.8  # in cm
+    distance: 196  # in cm
+    # gamma: 2.1 # activate this setting for BOLD screen!
+    gamma: 1
+
+mouse:
+  visible: False
+
+eyetracker:
+  address: '100.1.1.1'
+  dot_size: 0.1  # in deg
+  options:
+    active_eye: left  # [right]
+    binocular_enabled: NO  # [YES]
+    heuristic_filter: 2  # [0, OFF, 1, ON]
+    pupil_size_diameter: YES  # [NO]
+    #simulate_head_camera: NO  # [YES]  # GIVES ERROR?
+    #simulation_screen_distance
+    file_event_filter: 'LEFT,RIGHT,FIXATION,SACCADE,BLINK,MESSAGE,BUTTON,INPUT'
+    link_event_filter: 'LEFT,RIGHT,FIXATION,SACCADE,BLINK,BUTTON'
+    link_sample_data: 'LEFT,RIGHT,GAZE,GAZERES,AREA,STATUS,HTARGET'
+    #file_sample_data: LEFT,RIGHT,GAZE,AREA,GAZERES,STATUS,HTARGET,INPUT'  # GIVES ERROR?
+    calibration_type: HV9  # [H3, HV3, HV5, HV9]
+    x_gaze_constraint: AUTO
+    y_gaze_constraint: AUTO
+    enable_automatic_calibration: YES  # [NO]
+    automatic_calibration_pacing: 1000
+    enable_search_limits: YES
+    track_search_limits: YES
+    autothreshold_click: YES
+    autothreshold_repeat: YES
+    enable_camera_position_detect: YES
+    sample_rate: 1000
+
+mri:
+  simulate: False
+  TR: 1.32  # seconds between volume acquisitions
+  TA: 1.32  # seconds to acquire one volume
+  volumes: 100  # number of 3D volumes to obtain in a given scanning run
+  sync: t  # character used as flag for sync timing, default=‘5’
+  skip: 0  # how many frames to silently omit initially during T1 stabilization, no sync pulse.
+  sound: False  # simulate scanner noise
+  topup_scan: True
+  topup_duration: 45 # topup scan duration in seconds (no 't's)
+
+# times in frames based on 120 FPS screen
+stimuli:
+    # trial_sequence: 'trial_sequences/p_23_s_42/trial_sequence_s008.csv'
+
+    tex_type: 'snakes-new'                     # either of ['rms', 'minmax'], determines the rescaling used
+    #screenshot: True                   # TODO implement
+    stim_conds: ['AV', 'VA'] #['AV', 'VA']  # stimulus condition in frames, interpreted as either stimulus duration ('dur' trials) or isi ('isi' trials) 
+    n_repeats: 20 # repetitions of indiv. conditions
+    button_size: 1
+    eye_size: 1
+    # stim_onset_asynch: [0, 10, 30, 50, 80, 100, 150, 200, 250, 300]
+    stim_onset_asynch: [1, 2, 4, 8, 16, 32, 64] # in frames, for 120 Hz
+    # stim_onset_asynch: [1, 2, 4, 8, 16, 32] # in frames, for 60 Hz
+    # stim_onset_asynch: [ 32, 64] # in frames
+
+    stim_dur: 4 # in frames, 4 frames is 33 ms
+
+# times in seconds
+task:
+    type: 'TOJ' # ['TOJ', 'SJ'] type of task, temporal order judgement or synchrony judgement
+    response_keys: ['a', 'l'] # ['a', 'v'] # [audio first, video first] or [sync, async]
+    response_device: 'keyboard' # ['keyboard', 'button_box']
+#     response interval: 0.8             # time in s you allow the participant to respond that still counts as correct response
+#     color switch interval: 3.5         # interval in s between color dot switches, note: a random decimal between -1 and +1 is added to it in the code
+#     fix_dot_size: .5                 # fixation dot size in degrees. Dot changes color on average every two TRs (or bar steps)
+#     fix_dot_colors: ['green', 'red']   # fixation dot colors
