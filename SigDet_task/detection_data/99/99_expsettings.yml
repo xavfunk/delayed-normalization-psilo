@@ -21,10 +21,10 @@ eyetracker:
         x_gaze_constraint: AUTO
         y_gaze_constraint: AUTO
 monitor:
-    distance: 65
+    distance: 196
     gamma: 1
     name: default
-    width: 53
+    width: 69.8
 mouse:
     visible: false
 mri:
@@ -37,14 +37,16 @@ mri:
     volumes: 10
 preferences:
     general:
-        audioLib: PTB
+        audioLib: sounddevice
         units: deg
+response:
+    device: keyboard
 window:
     color:
     - 0
     - 0
     - 0
-    fullscr: false
+    fullscr: true
     pos:
     - 0
     - 0
@@ -53,3 +55,4 @@ window:
     - 1920
     - 1080
     waitBlanking: true
+    winType: pyglet

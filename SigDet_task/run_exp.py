@@ -49,7 +49,7 @@ block_len = 100     # Number of trials per block
 
 tracker_on = False
 signal_parameters = {'contrast': 0.8, 'spatial_freq': 0.035, 'size': 17} # Note: size in degrees
-noise_parameters =  {'contrast': 0.35, 'opacity': 0.50, 'size': 19} # Note: size in degrees
+noise_parameters =  {'contrast': 0.35, 'opacity': 0.5, 'size': 19, 'refresh_frame':2} # Note: size in degrees
 
 class DetectTrial(Trial):
     def __init__(self, parameters = {}, phase_names =[], phase_durations=[], session=None, monitor=None, tracker=None, ID=0, intensity=1): # self, parameters = {}, phase_durations=[], session=None, monitor=None, tracker=None, ID=0,
@@ -71,7 +71,7 @@ class DetectTrial(Trial):
                                 'blinkDuringTrial': 0,
                                 'RT': -1,
                                 'trial': self.ID,
-                                'confidence' : -1})        
+                                'confidence': -1})        
 
         self.stopped = False
         super(DetectTrial, self).__init__(phase_durations = phase_durations,
@@ -131,10 +131,11 @@ class DetectTrial(Trial):
     def draw(self):
 
         # draw additional stimuli:
-        # Continuously update noise pattern
-        noiseTexture = np.random.random([self.noise_sizePIX,self.noise_sizePIX])*2.-1.
-        noiseTexture = np.repeat(np.repeat(noiseTexture, 2, axis=1), 2, axis=0)
-        self.noise.tex = noiseTexture
+        # update noise pattern on refresh frames
+        if self.session.nr_frames % noise_parameters['refresh_frame'] == 0:
+            noiseTexture = np.random.random([self.noise_sizePIX,self.noise_sizePIX])*2.-1.
+            noiseTexture = np.repeat(np.repeat(noiseTexture, 2, axis=1), 2, axis=0)
+            self.noise.tex = noiseTexture
 
         if self.phase == 0: # Block start + instructions
             
@@ -204,7 +205,7 @@ class DetectTrial(Trial):
                         self.stop_phase()
 
                 # elif ev == 'a':
-                elif ev == '1':
+                elif ev == self.session.response_button_mapping['absent_confident']:
 
                     if self.phase == 3:
                         idx = self.session.global_log.shape[0]
@@ -240,7 +241,7 @@ class DetectTrial(Trial):
                                             
 
                 # elif ev == 's':
-                elif ev == '3':
+                elif ev == self.session.response_button_mapping['absent_not_confident']:
 
                     if self.phase == 3:
                         idx = self.session.global_log.shape[0]
@@ -274,7 +275,7 @@ class DetectTrial(Trial):
                         self.stop_phase()
 
                 # elif ev == 'k':
-                elif ev == '4':
+                elif ev == self.session.response_button_mapping['present_not_confident']:
 
                     if self.phase == 3:
                         idx = self.session.global_log.shape[0]
@@ -308,7 +309,7 @@ class DetectTrial(Trial):
                         self.stop_phase()
 
                 # elif ev == 'l':
-                elif ev == '2':
+                elif ev == self.session.response_button_mapping['present_confident']:
 
                     if self.phase == 3:
                         idx = self.session.global_log.shape[0]
@@ -450,6 +451,19 @@ class DetectSession(PylinkEyetrackerSession):
         self.pix_per_deg = self.win.size[0] / self.width_deg
         self.create_yes_no_trials()
         self.settings_file = 'settings.yml'
+        
+        # make response button mapping
+        if self.settings['response']['device'] == 'keyboard':
+            self.response_button_mapping = {'present_confident' : 'l',
+                                            'present_not_confident' : 'k',
+                                            'absent_confident' : 'a',
+                                            'absent_not_confident' : 's'}
+            
+        elif self.settings['response']['device'] == 'button_box':
+            self.response_button_mapping = {'present_confident' : '2',
+                                            'present_not_confident' : '4',
+                                            'absent_confident' : '1',
+                                            'absent_not_confident' : '3'}
 
     def create_yes_no_trials(self):
         """creates trials for yes/no runs"""
@@ -493,7 +507,7 @@ class DetectSession(PylinkEyetrackerSession):
                 for i in range(int(max_trials/unique_trials)):      # loop over trials within each sub-condition
                     # phase durations, and iti's:
                     # phases: 0=pretrial, 1=baseline, 2=stim, 3=response, 4=feedback 5=ITI
-                    phase_durs = [-0.01, 0.5, 0.2, 1.2, 0.3, np.random.uniform(0.6, 1.0)] 
+                    phase_durs = [-0.01, 0.5, 0.2, 1.5, 0.3, np.random.uniform(0.6, 1.0)] 
                     params = self.standard_parameters.copy()
                     params.update({'signal_present':self.signal_present[pres], 'signal_orientation': self.signal_orientation[ori]})
 
@@ -571,6 +585,7 @@ class DetectSession(PylinkEyetrackerSession):
 
 def main(initials, index, block=0):
     ts = DetectSession(subject_initials=initials, block_len = block_len, index=index, block=block, eyetracker_on=tracker_on)
+    # print(ts.settings)
     ts.run()
 
     # define directory to store behavioral data
